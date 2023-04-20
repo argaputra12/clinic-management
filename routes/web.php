@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PasienController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -19,6 +20,15 @@ Route::get('/', function () {
 })
 ->middleware(['dokter'])
 ->name('welcome');
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

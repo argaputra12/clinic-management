@@ -27,6 +27,7 @@ Route::middleware(['admin'])->group(function () {
     })->name('dashboard');
 
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+    Route::post('/pasien', [PasienController::class, 'store'])->name('pasien.store');
 
 });
 

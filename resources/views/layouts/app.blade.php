@@ -15,6 +15,9 @@
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/0b736e1e36.js" crossorigin="anonymous"></script>
 
+    <!-- Ajax -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <!-- Styles -->
     <style>
         [x-cloak] {

@@ -28,6 +28,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
     Route::post('/pasien', [PasienController::class, 'store'])->name('pasien.store');
+    Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
+    Route::get('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
     Route::delete('/pasien/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');
 
 });

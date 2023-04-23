@@ -37,10 +37,8 @@ class PasienController extends Controller
     public function show($id)
     {
         $pasien = Pasien::find($id);
-        return response()->json([
-            'status' => 'success',
-            'data' => $pasien,
-        ], 200);
+        // return component
+        return view('components.modals.detail-info-pasien', compact('pasien'));
     }
 
     public function destroy($id)
@@ -49,6 +47,33 @@ class PasienController extends Controller
         $pasien->delete();
 
         return redirect()->route('pasien.index')
-            ->with('success', 'Pasien berhasil dihapus.');
+            ->with(['success' => 'Pasien berhasil dihapus.']);
+    }
+
+    public function getEdit($id)
+    {
+        $pasien = Pasien::find($id);
+        return view('components.modals.edit-info-pasien', compact('pasien'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'no_rm' => 'required',
+            'tanggal_kunjungan' => 'required',
+            'nama_pasien' => 'required',
+            'tanggal_lahir' => 'required',
+            'umur' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+            'keluhan' => 'required',
+        ]);
+
+        $pasien = Pasien::find($id);
+        $pasien->update($request->all());
+
+        return redirect()->route('pasien.index')
+            ->with('success', 'Pasien berhasil diupdate.');
     }
 }

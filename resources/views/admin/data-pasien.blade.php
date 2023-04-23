@@ -7,6 +7,35 @@
     </div>
   </x-slot>
 
+  <!-- Flash message -->
+  @if (session('success'))
+    <div id="flash-message-success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+      role="alert">
+      <strong class="font-bold">{!! session('success') !!}</strong>
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        <svg id="flash-message-success-close" class="fill-current h-6 w-6 text-green-500" role="button"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <title>Close</title>
+          <path
+            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+        </svg>
+      </span>
+    </div>
+  @elseif(session('error'))
+    <div id="flash-message-error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+      role="alert">
+      <strong class="font-bold">{!! session('error') !!}</strong>
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        <svg id="flash-message-error-close" class="fill-current h-6 w-6 text-red-500" role="button"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <title>Close</title>
+          <path
+            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+        </svg>
+      </span>
+    </div>
+  @endif
+
   <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mb-4">
     <div class="mb-6 mx-4 flex justify-end">
       <a id="pasien-modal-button"
@@ -36,7 +65,9 @@
           <i class="info-pasien-button fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $p->id }}>
             <input type="hidden" name="id" value={{ $p->id }}>
           </i>
-          <i class="fa-solid fa-pen-to-square fa-xl"></i>
+          <i class="edit-pasien-button fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $p->id }}>
+            <input type="hidden" name="id" value={{ $p->id }}>
+          </i>
           <form action="{{ route('pasien.destroy', $p->id) }}" method="POST">
             @csrf
             @method('DELETE')
@@ -48,6 +79,10 @@
         </div>
       </div>
     @endforeach
+
+    <!-- Edit Pasien Modal -->
+    <div id="edit-pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    </div>
 
     <!-- Insert Pasien Modal -->
     <div id="pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
@@ -134,34 +169,70 @@
 
     <!-- Info Pasien Modal -->
     <div id="info-pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div id="info-pasien-modal"
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-          role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-headline">
-                  Info Lengkap Pasien
-                </h3>
-                <div class="mt-2" id="info-detail-pasien">
+    </div>
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Edit Pasien Modal -->
+    <div id="edit-pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
     </div>
   </div>
 
   <?php echo $pasien->render(); ?>
 
   <script>
+    // Flash message success
+    const flashMessageSuccess = document.querySelector('#flash-message-success') | null;
+    const flashMessageSuccessClose = document.querySelector('#flash-message-success-close') | null;
+
+    if (flashMessageSuccess) {
+      flashMessageSuccessClose.addEventListener('click', () => {
+        flashMessageSuccess.classList.add('hidden');
+      });
+    }
+
+
+    // Flash message error
+    const flashMessageError = document.querySelector('#flash-message-error') | null;
+    const flashMessageErrorClose = document.querySelector('#flash-message-error-close') | null;
+
+    if (flashMessageError) {
+      flashMessageErrorClose.addEventListener('click', () => {
+        flashMessageError.classList.add('hidden');
+      });
+    }
+
+
+    // Edit Pasien
+    const editModalContainer = document.querySelector('#edit-pasien-modal-container');
+    const editModal = document.querySelector('#edit-pasien-modal');
+    const closeEditModal = document.querySelector('#close-edit-pasien-modal') | null;
+
+    const getEditPasien = (id) => {
+      $.ajax({
+        url: 'api/pasien/' + id + '/edit',
+        type: 'GET',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+          editModalContainer.innerHTML = data;
+        }
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-pasien-button')) {
+        getEditPasien(e.target.querySelector('input[name="id"]').value);
+        editModalContainer.classList.remove('hidden');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains('close-edit-pasien-modal')) {
+        editModalContainer.classList.add('hidden');
+      }
+    });
+
+
     // Tambah Pasien
     const modalButton = document.querySelector('#pasien-modal-button');
     const modalContainer = document.querySelector('#pasien-modal-container');
@@ -189,43 +260,7 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
-          infoDetailPasien.innerHTML = `
-            <div class="mb-4">
-                <label for="no_rm" class="block text-gray-700 text-sm font-bold mb-2">No Rekam Medis</label>
-                <p>${data.data.no_rm}</p>
-            </div>
-            <div class="mb-4">
-                <label for="tanggal_kunjungan" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Kunjungan</label>
-                <p>${data.data.tanggal_kunjungan}</p>
-            </div>
-            <div class="mb-4">
-                <label for="nama_pasien" class="block text-gray-700 text-sm font-bold mb-2">Nama Pasien</label>
-                <p>${data.data.nama_pasien}</p>
-            </div>
-            <div class="mb-4">
-                <label for="tanggal_lahir" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Lahir</label>
-                <p>${data.data.tanggal_lahir}</p>
-            </div>
-            <div class="mb-4">
-                <label for="umur" class="block text-gray-700 text-sm font-bold mb-2">Umur</label>
-                <p>${data.data.umur} Tahun</p>
-            </div>
-            <div class="mb-4">
-                <label for="jenis_kelamin" class="block text-gray-700 text-sm font-bold mb-2">Jenis Kelamin</label>
-                <p>${data.data.jenis_kelamin}</p>
-            </div>
-            <div class="mb-4">
-                <label for="no_telp" class="block text-gray-700 text-sm font-bold mb-2">Nomor telepon</label>
-                <p>${data.data.no_telp}</p>
-            </div>
-            <div class="mb-4">
-                <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat</label>
-                <p>${data.data.alamat}</p>
-            </div>
-            <div class="mb-4">
-                <label for="keluhan" class="block text-gray-700 text-sm font-bold mb-2">Keluhan</label>
-                <p>${data.data.keluhan}</p>
-            </div>`
+          infoModalContainer.innerHTML = data
         }
       })
     }

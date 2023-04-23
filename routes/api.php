@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/pasien/{id}', [PasienController::class, 'show'])->name('pasien.show');
+Route::get('/pasien/{id}/edit', [PasienController::class, 'getEdit'])->name('pasien.edit');

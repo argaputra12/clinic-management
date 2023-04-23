@@ -33,11 +33,18 @@
         <div class="text-center w-[100px]">{{ $p->umur }} Tahun</div>
         <div class="text-center w-[100px]">{{ $p->jenis_kelamin }}</div>
         <div class="text-center w-[200px] flex justify-evenly items-center">
-          <i class="info-pasien-button fa-solid fa-circle-info fa-xl" id={{ $p->id }}>
+          <i class="info-pasien-button fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $p->id }}>
             <input type="hidden" name="id" value={{ $p->id }}>
           </i>
           <i class="fa-solid fa-pen-to-square fa-xl"></i>
-          <i class="fa-solid fa-trash fa-xl"></i>
+          <form action="{{ route('pasien.destroy', $p->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">
+              <i class="fa-solid fa-trash fa-xl cursor-pointer">
+              </i>
+            </button>
+          </form>
         </div>
       </div>
     @endforeach
@@ -53,9 +60,9 @@
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           role="dialog" aria-modal="true" aria-labelledby="modal-headline">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
+            <div class="sm:flex sm:items-start justify-between">
               <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                <h3 class="text-lg leading-6 font-semibold text-gray-900 mb-6" id="modal-headline">
                   Tambah Pasien
                 </h3>
                 <div class="mt-2">
@@ -92,7 +99,9 @@
                       <label for="jenis_kelamin" class="block text-gray-700 text-sm font-bold mb-2">Jenis
                         Kelamin</label>
                       <input type="radio" name="jenis_kelamin" id="" value="L">
+                      <label for="jenis_kelamin">L</label>
                       <input type="radio" name="jenis_kelamin" id="" value="P">
+                      <label for="jenis_kelamin">P</label>
                     </div>
                     <div class="mb-4">
                       <label for="no_telp" class="block text-gray-700 text-sm font-bold mb-2">Nomor telepon</label>
@@ -101,7 +110,7 @@
                     </div>
                     <div class="mb-4">
                       <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat</label>
-                      <input type="number" name="alamat" id="alamat"
+                      <input type="text" name="alamat" id="alamat"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
@@ -109,7 +118,6 @@
                       <input type="text" name="keluhan" id="keluhan"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
-
                     <div class="flex justify-end">
                       <button type="submit"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
@@ -117,6 +125,7 @@
                   </form>
                 </div>
               </div>
+              <i id="close-pasien-modal" class="fa-solid fa-xmark fa-lg cursor-pointer"></i>
             </div>
           </div>
         </div>
@@ -157,19 +166,14 @@
     const modalButton = document.querySelector('#pasien-modal-button');
     const modalContainer = document.querySelector('#pasien-modal-container');
     const modal = document.querySelector('#pasien-modal');
+    const closeModal = document.querySelector('#close-pasien-modal');
 
     modalButton.addEventListener('click', () => {
       modalContainer.classList.remove('hidden');
     });
 
-    document.addEventListener('click', (e) => {
-      if (!modalContainer.classList.contains('hidden')) {
-        modalContainer.addEventListener('click', (e) => {
-          if (e.target !== modal) {
-            modalContainer.classList.add('hidden');
-          }
-        });
-      }
+    closeModal.addEventListener('click', () => {
+      modalContainer.classList.add('hidden');
     });
 
     // Info Pasien

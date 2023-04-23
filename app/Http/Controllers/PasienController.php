@@ -15,17 +15,17 @@ class PasienController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'nama' => 'required',
-            'tanggal_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-            'alamat' => 'required',
+            'no_rm' => 'required',
             'tanggal_kunjungan' => 'required',
+            'nama_pasien' => 'required',
+            'tanggal_lahir' => 'required',
+            'umur' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
             'keluhan' => 'required',
-            'diagnosa' => 'required',
-            'tindakan' => 'required',
-            'obat' => 'required',
-            'dokter' => 'required',
         ]);
 
         Pasien::create($request->all());
@@ -41,5 +41,14 @@ class PasienController extends Controller
             'status' => 'success',
             'data' => $pasien,
         ], 200);
+    }
+
+    public function destroy($id)
+    {
+        $pasien = Pasien::find($id);
+        $pasien->delete();
+
+        return redirect()->route('pasien.index')
+            ->with('success', 'Pasien berhasil dihapus.');
     }
 }

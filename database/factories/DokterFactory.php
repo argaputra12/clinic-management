@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class DokterFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // nik dokter reference to table users column 'nik'
+            'nik_dokter' => User::factory()->create()->nik,
+            'nama_dokter' => $this->faker->name(),
+            'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
+            'alamat' => $this->faker->address(),
+            'no_telp' => $this->faker->phoneNumber(),
+            'tanggal_lahir' => $this->faker->date(),
         ];
     }
 }

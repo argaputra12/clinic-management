@@ -22,13 +22,16 @@ class DatabaseSeeder extends Seeder
         // run seeder from UserSeeder
         $this->call(UserSeeder::class);
 
+        // run seeder from AdminSeeder
+        $this->call(AdminSeeder::class);
+
 
         // run seeder from DokterSeeder
         $this->call(DokterSeeder::class);
 
         // run seeder from MedisSeeder
         $this->call(MedisSeeder::class);
-        
+
         // run seeder from PasienSeeder
         $this->call(PasienSeeder::class);
     }

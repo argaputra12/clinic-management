@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         // run seeder from AdminSeeder
         $this->call(AdminSeeder::class);
 
-
         // run seeder from DokterSeeder
         $this->call(DokterSeeder::class);
 
@@ -34,5 +33,14 @@ class DatabaseSeeder extends Seeder
 
         // run seeder from PasienSeeder
         $this->call(PasienSeeder::class);
+
+        // run seeder from ObatSeeder
+        $this->call(ObatSeeder::class);
+
+        // run seeder from ResepSeeder
+        $this->call(ResepSeeder::class);
+
+        // run seeder from ResepObatSeeder
+        $this->call(ResepObatSeeder::class);
     }
 }

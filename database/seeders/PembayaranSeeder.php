@@ -2,25 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dokter;
-use App\Models\Medis;
 use App\Models\Pasien;
+use App\Models\Pembayaran;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class MedisSeeder extends Seeder
+class PembayaranSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $pasien = Medis::factory(Pasien::class)->create();
-        $dokter = Medis::factory(Dokter::class)->create();
+        $pasien = Pembayaran::factory(Pasien::class)->create();
 
-        Medis::factory()->create([
+        Pembayaran::factory()->create([
             'pasien_id' => $pasien->id,
-            'nama_dokter' => $dokter->nama_dokter,
+            'no_rm' => $pasien->no_rm,
         ]);
     }
 }

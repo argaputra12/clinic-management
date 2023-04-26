@@ -25,6 +25,8 @@
     Dummy Links
   </div>
 
-  <x-sidebar.link title="Data Pasien" href="{{ route('pasien.index') }}" title="data-pasien" isActive={{ true }}/>
+  <x-sidebar.link title="Data Pasien" href="{{ route('pasien.index') }}" isActive="request()->routeIs('pasien.index')"/>
+  <x-sidebar.link title="Data Rekam Medis" href="{{ route('medis.index') }}" isActive="request()->routeIs('medis.index')"/>
+
 
 </x-perfect-scrollbar>

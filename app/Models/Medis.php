@@ -29,4 +29,9 @@ class Medis extends Model
     {
         return $this->belongsTo(Pasien::class, 'pasien_id', 'id');
     }
+
+    public function dokter()
+    {
+        return $this->belongsTo(Dokter::class, 'nama_dokter', 'nama_dokter');
+    }
 }

@@ -80,10 +80,6 @@
       </div>
     @endforeach
 
-    <!-- Edit Pasien Modal -->
-    <div id="edit-pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-    </div>
-
     <!-- Insert Pasien Modal -->
     <div id="pasien-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

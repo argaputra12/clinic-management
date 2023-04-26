@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\PasienController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MedisController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -26,11 +27,21 @@ Route::middleware(['admin'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
-    Route::post('/pasien', [PasienController::class, 'store'])->name('pasien.store');
-    Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
-    Route::get('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
-    Route::delete('/pasien/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');
+    Route::prefix('pasien')->group(function () {
+        Route::get('/', [PasienController::class, 'index'])->name('pasien.index');
+        Route::post('/', [PasienController::class, 'store'])->name('pasien.store');
+        Route::put('/{id}', [PasienController::class, 'update'])->name('pasien.update');
+        Route::get('/{id}', [PasienController::class, 'update'])->name('pasien.update');
+        Route::delete('/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');
+    });
+
+    Route::prefix('medis')->group(function () {
+        Route::get('/', [MedisController::class, 'index'])->name('medis.index');
+        Route::post('/', [MedisController::class, 'store'])->name('medis.store');
+        Route::put('/{id}', [MedisController::class, 'update'])->name('medis.update');
+        Route::get('/{id}', [MedisController::class, 'update'])->name('medis.update');
+        Route::delete('/{id}', [MedisController::class, 'destroy'])->name('medis.destroy');
+    });
 
 });
 

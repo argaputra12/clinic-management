@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medis;
+use App\Models\Resep;
 use App\Models\Dokter;
 use App\Models\Pasien;
+use App\Models\ResepObat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -70,7 +72,9 @@ class MedisController extends Controller
     public function edit(string $id)
     {
         $medis = Medis::find($id);
-        return view('components.modals.edit-info-medis', compact('medis'));
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+        return view('components.modals.edit-info-medis', compact('medis', 'pasien', 'dokter'));
     }
 
     /**
@@ -78,6 +82,12 @@ class MedisController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $nama_pasien = Pasien::where('id', $request->pasien_id)->first();
+
+        $request->merge([
+            'nama_pasien' => $nama_pasien->nama_pasien,
+        ]);
+
         $request->validate([
             'pasien_id' => 'required',
             'no_rm' => 'required',
@@ -85,15 +95,16 @@ class MedisController extends Controller
             'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'tenis' => 'required',
+            'tensi' => 'required',
             'keluhan' => 'required',
-            'diagonsa' => 'required',
-            'tingdakan' => 'required',
+            'diagnosa' => 'required',
+            'tindakan' => 'required',
             'nama_dokter' => 'required',
         ]);
 
         $medis = Medis::find($id);
         $medis->update($request->all());
+
 
         return redirect()->route('medis.index')
             ->with('success', 'Rekam Medis berhasil diupdate.');
@@ -105,9 +116,19 @@ class MedisController extends Controller
     public function destroy(string $id)
     {
         $medis = Medis::find($id);
+        $reseps = Resep::where('medis_id', $id)->get();
+
+        foreach ($reseps as $resep) {
+            $resep_obats = ResepObat::where('resep_id', $resep->id)->get();
+            foreach ($resep_obats as $resep_obat) {
+                $resep_obat->delete();
+            }
+            $resep->delete();
+        }
+
         $medis->delete();
 
         return redirect()->route('medis.index')
-            ->with(['success' => 'Rekam Medis berhasil dihapus.']);
+            ->with('success', 'Rekam Medis berhasil dihapus.');
     }
 }

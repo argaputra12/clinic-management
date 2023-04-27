@@ -66,10 +66,10 @@
         <div class="w-[12rem] overflow-hidden text-ellipsis">{{ $m->keluhan }}</div>
         <div class="w-[12rem] overflow-hidden">{{ $m->tindakan }}</div>
         <div class="text-center w-[9rem] flex justify-evenly items-center">
-          <i class="info-medis-button fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $m->id }}>
+          <i id="info-medis-button" class="fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $m->id }}>
             <input type="hidden" name="id" value={{ $m->id }}>
           </i>
-          <i class="edit-medis-button fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $m->id }}>
+          <i id="edit-medis-button" class="fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $m->id }}>
             <input type="hidden" name="id" value={{ $m->id }}>
           </i>
           <form action="{{ route('medis.destroy', $m->id) }}" method="POST">
@@ -101,14 +101,14 @@
 
   <script>
     // Flash message success
-    const flashMessageSuccess = document.querySelector('#flash-message-success') | null;
     const flashMessageSuccessClose = document.querySelector('#flash-message-success-close') | null;
 
-    if (flashMessageSuccess) {
-      flashMessageSuccessClose.addEventListener('click', () => {
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'flash-message-success-close') {
+        const flashMessageSuccess = document.querySelector('#flash-message-success');
         flashMessageSuccess.classList.add('hidden');
-      });
-    }
+      }
+    });
 
 
     // Flash message error
@@ -141,14 +141,12 @@
     }
 
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('edit-medis-button')) {
+      if (e.target.id == 'edit-medis-button') {
         getEditmedis(e.target.querySelector('input[name="id"]').value);
         editModalContainer.classList.remove('hidden');
       }
-    });
 
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('close-edit-medis-modal')) {
+      if (e.target.id == 'close-edit-medis-modal') {
         editModalContainer.classList.add('hidden');
       }
     });
@@ -200,9 +198,8 @@
       })
     }
 
-    // Info medis Modal
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('info-medis-button')) {
+      if (e.target.id == 'info-medis-button') {
         getInfomedis(e.target.querySelector('input[name="id"]').value);
         infoModalContainer.classList.remove('hidden');
       }

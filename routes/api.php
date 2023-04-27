@@ -27,4 +27,6 @@ Route::prefix('pasien')->group(function () {
 
 Route::prefix('medis')->group(function (){
     Route::get('/create', [MedisController::class, 'create'])->name('medis.create');
+    Route::get('/{id}', [MedisController::class, 'show'])->name('medis.show');
+    Route::get('/{id}/edit', [MedisController::class, 'edit'])->name('medis.edit');
 });

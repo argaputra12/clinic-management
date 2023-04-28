@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('nik_admin');
-            $table->foreign('nik_admin')->references('nik')->on('users');
+            $table->foreign('nik_admin')->references('nik')->on('users')->onDelete('cascade');
 
             $table->string('nama_admin');
             $table->date('tanggal_lahir');

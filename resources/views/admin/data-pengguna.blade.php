@@ -2,7 +2,7 @@
   <x-slot name="header">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <h2 class="text-xl font-semibold leading-tight">
-        {{ __('Data medis') }}
+        {{ __('Data Pengguna') }}
       </h2>
     </div>
   </x-slot>
@@ -38,41 +38,31 @@
 
   <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mb-4">
     <div class="mb-6 mx-4 flex justify-end">
-      <a id="tambah-medis-modal-button"
+      <a id="tambah-pengguna-modal-button"
         class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-300 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-blue cursor-pointer">
-        Tambah rekam medis
+        Tambah pengguna
       </a>
     </div>
-    <div class="flex font-semibold text-base justify-between border-b-2 pb-4 items-center">
-      <div class="text-center basis-36">No Rekam Medis</div>
-      <div class="text-center basis-36">Tanggal Kunjungan</div>
-      <div class="text-center basis-48">Nama Pasien</div>
-      <div class="text-center basis-48">Nama Dokter</div>
-      <div class="text-center basis-36">Tanggal Lahir</div>
-      <div class="text-center basis-24">Tensi</div>
-      <div class="text-center basis-48">Keluhan</div>
-      <div class="text-center basis-48">Tindakan</div>
-      <div class="text-center basis-36">Aksi</div>
+    <div class="flex font-semibold text-base justify-between border-b-2 pb-4">
+      <div class="text-center w-[150px]">NIK</div>
+      <div class="text-center w-[150px]">Role</div>
+      <div class="text-center w-[200px]">Email</div>
+      <div class="text-center w-[200px]">Aksi</div>
     </div>
 
-    @foreach ($medis as $m)
-      <div class="flex text-sm justify-between border-b-2 py-4">
-        <div class="w-[9rem]">{{ $m->no_rm }}</div>
-        <div class="text-center w-[9rem]">{{ $m->tanggal_kunjungan }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->pasien->nama_pasien }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->dokter->nama_dokter }}</div>
-        <div class="text-center w-[9rem]">{{ $m->tanggal_lahir }}</div>
-        <div class="text-center w-[6rem]">{{ $m->tensi }} mmHg </div>
-        <div class="w-[12rem] overflow-hidden text-ellipsis">{{ $m->keluhan }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->tindakan }}</div>
-        <div class="text-center w-[9rem] flex justify-evenly items-center">
-          <i id="info-medis-button" class="fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $m->id }}>
-            <input type="hidden" name="id" value={{ $m->id }}>
+    @foreach ($users as $user)
+      <div class="flex text-sm justify-between border-b-2 px-2 py-4">
+        <div class="w-[150px]">{{ $user->nik }}</div>
+        <div class="w-[150px]">{{ $user->role }}</div>
+        <div class="w-[200px]">{{ $user->email }}</div>
+        <div class="text-center w-[200px] flex justify-evenly items-center">
+          <i id="info-pengguna-button" class="fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $user->id }}>
+            <input type="hidden" name="id" value={{ $user->id }}>
           </i>
-          <i id="edit-medis-button" class="fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $m->id }}>
-            <input type="hidden" name="id" value={{ $m->id }}>
+          <i id="edit-pengguna-button" class="fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $user->id }}>
+            <input type="hidden" name="id" value={{ $user->id }}>
           </i>
-          <form action="{{ route('medis.destroy', $m->id) }}" method="POST">
+          <form action="{{ route('user.destroy', $user->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">
@@ -84,27 +74,29 @@
       </div>
     @endforeach
 
-    <!-- Insert medis Modal -->
-    <div id="tambah-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    <!-- Insert pengguna Modal -->
+    <div id="pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+
     </div>
 
-    <!-- Info medis Modal -->
-    <div id="info-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    <!-- Info pengguna Modal -->
+    <div id="info-pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
     </div>
 
-    <!-- Edit medis Modal -->
-    <div id="edit-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    <!-- Edit pengguna Modal -->
+    <div id="edit-pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
     </div>
   </div>
 
-  <?php echo $medis->render(); ?>
+  <?php echo $users->render(); ?>
 
   <script>
     // Flash message success
+    //   const flashMessageSuccess = document.querySelector('#flash-message-success') | null;
     const flashMessageSuccessClose = document.querySelector('#flash-message-success-close') | null;
 
     document.addEventListener('click', (e) => {
-      if (e.target.id === 'flash-message-success-close') {
+      if (e.target.id == 'flash-message-success-close') {
         const flashMessageSuccess = document.querySelector('#flash-message-success');
         flashMessageSuccess.classList.add('hidden');
       }
@@ -122,14 +114,14 @@
     }
 
 
-    // Edit medis
-    const editModalContainer = document.querySelector('#edit-medis-modal-container');
-    const editModal = document.querySelector('#edit-medis-modal');
-    const closeEditModal = document.querySelector('#close-edit-medis-modal') | null;
+    // Edit pengguna
+    const editModalContainer = document.querySelector('#edit-pengguna-modal-container');
+    const editModal = document.querySelector('#edit-pengguna-modal');
+    const closeEditModal = document.querySelector('#close-edit-pengguna-modal') | null;
 
-    const getEditmedis = (id) => {
+    const getEditPengguna = (id) => {
       $.ajax({
-        url: 'api/medis/' + id + '/edit',
+        url: 'api/user/' + id + '/edit',
         type: 'GET',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -141,53 +133,61 @@
     }
 
     document.addEventListener('click', (e) => {
-      if (e.target.id == 'edit-medis-button') {
-        getEditmedis(e.target.querySelector('input[name="id"]').value);
+      if (e.target.id == 'edit-pengguna-button') {
+        getEditPengguna(e.target.querySelector('input[name="id"]').value);
         editModalContainer.classList.remove('hidden');
       }
+    });
 
-      if (e.target.id == 'close-edit-medis-modal') {
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('close-edit-pengguna-modal')) {
         editModalContainer.classList.add('hidden');
       }
     });
 
 
-    // Tambah medis
-    const tambahModalButton = document.querySelector('#tambah-medis-button');
-    const tambahModalContainer = document.querySelector('#tambah-medis-modal-container');
-    const closeTambahModal = document.querySelector('#close-tambah-medis-modal') | null;
+    // Tambah pengguna
+    const modalButton = document.querySelector('#tambah-pengguna-modal-button');
+    const modalContainer = document.querySelector('#pengguna-modal-container');
+    const modal = document.querySelector('#pengguna-modal') | null;
+    const closeModal = document.querySelector('#close-tambah-pengguna-modal') | null;
 
-    const getTambahmedis = () => {
+    const getTambahPengguna = () => {
       $.ajax({
-        url: 'api/medis/create',
+        url: 'api/user/create',
         type: 'GET',
         data: {
-            '_token' : '{{ csrf_token() }}'
+          '_token': '{{ csrf_token() }}'
         },
         success: function(data) {
-          tambahModalContainer.innerHTML = data;
+          modalContainer.innerHTML = data;
+        },
+        error: function(data) {
+          console.log(data);
         }
+
       });
     }
 
+    modalButton.addEventListener('click', () => {
+      getTambahPengguna();
+      modalContainer.classList.remove('hidden');
+    });
+
     document.addEventListener('click', (e) => {
-      if (e.target.id == 'tambah-medis-modal-button') {
-        getTambahmedis();
-        tambahModalContainer.classList.remove('hidden');
-      }
-      if (e.target.id == 'close-tambah-medis-modal') {
-        tambahModalContainer.classList.add('hidden');
+      if (e.target.id == 'close-tambah-pengguna-modal') {
+        modalContainer.classList.add('hidden');
       }
     });
 
-    // Info medis
-    const infoModalContainer = document.querySelector('#info-medis-modal-container');
-    const infoModal = document.querySelector('#info-medis-modal');
-    const infoDetailmedis = document.querySelector('#info-detail-medis');
+    // Info pengguna
+    const infoModalContainer = document.querySelector('#info-pengguna-modal-container');
+    const infoModal = document.querySelector('#info-pengguna-modal');
+    const infoDetailpengguna = document.querySelector('#info-detail-pengguna');
 
-    const getInfomedis = (id) => {
+    const getInfopengguna = (id) => {
       $.ajax({
-        url: 'api/medis/' + id,
+        url: 'api/user/' + id,
         type: 'GET',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -198,9 +198,11 @@
       })
     }
 
+    // Info pengguna Modal
     document.addEventListener('click', (e) => {
-      if (e.target.id == 'info-medis-button') {
-        getInfomedis(e.target.querySelector('input[name="id"]').value);
+      if (e.target.id == 'info-pengguna-button') {
+        console.log(e.target.querySelector('input[name="id"]').value);
+        getInfopengguna(e.target.querySelector('input[name="id"]').value);
         infoModalContainer.classList.remove('hidden');
       }
 

@@ -18,13 +18,13 @@ class AdminFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory()->create(['role' => 'admin'])->id,
             'nik_admin' => User::factory()->create()->nik,
             'nama_admin' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->date(),
             'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
             'alamat' => $this->faker->address(),
             'no_telp' => $this->faker->phoneNumber(),
-
         ];
     }
 }

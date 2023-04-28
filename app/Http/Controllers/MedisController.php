@@ -9,6 +9,7 @@ use App\Models\Pasien;
 use App\Models\ResepObat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Termwind\Components\Dd;
 
 class MedisController extends Controller
 {
@@ -24,11 +25,12 @@ class MedisController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        $_token = $request->_token;
         $pasien = Pasien::all();
         $dokter = Dokter::all();
-        return view('components.modals.tambah-info-medis', compact('pasien', 'dokter'));
+        return view('components.modals.tambah-info-medis', compact('pasien', 'dokter', '_token'));
     }
 
     /**
@@ -36,7 +38,12 @@ class MedisController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $pasien = Pasien::where('id', $request->pasien_id)->first();
+        $request->merge([
+            'nama_pasien' => $pasien->nama_pasien,
+        ]);
+
+        $validate = $request->validate([
             'pasien_id' => 'required',
             'no_rm' => 'required',
             'tanggal_kunjungan' => 'required',
@@ -50,10 +57,19 @@ class MedisController extends Controller
             'nama_dokter' => 'required',
         ]);
 
-        Medis::create($request->all());
+        try {
+            $medis = Medis::create($validate);
+            $medis->save();
+            dd('berhasil');
+        } catch (\Throwable $th) {
+            dd($th);
+        }
 
-        return redirect()->route('medis.index')
-            ->with('success', 'Rekam Medis berhasil ditambahkan.');
+        dd($validate);
+
+
+        // return redirect()->route('medis.index')
+        //     ->with('success', 'Rekam Medis berhasil ditambahkan.');
     }
 
     /**
@@ -116,15 +132,15 @@ class MedisController extends Controller
     public function destroy(string $id)
     {
         $medis = Medis::find($id);
-        $reseps = Resep::where('medis_id', $id)->get();
+        // $reseps = Resep::where('medis_id', $id)->get();
 
-        foreach ($reseps as $resep) {
-            $resep_obats = ResepObat::where('resep_id', $resep->id)->get();
-            foreach ($resep_obats as $resep_obat) {
-                $resep_obat->delete();
-            }
-            $resep->delete();
-        }
+        // foreach ($reseps as $resep) {
+        //     $resep_obats = ResepObat::where('resep_id', $resep->id)->get();
+        //     foreach ($resep_obats as $resep_obat) {
+        //         $resep_obat->delete();
+        //     }
+        //     $resep->delete();
+        // }
 
         $medis->delete();
 

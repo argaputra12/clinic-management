@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('resep_id');
-            $table->foreign('resep_id')->references('id')->on('reseps');
+            $table->foreign('resep_id')->references('id')->on('reseps')->onDelete('cascade');
 
             $table->unsignedBigInteger('obat_id');
-            $table->foreign('obat_id')->references('id')->on('obats');
+            $table->foreign('obat_id')->references('id')->on('obats')->onDelete('cascade');
 
             $table->integer('jumlah');
             $table->timestamps();

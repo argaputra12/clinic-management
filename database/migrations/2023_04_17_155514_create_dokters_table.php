@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('nik_dokter');
-            $table->foreign('nik_dokter')->references('nik')->on('users');
+            $table->foreign('nik_dokter')->references('nik')->on('users')->onDelete('cascade');
 
             $table->string('nama_dokter');
             $table->enum('jenis_kelamin', ['L', 'P']);

@@ -27,6 +27,8 @@
 
   <x-sidebar.link title="Data Pasien" href="{{ route('pasien.index') }}" isActive="request()->routeIs('pasien.index')"/>
   <x-sidebar.link title="Data Rekam Medis" href="{{ route('medis.index') }}" isActive="request()->routeIs('medis.index')"/>
+  <x-sidebar.link title="Data Pengguna" href="{{ route('user.index') }}" isActive="request()->routeIs('user.index')"/>
+
 
 
 </x-perfect-scrollbar>

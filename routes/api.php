@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
 
@@ -29,4 +30,10 @@ Route::prefix('medis')->group(function (){
     Route::get('/create', [MedisController::class, 'create'])->name('medis.create');
     Route::get('/{id}', [MedisController::class, 'show'])->name('medis.show');
     Route::get('/{id}/edit', [MedisController::class, 'edit'])->name('medis.edit');
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 });

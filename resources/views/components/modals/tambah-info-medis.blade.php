@@ -14,7 +14,7 @@
           </h3>
           <div class="mt-2">
             <form action="{{ route('medis.store') }}" method="POST" class="flex flex-col">
-              @csrf
+              <input type="hidden" name="_token" value="{{ $_token }}" />
               <div class="flex justify-between gap-4">
                 <div class="mb-4 w-1/2">
                   <label for="no_rm" class="block text-gray-700 text-sm font-bold mb-2">No Rekam Medis</label>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kode_resep')->unique();
             $table->unsignedBigInteger('medis_id');
-            $table->foreign('medis_id')->references('id')->on('medis');
+            $table->foreign('medis_id')->references('id')->on('medis')->onDelete('cascade');
 
             $table->float('total_harga');
 

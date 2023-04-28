@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +42,14 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/{id}', [MedisController::class, 'update'])->name('medis.update');
         Route::get('/{id}', [MedisController::class, 'update'])->name('medis.update');
         Route::delete('/{id}', [MedisController::class, 'destroy'])->name('medis.destroy');
+    });
+
+    Route::prefix('user')->group(function (){
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::post('/', [UserController::class, 'store'])->name('user.store');
+        Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
     });
 
 });

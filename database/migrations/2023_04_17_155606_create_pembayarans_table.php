@@ -18,14 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('pasien_id');
             $table->foreign('pasien_id')->references('id')->on('pasiens');
 
-            $table->unsignedBigInteger('no_rm');
-            $table->foreign('no_rm')->references('no_rm')->on('pasiens');
+            $table->unsignedBigInteger('medis_id');
+            $table->foreign('medis_id')->references('id')->on('medis');
 
-            $table->text('tindakan');
             $table->string('alat_medis');
             $table->float('administrasi');
             $table->float('total_bayar');
-            $table->string('metode_pembayaran');
+            $table->enum('metode_pembayaran', ['Cash', 'Debit', 'Kredit']);
             $table->timestamps();
         });
     }

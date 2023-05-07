@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('no_rm')->unique()->index();
-            $table->date('tanggal_kunjungan');
+
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+
             $table->string('nama_pasien');
-            $table->date('tanggal_lahir');
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('no_telp');
-            $table->string('alamat');
-            $table->text('keluhan');
             $table->timestamps();
         });
     }

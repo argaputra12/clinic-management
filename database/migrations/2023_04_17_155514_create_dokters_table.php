@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('nik_dokter');
-            $table->foreign('nik_dokter')->references('nik')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->string('nama_dokter');
             $table->enum('jenis_kelamin', ['L', 'P']);

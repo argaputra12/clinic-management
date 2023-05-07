@@ -13,16 +13,15 @@ class Medis extends Model
 
     protected $fillable = [
         'pasien_id',
+        'dokter_id',
         'no_rm',
         'tanggal_kunjungan',
-        'nama_pasien',
         'tanggal_lahir',
         'alamat',
         'tensi',
         'keluhan',
         'diagnosa',
         'tindakan',
-        'nama_dokter',
     ];
 
     public function pasien()
@@ -32,6 +31,6 @@ class Medis extends Model
 
     public function dokter()
     {
-        return $this->belongsTo(Dokter::class, 'nama_dokter', 'nama_dokter');
+        return $this->belongsTo(Dokter::class, 'dokter_id', 'id');
     }
 }

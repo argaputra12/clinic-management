@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('nik_admin');
-            $table->foreign('nik_admin')->references('nik')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->string('nama_admin');
             $table->date('tanggal_lahir');

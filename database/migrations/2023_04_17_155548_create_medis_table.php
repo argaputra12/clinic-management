@@ -14,21 +14,18 @@ return new class extends Migration
         Schema::create('medis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pasien_id')->unique();
-            $table->foreign('pasien_id')->references('id')->on('pasiens');
+            $table->foreign('pasien_id')->references('id')->on('pasiens')->cascadeOnDelete();
 
-            $table->unsignedBigInteger('no_rm')->unique();
-            $table->foreign('no_rm')->references('no_rm')->on('pasiens');
+            $table->unsignedBigInteger('dokter_id');
+            $table->foreign('dokter_id')->references('id')->on('dokters')->cascadeOnDelete();
 
             $table->date('tanggal_kunjungan');
-            $table->string('nama_pasien');
             $table->date('tanggal_lahir');
             $table->string('alamat');
             $table->char('tensi', 11);
             $table->string('keluhan');
             $table->string('diagnosa');
             $table->string('tindakan');
-
-            $table->string('nama_dokter');
 
             $table->timestamps();
         });

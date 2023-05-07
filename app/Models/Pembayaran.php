@@ -14,8 +14,7 @@ class Pembayaran extends Model
     protected $fillable = [
         'kode_bayar',
         'pasien_id',
-        'no_rm',
-        'tindakan',
+        'medis_id',
         'alat_medis',
         'administrasi',
         'total_bayar',
@@ -25,5 +24,10 @@ class Pembayaran extends Model
     public function pasien()
     {
         return $this->belongsTo(Pasien::class, 'pasien_id', 'id');
+    }
+
+    public function medis()
+    {
+        return $this->belongsTo(Medis::class, 'medis_id', 'id');
     }
 }

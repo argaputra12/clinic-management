@@ -12,15 +12,16 @@ class Pasien extends Model
     protected $table = 'pasiens';
 
     protected $fillable = [
-        'no_rm',
-        'tanggal_kunjungan',
+        'user_id',
         'nama_pasien',
-        'tanggal_lahir',
         'umur',
         'jenis_kelamin',
         'no_telp',
-        'alamat',
-        'keluhan'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
 }

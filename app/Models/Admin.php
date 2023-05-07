@@ -12,7 +12,7 @@ class Admin extends Model
     protected $table = 'admins';
 
     protected $fillable = [
-        'nik_admin',
+        'user_id',
         'nama_admin',
         'tanggal_lahir',
         'jenis_kelamin',
@@ -22,6 +22,6 @@ class Admin extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'nik_admin', 'nik');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

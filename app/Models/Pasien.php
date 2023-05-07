@@ -12,7 +12,6 @@ class Pasien extends Model
     protected $table = 'pasiens';
 
     protected $fillable = [
-        'user_id',
         'nama_pasien',
         'umur',
         'jenis_kelamin',

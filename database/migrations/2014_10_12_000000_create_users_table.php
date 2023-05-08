@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('nik')->index()->unique()->nullable();
             $table->enum('role', ['admin', 'dokter'])->default('dokter');
             // $table->enum('usertype', ['1', '0'])->default('0');
+            $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

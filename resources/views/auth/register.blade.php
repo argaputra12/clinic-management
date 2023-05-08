@@ -7,30 +7,27 @@
             @csrf
 
             <div class="grid gap-6">
+                <div class="flex flex-col items-center">
+                    <h2 class="font-semibold text-xl">Registrasi</h2>
+                    <p>Klinik Utama Aliyah Medika</p>
+                </div>
                 <!-- Name -->
                 <div class="space-y-2">
                     <x-form.label
                         for="name"
                         :value="__('Name')"
                     />
-
-                    <x-form.input-with-icon-wrapper>
-                        <x-slot name="icon">
-                            <x-heroicon-o-user aria-hidden="true" class="w-5 h-5" />
-                        </x-slot>
-
-                        <x-form.input
-                            withicon
-                            id="name"
-                            class="block w-full"
-                            type="text"
-                            name="name"
-                            :value="old('name')"
-                            required
-                            autofocus
-                            placeholder="{{ __('Name') }}"
-                        />
-                    </x-form.input-with-icon-wrapper>
+                    <x-form.input
+                        withicon="false"
+                        id="name"
+                        class="block w-full"
+                        type="text"
+                        name="name"
+                        :value="old('name')"
+                        required
+                        autofocus
+                        placeholder="{{ __('Name') }}"
+                    />
                 </div>
 
                 <!-- Email Address -->

@@ -23,6 +23,11 @@ module.exports = {
                     'eval-2': '#2A2F42',
                     'eval-3': '#2C3142',
                 },
+                primary: {
+                    'green': '#105652',
+                    'cream': '#FFE9DC',
+                    'cream-2': '#F9E8D6',
+                },
             },
         },
     },

@@ -10,26 +10,23 @@
             @csrf
 
             <div class="grid gap-6">
-                <!-- Email Address -->
+                <div class="flex flex-col items-center">
+                    <h2 class="font-semibold text-xl">Masuk</h2>
+                    <p>Klinik Utama Aliyah Medika</p>
+                </div>
+                <!-- Username -->
                 <div class="space-y-2">
-                    <x-form.label
-                        for="email"
-                        :value="__('Email')"
-                    />
+
 
                     <x-form.input-with-icon-wrapper>
-                        <x-slot name="icon">
-                            <x-heroicon-o-mail aria-hidden="true" class="w-5 h-5" />
-                        </x-slot>
 
                         <x-form.input
-                            withicon
-                            id="email"
+                            id="username"
                             class="block w-full"
-                            type="email"
-                            name="email"
-                            :value="old('email')"
-                            placeholder="{{ __('Email') }}"
+                            type="text"
+                            name="username"
+                            :value="old('username')"
+                            placeholder="{{ __('Username') }}"
                             required
                             autofocus
                         />
@@ -38,18 +35,8 @@
 
                 <!-- Password -->
                 <div class="space-y-2">
-                    <x-form.label
-                        for="password"
-                        :value="__('Password')"
-                    />
-
                     <x-form.input-with-icon-wrapper>
-                        <x-slot name="icon">
-                            <x-heroicon-o-lock-closed aria-hidden="true" class="w-5 h-5" />
-                        </x-slot>
-
                         <x-form.input
-                            withicon
                             id="password"
                             class="block w-full"
                             type="password"
@@ -62,42 +49,32 @@
                 </div>
 
                 <!-- Remember Me -->
-                <div class="flex items-center justify-between">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input
-                            id="remember_me"
-                            type="checkbox"
-                            class="text-purple-500 border-gray-300 rounded focus:border-purple-300 focus:ring focus:ring-purple-500 dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
-                            name="remember"
-                        >
-
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                            {{ __('Remember me') }}
-                        </span>
-                    </label>
-
+                <div class="flex items-center justify-end">
                     @if (Route::has('password.request'))
                         <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                            {{ __('Lupa password?') }}
                         </a>
                     @endif
                 </div>
 
-                <div>
-                    <x-button class="justify-center w-full gap-2">
-                        <x-heroicon-o-login class="w-6 h-6" aria-hidden="true" />
+                <div class="flex justify-center">
+                    <x-button class="justify-center w-1/2 gap-2">
+                        {{-- <x-heroicon-o-login class="w-6 h-6" aria-hidden="true" /> --}}
 
-                        <span>{{ __('Log in') }}</span>
+                        <span>{{ __('Masuk') }}</span>
                     </x-button>
                 </div>
 
                 @if (Route::has('register'))
+                <div class="flex justify-center">
+
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ __('Don’t have an account?') }}
+                        {{ __('Belum punya akun?') }}
                         <a href="{{ route('register') }}" class="text-blue-500 hover:underline">
                             {{ __('Register') }}
                         </a>
                     </p>
+                </div>
                 @endif
             </div>
         </form>

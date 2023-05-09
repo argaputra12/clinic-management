@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('reseps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kode_resep')->unique();
-            $table->unsignedBigInteger('medis_id');
-            $table->foreign('medis_id')->references('id')->on('medis')->onDelete('cascade');
+            $table->unsignedBigInteger('rekam_medis_id');
+            $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
 
             $table->float('total_harga');
 

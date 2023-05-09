@@ -17,7 +17,7 @@ class ResepSeeder extends Seeder
         $medis = Resep::factory(Medis::class)->create();
 
         Resep::factory()->create([
-            'medis_id' => $medis->id,
+            'rekam_medis_id' => $medis->id,
         ]);
     }
 }

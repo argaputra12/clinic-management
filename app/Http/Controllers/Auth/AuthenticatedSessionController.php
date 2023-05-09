@@ -25,8 +25,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        // generate different auth based on user role
-        $request->authenticate();
+        auth()->attempt($request->only('username', 'password'));
 
         $request->session()->regenerate();
 
@@ -37,7 +36,6 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('welcome');
         }
 
-        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

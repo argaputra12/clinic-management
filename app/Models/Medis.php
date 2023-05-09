@@ -9,7 +9,7 @@ class Medis extends Model
 {
     use HasFactory;
 
-    protected $table = 'medis';
+    protected $table = 'rekam_medis';
 
     protected $fillable = [
         'pasien_id',

@@ -19,7 +19,7 @@ class ResepFactory extends Factory
     {
         return [
             'kode_resep' => $this->faker->numberBetween(1000, 5000),
-            'medis_id' => Medis::factory()->create()->id,
+            'rekam_medis_id' => Medis::factory()->create()->id,
             'total_harga' => $this->faker->numberBetween(5000, 10000),
         ];
     }

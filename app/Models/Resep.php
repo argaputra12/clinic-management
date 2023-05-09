@@ -13,12 +13,12 @@ class Resep extends Model
 
     protected $fillable = [
         'kode_resep',
-        'medis_id',
+        'rekam_medis_id',
         'total_harga',
     ];
 
     public function medis()
     {
-        return $this->belongsTo(Medis::class, 'medis_id', 'id');
+        return $this->belongsTo(Medis::class, 'rekam_medis_id', 'id');
     }
 }

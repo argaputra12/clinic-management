@@ -40,9 +40,9 @@
           <x-form.input-with-icon-wrapper>
             <select name="jenis_kelamin" id="jenis_kelamin"
               class="px-4 py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring
-            focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1
+            focus:ring-green-700 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1
             dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 text-center w-full">
-              <option value="" disabled selected> Jenis Kelamin</option>
+              <option value="" disabled selected>Jenis Kelamin</option>
               <option value="L">Laki-laki</option>
               <option value="P">Perempuan</option>
             </select>
@@ -92,10 +92,24 @@
         <!-- Confirm Password -->
         <div class="space-y-2">
           <x-form.input-with-icon-wrapper>
-            <x-form.input id="password_confirmation" class="block w-full" type="password"
-              name="password_confirmation" required placeholder="{{ __('Confirm Password') }}" />
+            <x-form.input id="password_confirmation" class="block w-full" type="password" name="password_confirmation"
+              required placeholder="{{ __('Konfirmasi Password') }}" />
           </x-form.input-with-icon-wrapper>
         </div>
+
+       <!-- Role -->
+       <div class="space-y-2">
+        <x-form.input-with-icon-wrapper>
+          <select name="role" id="role"
+            class="px-4 py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring
+          focus:ring-green-700 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1
+          dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 text-center w-full">
+            <option value="" disabled selected> Role</option>
+            <option value="dokter">Dokter</option>
+            <option value="admin">Admin</option>
+          </select>
+        </x-form.input-with-icon-wrapper>
+      </div>
 
         <div class="flex justify-center">
           <x-button class="justify-center w-1/2 gap-2">

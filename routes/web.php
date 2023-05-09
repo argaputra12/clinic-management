@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\CustomLoginController;
 
 /*
 |--------------------------------------------------------------------------

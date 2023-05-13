@@ -10,12 +10,12 @@
     KELOLA DATA
   </div>
 
-  <x-sidebar.link title='Pengguna'>
+  <x-sidebar.link title='Pengguna' href="{{ route('user.index') }}" :isActive="request()->routeIs('user.index')">
     <x-slot name='icon'>
       <i class="w-6 text-center fa-lg fa-solid fa-stethoscope"></i>
     </x-slot>
   </x-sidebar.link>
-  <x-sidebar.link title='Rekam Medis'>
+  <x-sidebar.link title='Rekam Medis' href="{{ route('medis.index') }}" :isActive="request()->routeIs('medis.index')">
     <x-slot name='icon'>
       <i class="w-6 text-center fa-lg fa-solid fa-heart-pulse"></i>
     </x-slot>
@@ -25,7 +25,7 @@
       <i class="w-6 text-center fa-lg fa-solid fa-capsules"></i>
     </x-slot>
   </x-sidebar.link>
-  <x-sidebar.link title='Pasien'>
+  <x-sidebar.link title='Pasien' href="{{ route('pasien.index') }}" :isActive="request()->routeIs('pasien.index')">
     <x-slot name='icon'>
       <i class="w-6 text-center fa-lg fa-solid fa-house-medical"></i>
     </x-slot>

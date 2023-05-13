@@ -1,11 +1,4 @@
 <x-app-layout>
-  <x-slot name="header">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <h2 class="text-xl font-semibold leading-tight">
-        {{ __('Data Pengguna') }}
-      </h2>
-    </div>
-  </x-slot>
 
   <!-- Flash message -->
   @if (session('success'))
@@ -37,182 +30,100 @@
   @endif
 
   <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mb-4">
-    <div class="mb-6 mx-4 flex justify-end">
-      <a id="tambah-pengguna-modal-button"
-        class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-300 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-blue cursor-pointer">
-        Tambah pengguna
-      </a>
-    </div>
-    <div class="flex font-semibold text-base justify-between border-b-2 pb-4">
-      <div class="text-center w-[150px]">NIK</div>
-      <div class="text-center w-[150px]">Role</div>
-      <div class="text-center w-[200px]">Email</div>
-      <div class="text-center w-[200px]">Aksi</div>
-    </div>
 
-    @foreach ($users as $user)
-      <div class="flex text-sm justify-between border-b-2 px-2 py-4">
-        <div class="w-[150px]">{{ $user->nik }}</div>
-        <div class="w-[150px]">{{ $user->role }}</div>
-        <div class="w-[200px]">{{ $user->email }}</div>
-        <div class="text-center w-[200px] flex justify-evenly items-center">
-          <i id="info-pengguna-button" class="fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $user->id }}>
-            <input type="hidden" name="id" value={{ $user->id }}>
-          </i>
-          <i id="edit-pengguna-button" class="fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $user->id }}>
-            <input type="hidden" name="id" value={{ $user->id }}>
-          </i>
-          <form action="{{ route('user.destroy', $user->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit">
-              <i class="fa-solid fa-trash fa-xl cursor-pointer">
-              </i>
-            </button>
-          </form>
-        </div>
+    <!-- Search -->
+    <div class="mb-6 flex gap-4">
+      <div class="flex justify-start">
+        <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="search" class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-    @endforeach
-
-    <!-- Insert pengguna Modal -->
-    <div id="pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-
+      <button class="rounded-md px-4 shadow-md border-[1px]">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
 
-    <!-- Info pengguna Modal -->
-    <div id="info-pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    <!-- Table -->
+    <div class="min-h-[750px] border-2 rounded-md p-4">
+        <!-- Table Title -->
+        <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
+            <h1 class="font-semibold text-xl">Table Pengguna</h1>
+        </div>
+
+        <!-- Header -->
+        <div class="w-full flex justify-between items-center bg-primary-green bg-opacity-20 gap-4 text-lg text-gray-500 h-8 px-8 mb-4">
+            <div class="w-[10%] text-center">
+                NIK
+            </div>
+            <div class="w-[12%] text-center">
+                Nama
+            </div>
+            <div class="w-[12%] text-center">
+                Tgl Lahir
+            </div>
+            <div class="w-[8%] text-center">
+                Kelamin
+            </div>
+            <div class="w-[12%] text-center">
+                Telepon
+            </div>
+            <div class="w-[10%] text-center">
+                Alamat
+            </div>
+            <div class="w-[10%] text-center">
+                Email
+            </div>
+            <div class="w-[10%] text-center">
+                Username
+            </div>
+            <div class="w-[8%] text-center">
+                Role
+            </div>
+            <div class="w-[8%] text-center">
+                Aksi
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="w-full flex flex-col gap-3">
+            <div class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+                <div class="w-[10%] text-center">
+                    1234567890
+                </div>
+                <div class="w-[12%] text-center">
+                    John Doe
+                </div>
+                <div class="w-[12%] text-center truncate">
+                    10 Desember 2001
+                </div>
+                <div class="w-[8%] text-center">
+                    Laki-laki
+                </div>
+                <div class="w-[12%] text-center">
+                    0821325556728
+                </div>
+                <div class="w-[10%] text-center truncate">
+                    Perum Panorama Wilis
+                </div>
+                <div class="w-[10%] text-center">
+                    user@user.com
+                </div>
+                <div class="w-[10%] text-center">
+                    user
+                </div>
+                <div class="w-[8%] text-center">
+                    admin
+                </div>
+                <div class="flex justify-evenly w-[8%]">
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                    <i class="fa-solid fa-trash fa-lg"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Edit pengguna Modal -->
-    <div id="edit-pengguna-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-    </div>
+
+
   </div>
-
-  <?php echo $users->render(); ?>
-
-  <script>
-    // Flash message success
-    //   const flashMessageSuccess = document.querySelector('#flash-message-success') | null;
-    const flashMessageSuccessClose = document.querySelector('#flash-message-success-close') | null;
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'flash-message-success-close') {
-        const flashMessageSuccess = document.querySelector('#flash-message-success');
-        flashMessageSuccess.classList.add('hidden');
-      }
-    });
-
-
-    // Flash message error
-    const flashMessageError = document.querySelector('#flash-message-error') | null;
-    const flashMessageErrorClose = document.querySelector('#flash-message-error-close') | null;
-
-    if (flashMessageError) {
-      flashMessageErrorClose.addEventListener('click', () => {
-        flashMessageError.classList.add('hidden');
-      });
-    }
-
-
-    // Edit pengguna
-    const editModalContainer = document.querySelector('#edit-pengguna-modal-container');
-    const editModal = document.querySelector('#edit-pengguna-modal');
-    const closeEditModal = document.querySelector('#close-edit-pengguna-modal') | null;
-
-    const getEditPengguna = (id) => {
-      $.ajax({
-        url: 'api/user/' + id + '/edit',
-        type: 'GET',
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data) {
-          editModalContainer.innerHTML = data;
-        }
-      });
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'edit-pengguna-button') {
-        getEditPengguna(e.target.querySelector('input[name="id"]').value);
-        editModalContainer.classList.remove('hidden');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('close-edit-pengguna-modal')) {
-        editModalContainer.classList.add('hidden');
-      }
-    });
-
-
-    // Tambah pengguna
-    const modalButton = document.querySelector('#tambah-pengguna-modal-button');
-    const modalContainer = document.querySelector('#pengguna-modal-container');
-    const modal = document.querySelector('#pengguna-modal') | null;
-    const closeModal = document.querySelector('#close-tambah-pengguna-modal') | null;
-
-    const getTambahPengguna = () => {
-      $.ajax({
-        url: 'api/user/create',
-        type: 'GET',
-        data: {
-          '_token': '{{ csrf_token() }}'
-        },
-        success: function(data) {
-          modalContainer.innerHTML = data;
-        },
-        error: function(data) {
-          console.log(data);
-        }
-
-      });
-    }
-
-    modalButton.addEventListener('click', () => {
-      getTambahPengguna();
-      modalContainer.classList.remove('hidden');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'close-tambah-pengguna-modal') {
-        modalContainer.classList.add('hidden');
-      }
-    });
-
-    // Info pengguna
-    const infoModalContainer = document.querySelector('#info-pengguna-modal-container');
-    const infoModal = document.querySelector('#info-pengguna-modal');
-    const infoDetailpengguna = document.querySelector('#info-detail-pengguna');
-
-    const getInfopengguna = (id) => {
-      $.ajax({
-        url: 'api/user/' + id,
-        type: 'GET',
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data) {
-          infoModalContainer.innerHTML = data
-        }
-      })
-    }
-
-    // Info pengguna Modal
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'info-pengguna-button') {
-        console.log(e.target.querySelector('input[name="id"]').value);
-        getInfopengguna(e.target.querySelector('input[name="id"]').value);
-        infoModalContainer.classList.remove('hidden');
-      }
-
-      if (!infoModalContainer.classList.contains('hidden')) {
-        infoModalContainer.addEventListener('click', (e) => {
-          if (e.target !== infoModal) {
-            infoModalContainer.classList.add('hidden');
-          }
-        });
-      }
-    });
-  </script>
 </x-app-layout>

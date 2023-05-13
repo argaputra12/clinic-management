@@ -1,11 +1,4 @@
 <x-app-layout>
-  <x-slot name="header">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <h2 class="text-xl font-semibold leading-tight">
-        {{ __('Data medis') }}
-      </h2>
-    </div>
-  </x-slot>
 
   <!-- Flash message -->
   @if (session('success'))
@@ -37,180 +30,95 @@
   @endif
 
   <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mb-4">
-    <div class="mb-6 mx-4 flex justify-end">
-      <a id="tambah-medis-modal-button"
-        class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-300 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-blue cursor-pointer">
-        Tambah rekam medis
-      </a>
-    </div>
-    <div class="flex font-semibold text-base justify-between border-b-2 pb-4 items-center">
-      <div class="text-center basis-36">No Rekam Medis</div>
-      <div class="text-center basis-36">Tanggal Kunjungan</div>
-      <div class="text-center basis-48">Nama Pasien</div>
-      <div class="text-center basis-48">Nama Dokter</div>
-      <div class="text-center basis-36">Tanggal Lahir</div>
-      <div class="text-center basis-24">Tensi</div>
-      <div class="text-center basis-48">Keluhan</div>
-      <div class="text-center basis-48">Tindakan</div>
-      <div class="text-center basis-36">Aksi</div>
+
+    <!-- Search -->
+    <div class="mb-6 flex gap-4">
+      <div class="flex justify-start">
+        <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="search"
+          class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
+      </div>
+      <button class="rounded-md px-4 shadow-md border-[1px]">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
 
-    @foreach ($medis as $m)
-      <div class="flex text-sm justify-between border-b-2 py-4">
-        <div class="w-[9rem]">{{ $m->no_rm }}</div>
-        <div class="text-center w-[9rem]">{{ $m->tanggal_kunjungan }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->pasien->nama_pasien }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->dokter->nama_dokter }}</div>
-        <div class="text-center w-[9rem]">{{ $m->tanggal_lahir }}</div>
-        <div class="text-center w-[6rem]">{{ $m->tensi }} mmHg </div>
-        <div class="w-[12rem] overflow-hidden text-ellipsis">{{ $m->keluhan }}</div>
-        <div class="w-[12rem] overflow-hidden">{{ $m->tindakan }}</div>
-        <div class="text-center w-[9rem] flex justify-evenly items-center">
-          <i id="info-medis-button" class="fa-solid fa-circle-info fa-xl cursor-pointer" id={{ $m->id }}>
-            <input type="hidden" name="id" value={{ $m->id }}>
-          </i>
-          <i id="edit-medis-button" class="fa-solid fa-pen-to-square fa-xl cursor-pointer" id={{ $m->id }}>
-            <input type="hidden" name="id" value={{ $m->id }}>
-          </i>
-          <form action="{{ route('medis.destroy', $m->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit">
-              <i class="fa-solid fa-trash fa-xl cursor-pointer">
-              </i>
-            </button>
-          </form>
+    <!-- Table -->
+    <div class="min-h-[750px] border-2 rounded-md p-4">
+      <!-- Table Title -->
+      <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
+        <h1 class="font-semibold text-xl">Table Rekam Medis</h1>
+      </div>
+
+      <!-- Header -->
+      <div
+        class="w-full flex justify-between items-center bg-primary-green bg-opacity-20 gap-4 text-lg text-gray-500 h-8 px-8 mb-4">
+        <div class="w-[5%] text-center">
+          No.
+        </div>
+        <div class="w-[11%] text-center">
+          RM
+        </div>
+        <div class="w-[11%] text-center">
+          Datang
+        </div>
+        <div class="w-[11%] text-center">
+          Nama
+        </div>
+        <div class="w-[11%] text-center">
+          Tgl Lahir
+        </div>
+        <div class="w-[11%] text-center">
+          Tensi
+        </div>
+        <div class="w-[16%] text-center">
+          Keluhan
+        </div>
+        <div class="w-[16%] text-center">
+          Tindakan
+        </div>
+        <div class="w-[8%] text-center">
+          Aksi
         </div>
       </div>
-    @endforeach
 
-    <!-- Insert medis Modal -->
-    <div id="tambah-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
+      <!-- Body -->
+      <div class="w-full flex flex-col gap-3">
+        <div
+          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+          <div class="w-[5%] text-center">
+            1.
+          </div>
+          <div class="w-[11%] text-center">
+            203123421
+          </div>
+          <div class="w-[11%] text-center">
+            10 Desember 2020
+          </div>
+          <div class="w-[11%] text-center">
+            Arga Putra
+          </div>
+          <div class="w-[11%] text-center">
+            10 Desember 2001
+          </div>
+          <div class="w-[11%] text-center">
+            110/80
+          </div>
+          <div class="w-[16%] text-center truncate">
+            Sakit pada belakang kepala
+          </div>
+          <div class="w-[16%] text-center truncate">
+            Diberikan obat sakit kepala
+          </div>
+          <div class="flex justify-evenly w-[8%]">
+            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            <i class="fa-solid fa-trash fa-lg"></i>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Info medis Modal -->
-    <div id="info-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-    </div>
-
-    <!-- Edit medis Modal -->
-    <div id="edit-medis-modal-container" class="hidden fixed inset-0 z-10 overflow-y-auto">
-    </div>
   </div>
-
-  <?php echo $medis->render(); ?>
-
-  <script>
-    // Flash message success
-    const flashMessageSuccessClose = document.querySelector('#flash-message-success-close') | null;
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id === 'flash-message-success-close') {
-        const flashMessageSuccess = document.querySelector('#flash-message-success');
-        flashMessageSuccess.classList.add('hidden');
-      }
-    });
-
-
-    // Flash message error
-    const flashMessageError = document.querySelector('#flash-message-error') | null;
-    const flashMessageErrorClose = document.querySelector('#flash-message-error-close') | null;
-
-    if (flashMessageError) {
-      flashMessageErrorClose.addEventListener('click', () => {
-        flashMessageError.classList.add('hidden');
-      });
-    }
-
-
-    // Edit medis
-    const editModalContainer = document.querySelector('#edit-medis-modal-container');
-    const editModal = document.querySelector('#edit-medis-modal');
-    const closeEditModal = document.querySelector('#close-edit-medis-modal') | null;
-
-    const getEditmedis = (id) => {
-      $.ajax({
-        url: 'api/medis/' + id + '/edit',
-        type: 'GET',
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data) {
-          editModalContainer.innerHTML = data;
-        }
-      });
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'edit-medis-button') {
-        getEditmedis(e.target.querySelector('input[name="id"]').value);
-        editModalContainer.classList.remove('hidden');
-      }
-
-      if (e.target.id == 'close-edit-medis-modal') {
-        editModalContainer.classList.add('hidden');
-      }
-    });
-
-
-    // Tambah medis
-    const tambahModalButton = document.querySelector('#tambah-medis-button');
-    const tambahModalContainer = document.querySelector('#tambah-medis-modal-container');
-    const closeTambahModal = document.querySelector('#close-tambah-medis-modal') | null;
-
-    const getTambahmedis = () => {
-      $.ajax({
-        url: 'api/medis/create',
-        type: 'GET',
-        data: {
-            '_token' : '{{ csrf_token() }}'
-        },
-        success: function(data) {
-          tambahModalContainer.innerHTML = data;
-        }
-      });
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'tambah-medis-modal-button') {
-        getTambahmedis();
-        tambahModalContainer.classList.remove('hidden');
-      }
-      if (e.target.id == 'close-tambah-medis-modal') {
-        tambahModalContainer.classList.add('hidden');
-      }
-    });
-
-    // Info medis
-    const infoModalContainer = document.querySelector('#info-medis-modal-container');
-    const infoModal = document.querySelector('#info-medis-modal');
-    const infoDetailmedis = document.querySelector('#info-detail-medis');
-
-    const getInfomedis = (id) => {
-      $.ajax({
-        url: 'api/medis/' + id,
-        type: 'GET',
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data) {
-          infoModalContainer.innerHTML = data
-        }
-      })
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.id == 'info-medis-button') {
-        getInfomedis(e.target.querySelector('input[name="id"]').value);
-        infoModalContainer.classList.remove('hidden');
-      }
-
-      if (!infoModalContainer.classList.contains('hidden')) {
-        infoModalContainer.addEventListener('click', (e) => {
-          if (e.target !== infoModal) {
-            infoModalContainer.classList.add('hidden');
-          }
-        });
-      }
-    });
-  </script>
 </x-app-layout>

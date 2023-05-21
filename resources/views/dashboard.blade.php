@@ -6,7 +6,13 @@
             </h2>
         </div>
     </x-slot> --}}
-  <div class="container min-h-screen flex justify-center items-center">
+  <div
+    class="container min-h-screen flex justify-center items-center transition-all duration-200"
+    :class="{
+        'translate-x-0': isSidebarOpen,
+        'translate-x-44': !isSidebarOpen,
+    }"
+  >
     <div class="flex justify-center items-center w-1/2 flex-wrap">
       <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3">
         <a href="{{ route('user.index') }}">

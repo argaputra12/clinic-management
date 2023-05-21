@@ -6,6 +6,7 @@ use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\CustomLoginController;
+use App\Http\Controllers\ResepObatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,14 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
         Route::get('/{id}', [UserController::class, 'update'])->name('user.update');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    });
+
+    Route::prefix('resep-obat')->group(function (){
+        Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
+        Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
+        Route::put('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+        Route::get('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+        Route::delete('/{id}', [ResepObatController::class, 'destroy'])->name('resep.destroy');
     });
 
 });

@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between flex-shrink-0 shadow-md border-b-[1px] border-black">
   <!-- Logo -->
   <div class="pb-4">
-    <h2 class="text-white font-semibold text-2xl text-center leading-8">
+    <h2 class="text-white font-semibold text-2xl text-center leading-8" x-transition x-show="isSidebarOpen || isSidebarHovered">
       KLINIK UTAMA ALIYAH MEDIKA
     </h2>
   </div>

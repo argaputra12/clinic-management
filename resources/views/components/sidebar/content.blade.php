@@ -20,7 +20,7 @@
       <i class="w-6 text-center fa-lg fa-solid fa-heart-pulse"></i>
     </x-slot>
   </x-sidebar.link>
-  <x-sidebar.link title='Resep Obat'>
+  <x-sidebar.link title='Resep Obat' href="{{ route('resep.index') }}" :isActive="request()->routeIs('resep.index')">
     <x-slot name='icon'>
       <i class="w-6 text-center fa-lg fa-solid fa-capsules"></i>
     </x-slot>

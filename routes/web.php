@@ -28,11 +28,12 @@ Route::get('/', function () {
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard');https://www.thunderclient.com/welcome
 
     Route::prefix('pasien')->group(function () {
         Route::get('/', [PasienController::class, 'index'])->name('pasien.index');
         Route::post('/', [PasienController::class, 'store'])->name('pasien.store');
+        Route::get('/create', [PasienController::class, 'create'])->name('pasien.create');
         Route::put('/{id}', [PasienController::class, 'update'])->name('pasien.update');
         Route::get('/{id}', [PasienController::class, 'update'])->name('pasien.update');
         Route::delete('/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');
@@ -41,6 +42,7 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('medis')->group(function () {
         Route::get('/', [MedisController::class, 'index'])->name('medis.index');
         Route::post('/', [MedisController::class, 'store'])->name('medis.store');
+        Route::get('/create', [MedisController::class, 'create'])->name('medis.create');
         Route::put('/{id}', [MedisController::class, 'update'])->name('medis.update');
         Route::get('/{id}', [MedisController::class, 'update'])->name('medis.update');
         Route::delete('/{id}', [MedisController::class, 'destroy'])->name('medis.destroy');

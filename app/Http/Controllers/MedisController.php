@@ -27,10 +27,9 @@ class MedisController extends Controller
      */
     public function create(Request $request)
     {
-        $_token = $request->_token;
         $pasien = Pasien::all();
         $dokter = Dokter::all();
-        return view('components.modals.tambah-info-medis', compact('pasien', 'dokter', '_token'));
+        return view('admin.tambah-rekam-medis', compact('pasien', 'dokter'));
     }
 
     /**

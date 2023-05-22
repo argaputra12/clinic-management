@@ -13,6 +13,11 @@ class PasienController extends Controller
         return view('admin.data-pasien', compact('pasien'));
     }
 
+    public function create()
+    {
+        return view('admin.tambah-pasien');
+    }
+
     public function store(Request $request)
     {
 

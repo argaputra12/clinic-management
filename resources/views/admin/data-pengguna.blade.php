@@ -40,7 +40,9 @@
         <input type="text" name="search" class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
       <button class="rounded-md px-4 shadow-md border-[1px]">
-        <i class="fa-solid fa-plus"></i>
+        <a href="{{ route('user.create') }}">
+            <i class="fa-solid fa-plus"></i>
+        </a>
       </button>
     </div>
 

@@ -25,9 +25,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $_token = $request->_token;
-
-        return view('components.modals.tambah-pengguna', compact('_token'));
+        return view('admin.tambah-pengguna');
     }
 
     /**

@@ -23,9 +23,9 @@ class PasienController extends Controller
 
         $request->validate([
             'no_rm' => 'required',
-            'tanggal_kunjungan' => 'required',
             'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
+            'alamat' => 'required',
             'umur' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',

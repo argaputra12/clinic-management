@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreign('dokter_id')->references('id')->on('dokters')->cascadeOnDelete();
 
             $table->date('tanggal_kunjungan');
-            $table->date('tanggal_lahir');
-            $table->string('alamat');
             $table->char('tensi', 11);
             $table->string('keluhan');
             $table->string('diagnosa');

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pasien');
+            $table->date('tanggal_lahir');
+            $table->string('alamat');
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('no_telp');

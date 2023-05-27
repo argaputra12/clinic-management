@@ -21,6 +21,18 @@
             <input type="number" name="umur" id="umur" class="block w-full rounded-md ">
           </div>
 
+          <!-- Alamat -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="alamat" class="font-semibold">Alamat</label>
+            <input type="text" name="alamat" id="alamat" class="block w-full rounded-md ">
+          </div>
+
+          <!-- Tanggal lahir -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="tanggal_lahir" class="font-semibold">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="block w-full rounded-md ">
+          </div>
+
           <!-- Jenis Kelamin-->
           <div class="w-full flex flex-col gap-1">
             <label for="jenis_kelamin" class="font-semibold">Jenis Kelamin</label>

@@ -42,7 +42,7 @@
       </div>
       <button class="rounded-md px-4 shadow-md border-[1px]">
         <a href="{{ route('pasien.create') }}">
-            <i class="fa-solid fa-plus"></i>
+          <i class="fa-solid fa-plus"></i>
         </a>
       </button>
     </div>
@@ -60,23 +60,23 @@
         <div class="w-[5%] text-center">
           No.
         </div>
-        <div class="w-[12.5%] text-center">
-          RM
-        </div>
-        <div class="w-[12.5%] text-center">
-          Datang
-        </div>
         <div class="w-[15.5%] text-center">
           Nama
+        </div>
+        <div class="w-[12.5%] text-center">
+          Tanggal Lahir
+        </div>
+        <div class="w-[17%] text-center">
+          Alamat
+        </div>
+        <div class="w-[12.5%] text-center">
+          Umur
         </div>
         <div class="w-[12.5%] text-center">
           Kelamin
         </div>
         <div class="w-[12.5%] text-center">
           Telepon
-        </div>
-        <div class="w-[17%] text-center">
-          Alamat
         </div>
         <div class="w-[12.5%] text-center">
           Aksi
@@ -90,23 +90,23 @@
           <div class="w-[5%] text-center">
             1.
           </div>
-          <div class="w-[12.5%] text-center">
-            122131244
+          <div class="w-[15.5%] text-center">
+            Hayu Hhaaaa
           </div>
           <div class="w-[12.5%] text-center">
             10 Januari 2001
           </div>
-          <div class="w-[15.5%] text-center">
-            Hayu Hhaaaa
+          <div class="w-[17%] text-center">
+            Perum Panorama Welosari
+          </div>
+          <div class="w-[12.5%] text-center">
+            20 Tahun
           </div>
           <div class="w-[12.5%] text-center">
             Laki-laki
           </div>
           <div class="w-[12.5%] text-center">
             08213242451254
-          </div>
-          <div class="w-[17%] text-center">
-            Perum Panorama Welosari
           </div>
           <div class="flex justify-center gap-4 w-[12.5%]">
             <i class="fa-solid fa-pen-to-square fa-lg"></i>

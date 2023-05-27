@@ -61,22 +61,22 @@
           No.
         </div>
         <div class="w-[11%] text-center">
-          RM
+          Nama Pasien
+        </div>
+        <div class="w-[11%] text-center">
+          Nama Dokter
         </div>
         <div class="w-[11%] text-center">
           Datang
-        </div>
-        <div class="w-[11%] text-center">
-          Nama
-        </div>
-        <div class="w-[11%] text-center">
-          Tgl Lahir
         </div>
         <div class="w-[11%] text-center">
           Tensi
         </div>
         <div class="w-[16%] text-center">
           Keluhan
+        </div>
+        <div class="w-[11%] text-center">
+          Diagnosa
         </div>
         <div class="w-[16%] text-center">
           Tindakan
@@ -94,13 +94,10 @@
             1.
           </div>
           <div class="w-[11%] text-center">
-            203123421
-          </div>
-          <div class="w-[11%] text-center">
-            10 Desember 2020
-          </div>
-          <div class="w-[11%] text-center">
             Arga Putra
+          </div>
+          <div class="w-[11%] text-center">
+            Dr. Herman
           </div>
           <div class="w-[11%] text-center">
             10 Desember 2001
@@ -110,6 +107,9 @@
           </div>
           <div class="w-[16%] text-center truncate">
             Sakit pada belakang kepala
+          </div>
+          <div class="w-[11%] text-center">
+            Tumor
           </div>
           <div class="w-[16%] text-center truncate">
             Diberikan obat sakit kepala

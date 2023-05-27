@@ -16,8 +16,6 @@ class Medis extends Model
         'dokter_id',
         'no_rm',
         'tanggal_kunjungan',
-        'tanggal_lahir',
-        'alamat',
         'tensi',
         'keluhan',
         'diagnosa',

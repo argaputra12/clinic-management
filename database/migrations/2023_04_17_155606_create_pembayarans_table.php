@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kode_bayar')->unique();
 
             $table->unsignedBigInteger('pasien_id');
             $table->foreign('pasien_id')->references('id')->on('pasiens');

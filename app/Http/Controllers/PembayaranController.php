@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Obat;
 use App\Models\Medis;
+use App\Models\Pasien;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ResepObatController extends Controller
+class PembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.data-resep-obat');
+        $pembayaran = Pembayaran::all();
+        return view('admin.data-pembayaran', compact('pembayaran'));
     }
 
     /**
@@ -22,9 +24,9 @@ class ResepObatController extends Controller
      */
     public function create()
     {
-        $obat = Obat::all();
+        $pasien = Pasien::all();
         $medis = Medis::all();
-        return view('admin.tambah-resep-obat', compact('obat', 'medis'));
+        return view('admin.tambah-pembayaran', compact('pasien', 'medis'));
     }
 
     /**
@@ -38,7 +40,7 @@ class ResepObatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pembayaran $pembayaran)
     {
         //
     }
@@ -46,7 +48,7 @@ class ResepObatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pembayaran $pembayaran)
     {
         //
     }
@@ -54,7 +56,7 @@ class ResepObatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pembayaran $pembayaran)
     {
         //
     }
@@ -62,7 +64,7 @@ class ResepObatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pembayaran $pembayaran)
     {
         //
     }

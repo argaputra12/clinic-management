@@ -30,7 +30,7 @@
       <i class="w-6 text-center fa-lg fa-solid fa-house-medical"></i>
     </x-slot>
   </x-sidebar.link>
-  <x-sidebar.link title='Pembayaran'>
+  <x-sidebar.link title='Pembayaran' href="{{ route('pembayaran.index') }}">
     <x-slot name='icon'>
       <i class="w-6 text-center fa-lg fa-solid fa-file-invoice"></i>
     </x-slot>

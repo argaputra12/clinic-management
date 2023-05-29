@@ -35,97 +35,96 @@
     <div class="mb-6 flex gap-4">
       <div class="flex justify-start">
         <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
-            <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <input type="text" name="search" class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
+        <input type="text" name="search"
+          class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-      <button class="rounded-md px-4 shadow-md border-[1px]">
-        <a href="{{ route('user.create') }}">
-            <i class="fa-solid fa-plus"></i>
-        </a>
-      </button>
+      <a href="{{ route('user.create') }}" class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+        <i class="fa-solid fa-plus"></i>
+      </a>
     </div>
 
     <!-- Table -->
     <div class="min-h-[750px] border-2 rounded-md p-4">
-        <!-- Table Title -->
-        <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
-            <h1 class="font-semibold text-xl">Table Pengguna</h1>
-        </div>
+      <!-- Table Title -->
+      <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
+        <h1 class="font-semibold text-xl">Table Pengguna</h1>
+      </div>
 
-        <!-- Header -->
-        <div class="w-full flex justify-between items-center bg-primary-green bg-opacity-20 gap-4 text-lg text-gray-500 h-8 px-8 mb-4">
-            <div class="w-[10%] text-center">
-                NIK
-            </div>
-            <div class="w-[12%] text-center">
-                Nama
-            </div>
-            <div class="w-[12%] text-center">
-                Tgl Lahir
-            </div>
-            <div class="w-[8%] text-center">
-                Kelamin
-            </div>
-            <div class="w-[12%] text-center">
-                Telepon
-            </div>
-            <div class="w-[10%] text-center">
-                Alamat
-            </div>
-            <div class="w-[10%] text-center">
-                Email
-            </div>
-            <div class="w-[10%] text-center">
-                Username
-            </div>
-            <div class="w-[8%] text-center">
-                Role
-            </div>
-            <div class="w-[8%] text-center">
-                Aksi
-            </div>
+      <!-- Header -->
+      <div
+        class="w-full flex justify-between items-center bg-primary-green bg-opacity-20 gap-4 text-lg text-gray-500 h-8 px-8 mb-4">
+        <div class="w-[10%] text-center">
+          NIK
         </div>
+        <div class="w-[12%] text-center">
+          Nama
+        </div>
+        <div class="w-[12%] text-center">
+          Tgl Lahir
+        </div>
+        <div class="w-[8%] text-center">
+          Kelamin
+        </div>
+        <div class="w-[12%] text-center">
+          Telepon
+        </div>
+        <div class="w-[10%] text-center">
+          Alamat
+        </div>
+        <div class="w-[10%] text-center">
+          Email
+        </div>
+        <div class="w-[10%] text-center">
+          Username
+        </div>
+        <div class="w-[8%] text-center">
+          Role
+        </div>
+        <div class="w-[8%] text-center">
+          Aksi
+        </div>
+      </div>
 
-        <!-- Body -->
-        <div class="w-full flex flex-col gap-3">
-            <div class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-                <div class="w-[10%] text-center">
-                    1234567890
-                </div>
-                <div class="w-[12%] text-center">
-                    John Doe
-                </div>
-                <div class="w-[12%] text-center truncate">
-                    10 Desember 2001
-                </div>
-                <div class="w-[8%] text-center">
-                    Laki-laki
-                </div>
-                <div class="w-[12%] text-center">
-                    0821325556728
-                </div>
-                <div class="w-[10%] text-center truncate">
-                    Perum Panorama Wilis
-                </div>
-                <div class="w-[10%] text-center">
-                    user@user.com
-                </div>
-                <div class="w-[10%] text-center">
-                    user
-                </div>
-                <div class="w-[8%] text-center">
-                    admin
-                </div>
-                <div class="flex justify-evenly w-[8%]">
-                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                    <i class="fa-solid fa-trash fa-lg"></i>
-                </div>
-            </div>
+      <!-- Body -->
+      <div class="w-full flex flex-col gap-3">
+        <div
+          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+          <div class="w-[10%] text-center">
+            1234567890
+          </div>
+          <div class="w-[12%] text-center">
+            John Doe
+          </div>
+          <div class="w-[12%] text-center truncate">
+            10 Desember 2001
+          </div>
+          <div class="w-[8%] text-center">
+            Laki-laki
+          </div>
+          <div class="w-[12%] text-center">
+            0821325556728
+          </div>
+          <div class="w-[10%] text-center truncate">
+            Perum Panorama Wilis
+          </div>
+          <div class="w-[10%] text-center">
+            user@user.com
+          </div>
+          <div class="w-[10%] text-center">
+            user
+          </div>
+          <div class="w-[8%] text-center">
+            admin
+          </div>
+          <div class="flex justify-evenly w-[8%]">
+            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            <i class="fa-solid fa-trash fa-lg"></i>
+          </div>
         </div>
+      </div>
     </div>
-
-
 
   </div>
 </x-app-layout>

@@ -40,11 +40,10 @@
         <input type="text" name="search"
           class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-      <button class="rounded-md px-4 shadow-md border-[1px]">
-        <a href="{{ route('pembayaran.create') }}">
-          <i class="fa-solid fa-plus"></i>
-        </a>
-      </button>
+      <a href="{{ route('pembayaran.create') }}"
+        class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+        <i class="fa-solid fa-plus"></i>
+      </a>
     </div>
 
     <!-- Table -->

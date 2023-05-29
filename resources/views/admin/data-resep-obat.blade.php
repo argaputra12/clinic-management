@@ -40,7 +40,8 @@
         <input type="text" name="search"
           class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-      <a href="{{ route('resep.create') }}" class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+      <a href="{{ route('resep.create') }}"
+        class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
@@ -59,7 +60,7 @@
           No.
         </div>
         <div class="w-1/4 text-center">
-          Kode Resep
+          Nama Pasien
         </div>
         <div class="w-1/4 text-center">
           No. Rekam Medis
@@ -80,7 +81,7 @@
             1.
           </div>
           <div class="w-1/4 text-center">
-            24201341
+            What If
           </div>
           <div class="w-1/4 text-center">
             41234762
@@ -89,7 +90,9 @@
             Rp. 100.000
           </div>
           <div class="flex justify-center gap-6 w-1/5">
-            <i class="fa-solid fa-circle-info fa-lg"></i>
+            <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer">
+              <input type="hidden" value="1">
+            </i>
             <i class="fa-solid fa-pen-to-square fa-lg"></i>
             <i class="fa-solid fa-trash fa-lg"></i>
           </div>
@@ -100,40 +103,57 @@
   </div>
 
   <!-- Obat Modal -->
-  {{-- <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-    <div class="relative top-1/4 mx-auto w-1/2 bg-white rounded-md p-4 shadow-md">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="font-semibold text-xl">Tambah Data Obat</h1>
-        <button class="rounded-md px-4 shadow-md border-[1px]">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <div id="obat-modal-container" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div id="obat-modal" class="relative top-1/4 mx-auto w-1/2 bg-white rounded-md p-8 shadow-md">
+      <div class="flex justify-center items-center mb-6">
+        <h1 class="font-semibold text-xl">Detail Obat</h1>
       </div>
-      <form action="" method="POST" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-2">
-          <label for="kode_obat" class="font-medium">Kode Obat</label>
-          <input type="text" name="kode_obat" id="kode_obat" class="rounded-md border-[1px] border-gray-400">
+
+      <div class="flex justify-between mb-6">
+        <h3>Nama Pasien : Damn Dang</h3>
+        <h3>No Rekam Medis : 123</h3>
+      </div>
+
+      <div class="flex flex-col gap-4 justify-between text-sm px-10">
+        <!-- Table Header -->
+        <div class="flex justify-between font-bold">
+          <div class="flex w-1/2 justify-center">
+            <div class="w-1/3">Nama Obat</div>
+            <div class="w-1/3">Jumlah</div>
+            <div class="w-1/3">Harga Satuan</div>
+          </div>
+          <div>Total Harga</div>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="nama_obat" class="font-medium">Nama Obat</label>
-          <input type="text" name="nama_obat" id="nama_obat" class="rounded-md border-[1px] border-gray-400">
+
+        <!-- Table Body -->
+        <div class="flex justify-between">
+          <div class="flex w-1/2 justify-center">
+            <div class="w-1/3">Paracetamool</div>
+            <div class="w-1/3">1</div>
+            <div class="w-1/3">Rp 20000</div>
+          </div>
+          <div class="text-right">Rp 200000</div>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="jenis_obat" class="font-medium">Jenis Obat</label>
-          <input type="text" name="jenis_obat" id="jenis_obat" class="rounded-md border-[1px] border-gray-400">
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="harga_obat" class="font-medium">Harga Obat</label>
-          <input type="text" name="harga_obat" id="harga_obat" class="rounded-md border-[1px] border-gray-400">
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="stok_obat" class="font-medium">Stok Obat</label>
-          <input type="text" name="stok_obat" id="stok_obat" class="rounded-md border-[1px] border-gray-400">
-        </div>
-        <div class="flex justify-end">
-          <button type="submit" class="rounded-md px-4 py-2 bg-primary-green">Tambah</button>
-        </div>
-      </form>
+
+        <!-- Table Footer -->
+        <div class="flex justify-between">
+          <div class="text-left font-bold">Jumlah</div>
+          <div class="text-right">Rp 200000</div>
+      </div>
     </div>
-  </div> --}}
+  </div>
 
 </x-app-layout>
+
+<script>
+  // open modal
+  window.addEventListener('click', function(e) {
+    if (e.target.id == 'detail-obat') {
+      document.getElementById('obat-modal-container').classList.remove('hidden')
+    }
+
+    if (e.target.id == 'obat-modal-container') {
+      document.getElementById('obat-modal-container').classList.add('hidden')
+    }
+  })
+</script>

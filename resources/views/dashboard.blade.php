@@ -22,7 +22,7 @@
         </a>
       </div>
       <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3">
-        <a href="{{ route('medis.index') }}">
+        <a href="{{ route('dokter.medis.index') }}">
           <div
             class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">
             <i class="text-center fa-4x fa-solid fa-heart-pulse"></i>

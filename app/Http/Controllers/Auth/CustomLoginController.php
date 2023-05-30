@@ -26,7 +26,7 @@ class CustomLoginController extends Controller
             case "admin":
                 return redirect()->intended(RouteServiceProvider::HOME);
             case "dokter":
-                return redirect()->route('welcome');
+                return redirect()->route('dokter.dashboard');
         }
 
     }

@@ -25,7 +25,7 @@ class Admin
             return $next($request);
         }
         if (Auth::user()->role == 'dokter') {
-            return redirect()->route('welcome');
+            return redirect()->route('dokter.dashboard');
         }
     }
 }

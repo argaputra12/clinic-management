@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');https://www.thunderclient.com/welcome
+    })->name('dashboard');
 
     Route::prefix('pasien')->group(function () {
         Route::get('/', [PasienController::class, 'index'])->name('pasien.index');
@@ -78,11 +78,16 @@ Route::middleware(['admin'])->group(function () {
 
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-->middleware(['admin'])
-->name('dashboard');
+Route::middleware('dokter')->group(function (){
+    Route::prefix('/dokter')->group(function (){
+        Route::get('/dashboard', function () {
+            return view('dokter.dashboard');
+        })->name('dokter.dashboard');
+
+        Route::get('/medis', [MedisController::class, 'dokterIndex'])->name('dokter.medis.index');
+    });
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

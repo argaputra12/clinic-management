@@ -18,7 +18,6 @@ class ResepFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode_resep' => $this->faker->numberBetween(1000, 5000),
             'rekam_medis_id' => Medis::factory()->create()->id,
             'total_harga' => $this->faker->numberBetween(5000, 10000),
         ];

@@ -6,7 +6,7 @@
         <i class="w-6 text-center fa-lg fa-solid fa-bars"></i>
       </x-slot>
     </x-sidebar.link>
-    <x-sidebar.link title="Rekam Medis" href="{{ route('dokter.dashboard') }}" :isActive="request()->routeIs('dokter.dashboard')">
+    <x-sidebar.link title="Rekam Medis" href="{{ route('dokter.medis.index') }}" :isActive="request()->routeIs('dokter.medis.index')">
       <x-slot name="icon">
         <i class="w-6 text-center fa-lg fa-solid fa-heart-pulse"></i>
       </x-slot>

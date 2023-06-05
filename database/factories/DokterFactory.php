@@ -20,7 +20,6 @@ class DokterFactory extends Factory
         return [
             // user_id reference to users table which has role dokter
             'user_id' => User::factory()->create(['role' => 'dokter'])->id,
-            'nik_dokter' => User::factory()->create()->nik,
             'nama_dokter' => $this->faker->name(),
             'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
             'alamat' => $this->faker->address(),

@@ -75,28 +75,30 @@
 
       <!-- Body -->
       <div class="w-full flex flex-col gap-3">
-        <div
-          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-          <div class="w-[5%] text-center">
-            1.
+        @foreach ($resep as $r)
+          <div
+            class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+            <div class="w-[5%] text-center">
+              {{ $loop->iteration }}
+            </div>
+            <div class="w-1/4 text-center">
+              {{ $r->pasien->nama_pasien ?? '-' }}
+            </div>
+            <div class="w-1/4 text-center">
+              {{ $r->rekam_medis_id }}
+            </div>
+            <div class="w-1/4 text-center">
+              {{ $r->total_harga }}
+            </div>
+            <div class="flex justify-center gap-6 w-1/5">
+              <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer">
+                <input type="hidden" value="{{ $r->id }}">
+              </i>
+              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            </div>
           </div>
-          <div class="w-1/4 text-center">
-            What If
-          </div>
-          <div class="w-1/4 text-center">
-            41234762
-          </div>
-          <div class="w-1/4 text-center">
-            Rp. 100.000
-          </div>
-          <div class="flex justify-center gap-6 w-1/5">
-            <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer">
-              <input type="hidden" value="1">
-            </i>
-            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
 
@@ -104,43 +106,7 @@
 
   <!-- Obat Modal -->
   <div id="obat-modal-container" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-    <div id="obat-modal" class="relative top-1/4 mx-auto w-1/2 bg-white rounded-md p-8 shadow-md">
-      <div class="flex justify-center items-center mb-6">
-        <h1 class="font-semibold text-xl">Detail Obat</h1>
-      </div>
 
-      <div class="flex justify-between mb-6">
-        <h3>Nama Pasien : Damn Dang</h3>
-        <h3>No Rekam Medis : 123</h3>
-      </div>
-
-      <div class="flex flex-col gap-4 justify-between text-sm px-10">
-        <!-- Table Header -->
-        <div class="flex justify-between font-bold">
-          <div class="flex w-1/2 justify-center">
-            <div class="w-1/3">Nama Obat</div>
-            <div class="w-1/3">Jumlah</div>
-            <div class="w-1/3">Harga Satuan</div>
-          </div>
-          <div>Total Harga</div>
-        </div>
-
-        <!-- Table Body -->
-        <div class="flex justify-between">
-          <div class="flex w-1/2 justify-center">
-            <div class="w-1/3">Paracetamool</div>
-            <div class="w-1/3">1</div>
-            <div class="w-1/3">Rp 20000</div>
-          </div>
-          <div class="text-right">Rp 200000</div>
-        </div>
-
-        <!-- Table Footer -->
-        <div class="flex justify-between">
-          <div class="text-left font-bold">Jumlah</div>
-          <div class="text-right">Rp 200000</div>
-      </div>
-    </div>
   </div>
 
 </x-app-layout>
@@ -149,7 +115,27 @@
   // open modal
   window.addEventListener('click', function(e) {
     if (e.target.id == 'detail-obat') {
-      document.getElementById('obat-modal-container').classList.remove('hidden')
+      const obatModalContainer = document.getElementById('obat-modal-container')
+      // get id
+      let id = e.target.children[0].value
+
+      // fetch data
+      fetch('api/resep/show/' + id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+        })
+        .then(response => {
+            return response.text()
+        })
+        .then(data => {
+            obatModalContainer.innerHTML = data
+            obatModalContainer.classList.remove('hidden')
+        })
+        .catch(error => console.log(error))
+
     }
 
     if (e.target.id == 'obat-modal-container') {

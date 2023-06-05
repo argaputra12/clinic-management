@@ -20,7 +20,7 @@ class UserFactory extends Factory
         return [
             'nik' => $this->faker->unique()->randomNumber(9),
             'role' => $this->faker->randomElement(['admin', 'dokter']),
-            // 'usertype' => $this->faker->randomElement(['0', '1']),
+            'username' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'), // password
         ];

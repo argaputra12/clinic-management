@@ -20,7 +20,7 @@ class MedisSeeder extends Seeder
 
         Medis::factory()->create([
             'pasien_id' => $pasien->id,
-            'nama_dokter' => $dokter->nama_dokter,
+            'dokter_id' => $dokter->id,
         ]);
     }
 }

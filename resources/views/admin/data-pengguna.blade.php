@@ -40,7 +40,8 @@
         <input type="text" name="search"
           class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-      <a href="{{ route('user.create') }}" class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+      <a href="{{ route('user.create') }}"
+        class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
@@ -89,40 +90,62 @@
 
       <!-- Body -->
       <div class="w-full flex flex-col gap-3">
-        <div
-          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-          <div class="w-[10%] text-center">
-            1234567890
+        @foreach ($users as $user)
+          <div
+            class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+            <div class="w-[10%] text-center">
+              {{ $user->nik }}
+            </div>
+            <div class="w-[12%] text-center">
+              @if ($user->dokter)
+                {{ $user->dokter->nama_dokter }}
+              @else
+                {{ $user->admin->nama_admin }}
+              @endif
+            </div>
+            <div class="w-[12%] text-center truncate">
+              @if ($user->dokter)
+                {{ $user->dokter->tanggal_lahir }}
+              @else
+                {{ $user->admin->tanggal_lahir }}
+              @endif
+            </div>
+            <div class="w-[8%] text-center">
+              @if ($user->dokter)
+                {{ $user->dokter->jenis_kelamin }}
+              @else
+                {{ $user->admin->jenis_kelamin }}
+              @endif
+            </div>
+            <div class="w-[12%] text-center">
+              @if ($user->dokter)
+                {{ $user->dokter->no_telp }}
+              @else
+                {{ $user->admin->no_telp }}
+              @endif
+            </div>
+            <div class="w-[10%] text-center truncate">
+              @if ($user->dokter)
+                {{ $user->dokter->alamat }}
+              @else
+                {{ $user->admin->alamat }}
+              @endif
+            </div>
+            <div class="w-[10%] text-center">
+              {{ $user->email }}
+            </div>
+            <div class="w-[10%] text-center">
+              {{ $user->username }}
+            </div>
+            <div class="w-[8%] text-center">
+              {{ $user->role }}
+            </div>
+            <div class="flex justify-evenly w-[8%]">
+              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            </div>
           </div>
-          <div class="w-[12%] text-center">
-            John Doe
-          </div>
-          <div class="w-[12%] text-center truncate">
-            10 Desember 2001
-          </div>
-          <div class="w-[8%] text-center">
-            Laki-laki
-          </div>
-          <div class="w-[12%] text-center">
-            0821325556728
-          </div>
-          <div class="w-[10%] text-center truncate">
-            Perum Panorama Wilis
-          </div>
-          <div class="w-[10%] text-center">
-            user@user.com
-          </div>
-          <div class="w-[10%] text-center">
-            user
-          </div>
-          <div class="w-[8%] text-center">
-            admin
-          </div>
-          <div class="flex justify-evenly w-[8%]">
-            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
 

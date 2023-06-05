@@ -27,6 +27,12 @@ class AuthenticatedSessionController extends Controller
     {
         auth()->attempt($request->only('username', 'password'));
 
+        if (!Auth::check()) {
+            return back()->withErrors([
+                'username' => 'The provided credentials do not match our records.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         switch(Auth::user()->role){

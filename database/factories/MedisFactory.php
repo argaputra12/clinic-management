@@ -20,16 +20,12 @@ class MedisFactory extends Factory
     {
         return [
             'pasien_id' => Pasien::factory()->create()->id,
-            'no_rm' => Pasien::factory()->create()->no_rm,
+            'dokter_id' => Dokter::factory()->create()->id,
             'tanggal_kunjungan' => $this->faker->date(),
-            'nama_pasien' => $this->faker->name(),
-            'tanggal_lahir' => $this->faker->date(),
-            'alamat' => $this->faker->address(),
             'tensi' => $this->faker->randomElement(['110/70', '120/80', '130/90']),
             'keluhan' => $this->faker->text(),
             'diagnosa' => $this->faker->text(),
             'tindakan' => $this->faker->text(),
-            'nama_dokter' => Dokter::factory()->create()->nama_dokter,
         ];
     }
 }

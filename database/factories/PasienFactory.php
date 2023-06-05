@@ -17,15 +17,12 @@ class PasienFactory extends Factory
     public function definition(): array
     {
         return [
-            'no_rm' => $this->faker->unique()->randomNumber(9),
-            'tanggal_kunjungan' => $this->faker->date(),
             'nama_pasien' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->date(),
+            'alamat' => $this->faker->address(),
             'umur' => $this->faker->numberBetween(1, 100),
             'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
             'no_telp' => $this->faker->phoneNumber(),
-            'alamat' => $this->faker->address(),
-            'keluhan' => $this->faker->text(),
         ];
     }
 }

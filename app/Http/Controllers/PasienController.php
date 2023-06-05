@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pasien;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class PasienController extends Controller
 {
     public function index()
     {
-        $pasien = Pasien::orderBy('tanggal_kunjungan', 'desc')->paginate(10);
+        $pasien = DB::table('pasiens')->paginate(10);
         return view('admin.data-pasien', compact('pasien'));
     }
 
@@ -21,29 +23,42 @@ class PasienController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'no_rm' => 'required',
-            'nama_pasien' => 'required',
-            'tanggal_lahir' => 'required',
-            'alamat' => 'required',
-            'umur' => 'required',
-            'jenis_kelamin' => 'required',
-            'no_telp' => 'required',
-            'alamat' => 'required',
-            'keluhan' => 'required',
-        ]);
+        // $request->validate([
+        //     'no_rm' => 'required',
+        //     'nama_pasien' => 'required',
+        //     'tanggal_lahir' => 'required',
+        //     'alamat' => 'required',
+        //     'umur' => 'required',
+        //     'jenis_kelamin' => 'required',
+        //     'no_telp' => 'required',
+        //     'alamat' => 'required',
+        //     'keluhan' => 'required',
+        // ]);
 
-        Pasien::create($request->all());
+        // insert pasien
+        DB::table('pasiens')
+            ->insert([
+                'nama_pasien' => $request->nama_pasien,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'umur' => $request->umur,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'no_telp' => $request->no_telp,
+                'alamat' => $request->alamat,
+            ]);
+
 
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil ditambahkan.');
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $pasien = Pasien::find($id);
+        $pasien = DB::table('pasiens')
+            ->where('id', $request->id)
+            ->first();
+       
         // return component
-        return view('components.modals.detail-info-pasien', compact('pasien'));
+        return view('admin.detail-pasien', compact('pasien'));
     }
 
     public function destroy($id)

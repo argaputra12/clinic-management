@@ -89,37 +89,39 @@
 
       <!-- Body -->
       <div class="w-full flex flex-col gap-3">
-        <div
-          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-          <div class="w-[5%] text-center">
-            1.
+        @foreach ($medis as $m)
+          <div
+            class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+            <div class="w-[5%] text-center">
+              {{ $loop->iteration }}
+            </div>
+            <div class="w-[11%] text-center">
+              {{ $m->pasien->nama }}
+            </div>
+            <div class="w-[11%] text-center">
+              {{ $m->dokter->nama }}
+            </div>
+            <div class="w-[11%] text-center">
+              {{ $m->tanggal_kunjungan }}
+            </div>
+            <div class="w-[11%] text-center">
+              {{ $m->tensi }}
+            </div>
+            <div class="w-[16%] text-center truncate">
+              {{ $m->keluhan }}
+            </div>
+            <div class="w-[11%] text-center truncate">
+              {{ $m->diagnosa }}
+            </div>
+            <div class="w-[16%] text-center truncate">
+              {{ $m->tindakan }}
+            </div>
+            <div class="flex justify-evenly w-[8%]">
+              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            </div>
           </div>
-          <div class="w-[11%] text-center">
-            Arga Putra
-          </div>
-          <div class="w-[11%] text-center">
-            Dr. Herman
-          </div>
-          <div class="w-[11%] text-center">
-            10 Desember 2001
-          </div>
-          <div class="w-[11%] text-center">
-            110/80
-          </div>
-          <div class="w-[16%] text-center truncate">
-            Sakit pada belakang kepala
-          </div>
-          <div class="w-[11%] text-center">
-            Tumor
-          </div>
-          <div class="w-[16%] text-center truncate">
-            Diberikan obat sakit kepala
-          </div>
-          <div class="flex justify-evenly w-[8%]">
-            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
 

@@ -40,7 +40,8 @@
         <input type="text" name="search"
           class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
       </div>
-      <a href="{{ route('pasien.create') }}" class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+      <a href="{{ route('pasien.create') }}"
+        class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
@@ -83,34 +84,36 @@
 
       <!-- Body -->
       <div class="w-full flex flex-col gap-3">
-        <div
-          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-          <div class="w-[5%] text-center">
-            1.
+        @foreach ($pasien as $p)
+          <div
+            class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+            <div class="w-[5%] text-center">
+              {{ $loop->iteration }}
+            </div>
+            <div class="w-[15.5%] text-center">
+              {{ $p->nama_pasien }}
+            </div>
+            <div class="w-[12.5%] text-center">
+              {{ $p->tanggal_lahir }}
+            </div>
+            <div class="w-[17%] text-center">
+              {{ $p->alamat }}
+            </div>
+            <div class="w-[12.5%] text-center">
+              {{ $p->umur }} Tahun
+            </div>
+            <div class="w-[12.5%] text-center">
+              {{ $p->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
+            </div>
+            <div class="w-[12.5%] text-center">
+              {{ $p->no_telp }}
+            </div>
+            <div class="flex justify-center gap-4 w-[12.5%]">
+              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            </div>
           </div>
-          <div class="w-[15.5%] text-center">
-            Hayu Hhaaaa
-          </div>
-          <div class="w-[12.5%] text-center">
-            10 Januari 2001
-          </div>
-          <div class="w-[17%] text-center">
-            Perum Panorama Welosari
-          </div>
-          <div class="w-[12.5%] text-center">
-            20 Tahun
-          </div>
-          <div class="w-[12.5%] text-center">
-            Laki-laki
-          </div>
-          <div class="w-[12.5%] text-center">
-            08213242451254
-          </div>
-          <div class="flex justify-center gap-4 w-[12.5%]">
-            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
 

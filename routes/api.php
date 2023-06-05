@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\ResepObatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,8 @@ Route::prefix('user')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('user.create');
     Route::get('/{id}', [UserController::class, 'show'])->name('user.show');
     Route::get('/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+});
+
+Route::prefix('resep')->group(function (){
+    Route::get('/show/{id}', [ResepObatController::class, 'show'])->name('resep.show');
 });

@@ -56,7 +56,7 @@ class PasienController extends Controller
         $pasien = DB::table('pasiens')
             ->where('id', $request->id)
             ->first();
-       
+
         // return component
         return view('admin.detail-pasien', compact('pasien'));
     }
@@ -70,24 +70,21 @@ class PasienController extends Controller
             ->with(['success' => 'Pasien berhasil dihapus.']);
     }
 
-    public function getEdit($id)
+    public function edit($id)
     {
         $pasien = Pasien::find($id);
-        return view('components.modals.edit-info-pasien', compact('pasien'));
+        return view('admin.edit-pasien', compact('pasien'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'no_rm' => 'required',
-            'tanggal_kunjungan' => 'required',
             'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
+            'alamat' => 'required',
             'umur' => 'required',
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
-            'alamat' => 'required',
-            'keluhan' => 'required',
         ]);
 
         $pasien = Pasien::find($id);

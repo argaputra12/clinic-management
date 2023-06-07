@@ -48,11 +48,11 @@ class ResepObatController extends Controller
     public function show(string $id)
     {
         $resep_obat = DB::table('resep_obats')
-        ->join('obats', 'resep_obats.obat_id', '=', 'obats.id')
-        ->join('reseps', 'resep_obats.resep_id', '=', 'reseps.id')
-        ->select('resep_obats.*', 'obats.nama_obat', 'obats.satuan', 'obats.harga')
-        ->where('resep_obats.resep_id', $id)
-        ->get();
+            ->join('obats', 'resep_obats.obat_id', '=', 'obats.id')
+            ->join('reseps', 'resep_obats.resep_id', '=', 'reseps.id')
+            ->select('resep_obats.*', 'obats.nama_obat', 'obats.satuan', 'obats.harga')
+            ->where('resep_obats.resep_id', $id)
+            ->get();
 
         $total_harga = 0;
 
@@ -69,10 +69,10 @@ class ResepObatController extends Controller
             ->first();
 
         $rekam_medis = DB::table('reseps')
-        ->join('rekam_medis', 'reseps.rekam_medis_id', '=', 'rekam_medis.id')
-        ->select('rekam_medis.*')
-        ->where('reseps.id', $id)
-        ->first();
+            ->join('rekam_medis', 'reseps.rekam_medis_id', '=', 'rekam_medis.id')
+            ->select('rekam_medis.*')
+            ->where('reseps.id', $id)
+            ->first();
 
         // return response
         return view('components.modal-obat', compact('resep_obat', 'pasien', 'rekam_medis'));
@@ -99,7 +99,12 @@ class ResepObatController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // delete
+        $resep = Resep::find($id);
+        $resep->delete();
 
-   }
+        // return response
+        return redirect()->route('resep.index')
+            ->with('success', 'Resep berhasil dihapus.');
+    }
 }

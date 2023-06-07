@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->paginate(10);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.data-pengguna', compact('users'));
     }
 
@@ -36,12 +36,32 @@ class UserController extends Controller
 
         $request->validate([
             'nik' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required',
+            'tanggal_lahir' => 'required',
+            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role' => 'required',
         ]);
 
-        User::create($request->all());
+        $user = User::create([
+            'nik' => $request->nik,
+            'username' => $request->username,
+            'role' => 'dokter',
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        Dokter::create([
+            'user_id' => $user->id,
+            'nama_dokter' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'tanggal_lahir' => $request->tanggal_lahir,
+        ]);
 
         return redirect()->route('user.index')
             ->with('success', 'Pengguna berhasil ditambahkan.');
@@ -71,7 +91,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('components.modals.edit-pengguna', compact('user'));
+        return view('admin.edit-pengguna', compact('user'));
 
     }
 
@@ -82,12 +102,42 @@ class UserController extends Controller
     {
         $request->validate([
             'nik' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required',
+            'tanggal_lahir' => 'required',
             'email' => 'required',
+            'username' => 'required',
         ]);
 
         $user = User::findOrFail($id);
 
-        $user->update($request->all());
+        if($user->role == 'admin'){
+            $admin = Admin::where('user_id', $user->id)->first();
+            $admin->update([
+                'nama_admin' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'tanggal_lahir' => $request->tanggal_lahir,
+            ]);
+        } else {
+            $dokter = Dokter::where('user_id', $user->id)->first();
+            $dokter->update([
+                'nama_dokter' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'tanggal_lahir' => $request->tanggal_lahir,
+            ]);
+        }
+
+        $user->update([
+            'nik' => $request->nik,
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
 
         return redirect()->route('user.index')
             ->with('success', 'Pengguna berhasil diupdate.');

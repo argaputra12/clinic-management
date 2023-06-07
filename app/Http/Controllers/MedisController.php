@@ -95,7 +95,7 @@ class MedisController extends Controller
         $medis = Medis::find($id);
         $pasien = Pasien::all();
         $dokter = Dokter::all();
-        return view('components.modals.edit-info-medis', compact('medis', 'pasien', 'dokter'));
+        return view('admin.edit-rekam-medis', compact('medis', 'pasien', 'dokter'));
     }
 
     /**
@@ -103,24 +103,15 @@ class MedisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nama_pasien = Pasien::where('id', $request->pasien_id)->first();
-
-        $request->merge([
-            'nama_pasien' => $nama_pasien->nama_pasien,
-        ]);
 
         $request->validate([
             'pasien_id' => 'required',
-            'no_rm' => 'required',
+            'dokter_id'=> 'required',
             'tanggal_kunjungan' => 'required',
-            'nama_pasien' => 'required',
-            'tanggal_lahir' => 'required',
-            'alamat' => 'required',
             'tensi' => 'required',
             'keluhan' => 'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
-            'nama_dokter' => 'required',
         ]);
 
         $medis = Medis::find($id);

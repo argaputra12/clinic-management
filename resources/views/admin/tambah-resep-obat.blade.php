@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center flex-1 px-4 sm:justify-center">
     <div class="w-full my-6 overflow-hidden bg-white rounded-xl shadow-md sm:max-w-2xl dark:bg-dark-eval-1">
       <form action="{{ route('resep.store') }}" method="POST">
-        {{-- @csrf --}}
+        @csrf
 
         <div class="bg-primary-green bg-opacity-20 flex justify-center items-center py-8">
           <h2 class="font-bold text-xl">FORM RESEP OBAT</h2>

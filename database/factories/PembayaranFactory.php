@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Medis;
 use App\Models\Pasien;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,10 +19,8 @@ class PembayaranFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode_bayar' => $this->faker->randomDigitNotZero(),
             'pasien_id' => Pasien::factory()->create()->id,
-            'no_rm' => Pasien::factory()->create()->no_rm,
-            'tindakan' => $this->faker->text(),
+            'rekam_medis_id' => Medis::factory()->create()->id,
             'alat_medis' => $this->faker->text(),
             'administrasi' => $this->faker->randomDigitNotZero(),
             'total_bayar' => $this->faker->randomDigit(),

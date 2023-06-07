@@ -15,10 +15,13 @@ class PembayaranSeeder extends Seeder
     public function run(): void
     {
         $pasien = Pembayaran::factory(Pasien::class)->create();
+        $medis = Pembayaran::factory(Medis::class)->create([
+            'pasien_id' => $pasien->id,
+        ]);
 
         Pembayaran::factory()->create([
             'pasien_id' => $pasien->id,
-            'no_rm' => $pasien->no_rm,
+            'rekam_medis_id' => $medis->id,
         ]);
     }
 }

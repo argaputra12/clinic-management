@@ -96,10 +96,10 @@
               {{ $loop->iteration }}
             </div>
             <div class="w-[11%] text-center">
-              {{ $m->pasien->nama }}
+              {{ $m->pasien->nama_pasien }}
             </div>
             <div class="w-[11%] text-center">
-              {{ $m->dokter->nama }}
+              {{ $m->dokter->nama_dokter }}
             </div>
             <div class="w-[11%] text-center">
               {{ $m->tanggal_kunjungan }}
@@ -116,14 +116,66 @@
             <div class="w-[16%] text-center truncate">
               {{ $m->tindakan }}
             </div>
-            <div class="flex justify-evenly w-[8%]">
-              <i class="fa-solid fa-pen-to-square fa-lg"></i>
-              <i class="fa-solid fa-trash fa-lg"></i>
+            <div class="flex justify-evenly w-[8%] items-center">
+              <form action="{{ route('medis.edit', ['id' => $m->id]) }}">
+                <button type="submit">
+                  <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </button>
+              </form>
+              <i class="fa-solid fa-trash fa-lg" id={{ $m->id }}></i>
+            </div>
+
+            <!-- Delete Modal -->
+            <div
+              class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
+              id="container-modal-delete-{{ $m->id }}">
+              <form action="{{ route('pasien.destroy', ['id' => $m->id]) }}" method="POST" class="w-full">
+                @csrf
+                <div
+                  class="relative mx-auto w-1/3 bg-white rounded-md p-8 shadow-md flex flex-col justify-center items-center gap-10">
+                  <h1 class="font-bold text-xl">Apakah anda yakin ingin menghapus data ini?</h1>
+                  <div class="w-full flex justify-center gap-8">
+                    <button type="submit"
+                      class="bg-primary-cream rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200">Hapus</button>
+                    <button type="button"
+                      class="rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200 cancel-button">Batal</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         @endforeach
       </div>
     </div>
-
   </div>
+
+  <script>
+    // Flash message
+    const flashMessageSuccess = document.getElementById('flash-message-success');
+    const flashMessageError = document.getElementById('flash-message-error');
+    const flashMessageSuccessClose = document.getElementById('flash-message-success-close');
+    const flashMessageErrorClose = document.getElementById('flash-message-error-close');
+
+    flashMessageSuccessClose?.addEventListener('click', () => {
+      flashMessageSuccess.style.display = 'none';
+    });
+
+    flashMessageErrorClose?.addEventListener('click', () => {
+      flashMessageError.style.display = 'none';
+    });
+
+    // Delete button
+    window.addEventListener('click', (e) => {
+
+      if (e.target.classList.contains('fa-trash')) {
+        let id = e.target.id;
+        const containerModalDeleteUser = document.getElementById(`container-modal-delete-${id}`);
+        containerModalDeleteUser.classList.remove('hidden');
+      }
+      if (e.target.classList.contains('cancel-button')) {
+        const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
+        containerModalDeleteUserClose.classList.add('hidden');
+      }
+    });
+  </script>
 </x-app-layout>

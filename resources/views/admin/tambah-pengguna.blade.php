@@ -1,11 +1,11 @@
 <x-guest-layout>
   <div class="flex flex-col items-center flex-1 px-4 sm:justify-center">
     <div class="w-full my-14 overflow-hidden bg-white rounded-xl shadow-md sm:max-w-xl dark:bg-dark-eval-1">
-      <form action="{{ route('pasien.store') }}" method="POST">
-        {{-- @csrf --}}
+      <form action="{{ route('user.store') }}" method="POST">
+        @csrf
 
         <div class="bg-primary-green bg-opacity-20 flex flex-col justify-center items-center py-6 gap-2">
-          <h2 class="font-bold text-xl">FORM DATA PASIEN</h2>
+          <h2 class="font-bold text-xl">FORM DATA PENGGUNA</h2>
           <p class="text-lg">Klinik Utama Aliyah Medika</p>
         </div>
 
@@ -81,9 +81,7 @@
                 class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
             </a>
           </div>
-
         </div>
+      </form>
     </div>
-    </form>
-  </div>
 </x-guest-layout>

@@ -95,7 +95,26 @@
                 <input type="hidden" value="{{ $r->id }}">
               </i>
               <i class="fa-solid fa-pen-to-square fa-lg"></i>
-              <i class="fa-solid fa-trash fa-lg"></i>
+              <i class="fa-solid fa-trash fa-lg cursor-pointer" id="{{ $r->id }}"></i>
+            </div>
+
+            <!-- Delete Modal -->
+            <div
+              class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
+              id="container-modal-delete-{{ $r->id }}">
+              <form action="{{ route('resep.destroy', ['id' => $r->id]) }}" method="POST" class="w-full">
+                @csrf
+                <div
+                  class="relative mx-auto w-1/3 bg-white rounded-md p-8 shadow-md flex flex-col justify-center items-center gap-10">
+                  <h1 class="font-bold text-xl">Apakah anda yakin ingin menghapus data ini?</h1>
+                  <div class="w-full flex justify-center gap-8">
+                    <button type="submit"
+                      class="bg-primary-cream rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200">Hapus</button>
+                    <button type="button"
+                      class="rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200 cancel-button">Batal</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         @endforeach
@@ -112,8 +131,35 @@
 </x-app-layout>
 
 <script>
+  // Flash message
+  const flashMessageSuccess = document.getElementById('flash-message-success');
+  const flashMessageError = document.getElementById('flash-message-error');
+  const flashMessageSuccessClose = document.getElementById('flash-message-success-close');
+  const flashMessageErrorClose = document.getElementById('flash-message-error-close');
+
+  flashMessageSuccessClose?.addEventListener('click', () => {
+    flashMessageSuccess.style.display = 'none';
+  });
+
+  flashMessageErrorClose?.addEventListener('click', () => {
+    flashMessageError.style.display = 'none';
+  });
+
+
   // open modal
   window.addEventListener('click', function(e) {
+
+    if (e.target.classList.contains('fa-trash')) {
+      let id = e.target.id;
+      const containerModalDeleteUser = document.getElementById(`container-modal-delete-${id}`);
+      containerModalDeleteUser.classList.remove('hidden');
+    }
+
+    if (e.target.classList.contains('cancel-button')) {
+      const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
+      containerModalDeleteUserClose.classList.add('hidden');
+    }
+
     if (e.target.id == 'detail-obat') {
       const obatModalContainer = document.getElementById('obat-modal-container')
       // get id
@@ -128,11 +174,11 @@
           },
         })
         .then(response => {
-            return response.text()
+          return response.text()
         })
         .then(data => {
-            obatModalContainer.innerHTML = data
-            obatModalContainer.classList.remove('hidden')
+          obatModalContainer.innerHTML = data
+          obatModalContainer.classList.remove('hidden')
         })
         .catch(error => console.log(error))
 

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis');
 
             $table->string('alat_medis');
-            $table->float('administrasi');
-            $table->float('total_bayar');
+            $table->unsignedBigInteger('administrasi');
+            $table->unsignedBigInteger('total_bayar');
             $table->enum('metode_pembayaran', ['Cash', 'Debit', 'Kredit']);
             $table->timestamps();
         });

@@ -34,7 +34,19 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pasien_id' => 'required',
+            'rekam_medis_id' => 'required',
+            'alat_medis' => 'required',
+            'administrasi' => 'required',
+            'total_bayar' => 'required',
+            'metode_pembayaran' => 'required',
+        ]);
+
+        Pembayaran::create($request->all());
+
+        return redirect()->route('pembayaran.index')
+            ->with('success', 'Pembayaran berhasil ditambahkan');
     }
 
     /**
@@ -48,24 +60,45 @@ class PembayaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pembayaran $pembayaran)
+    public function edit(string $id)
     {
-        //
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pasien = Pasien::all();
+        $medis = Medis::all();
+
+        return view('admin.edit-pembayaran', compact('pembayaran', 'pasien', 'medis'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pembayaran $pembayaran)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'pasien_id' => 'required',
+            'rekam_medis_id' => 'required',
+            'alat_medis' => 'required',
+            'administrasi' => 'required',
+            'total_bayar' => 'required',
+            'metode_pembayaran' => 'required',
+        ]);
+
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->update($request->all());
+
+        return redirect()->route('pembayaran.index')
+            ->with('success', 'Pembayaran berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pembayaran $pembayaran)
+    public function destroy(string $id)
     {
         //
+        Pembayaran::destroy($id);
+
+        return redirect()->route('pembayaran.index')
+            ->with('success', 'Pembayaran berhasil dihapus');
     }
 }

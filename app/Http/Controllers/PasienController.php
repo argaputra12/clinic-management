@@ -23,17 +23,15 @@ class PasienController extends Controller
     public function store(Request $request)
     {
 
-        // $request->validate([
-        //     'no_rm' => 'required',
-        //     'nama_pasien' => 'required',
-        //     'tanggal_lahir' => 'required',
-        //     'alamat' => 'required',
-        //     'umur' => 'required',
-        //     'jenis_kelamin' => 'required',
-        //     'no_telp' => 'required',
-        //     'alamat' => 'required',
-        //     'keluhan' => 'required',
-        // ]);
+        $request->validate([
+            'nama_pasien' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'umur' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ]);
 
         // insert pasien
         DB::table('pasiens')

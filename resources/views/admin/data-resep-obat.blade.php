@@ -90,11 +90,13 @@
             <div class="w-1/4 text-center">
               {{ $r->total_harga }}
             </div>
-            <div class="flex justify-center gap-6 w-1/5">
+            <div class="flex justify-center items-center gap-6 w-1/5">
               <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer">
                 <input type="hidden" value="{{ $r->id }}">
               </i>
-              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <a href="{{ route('resep.edit', ['id' => $r->id]) }}">
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              </a>
               <i class="fa-solid fa-trash fa-lg cursor-pointer" id="{{ $r->id }}"></i>
             </div>
 

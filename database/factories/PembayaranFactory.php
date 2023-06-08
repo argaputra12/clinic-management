@@ -22,8 +22,8 @@ class PembayaranFactory extends Factory
             'pasien_id' => Pasien::factory()->create()->id,
             'rekam_medis_id' => Medis::factory()->create()->id,
             'alat_medis' => $this->faker->text(),
-            'administrasi' => $this->faker->randomDigitNotZero(),
-            'total_bayar' => $this->faker->randomDigit(),
+            'administrasi' => $this->faker->numberBetween(10000, 100000),
+            'total_bayar' => $this->faker->numberBetween(100000, 10000000),
             'metode_pembayaran' => $this->faker->randomElement(['Cash', 'Debit', 'Kredit']),
         ];
     }

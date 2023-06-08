@@ -83,7 +83,12 @@ class ResepObatController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $medis = Medis::all();
+        $obat = Obat::all();
+        $resep = Resep::find($id);
+        $resep_obat = DB::table('resep_obats')->where('resep_id', $id)->get();
+
+        return view('admin.edit-resep-obat', compact('resep', 'medis', 'obat', 'resep_obat'));
     }
 
     /**
@@ -91,7 +96,37 @@ class ResepObatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        foreach ($request->obat as $key => $obat) {
+            $cek_obat = DB::table('resep_obats')
+                ->where('resep_id', $id)
+                ->where('obat_id', $obat)
+                ->exists();
+
+            if ($cek_obat) {
+                DB::table('resep_obats')
+                    ->where('resep_id', $id)
+                    ->update([
+                        'jumlah' => $request->jumlah[$key],
+                        'obat_id' => $obat,
+                    ]);
+            } else {
+                DB::table('resep_obats')
+                    ->where('resep_id', $id)
+                    ->insert([
+                        'jumlah' => $request->jumlah[$key],
+                        'obat_id' => $obat,
+                        'resep_id' => $id,
+                    ]);
+            }
+        }
+        Resep::where('id', $id)
+            ->update([
+                'rekam_medis_id' => $request->rekam_medis_id,
+            ]);
+
+        // return response
+        return redirect()->route('resep.index')
+            ->with('success', 'Resep berhasil diupdate.');
     }
 
     /**

@@ -62,8 +62,8 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
         Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
         Route::get('/create', [ResepObatController::class, 'create'])->name('resep.create');
-        Route::put('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
-        Route::get('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+        Route::post('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+        Route::get('/{id}/edit', [ResepObatController::class, 'edit'])->name('resep.edit');
         Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
     });
 
@@ -71,9 +71,9 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
         Route::post('/', [PembayaranController::class, 'store'])->name('pembayaran.store');
         Route::get('/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
-        Route::put('/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
-        Route::get('/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
-        Route::delete('/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+        Route::post('/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+        Route::get('/{id}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+        Route::post('/{id}/delete', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
     });
 
 });

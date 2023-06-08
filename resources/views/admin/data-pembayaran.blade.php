@@ -59,19 +59,22 @@
         <div class="w-[5%] text-center">
           No.
         </div>
-        <div class="w-[17.4%] text-center">
+        <div class="w-[14.5%] text-center">
           Nama Pasien
         </div>
-        <div class="w-[17.4%] text-center">
+        <div class="w-[14.5%] text-center">
           No Rekam Medis
         </div>
-        <div class="w-[17.4%] text-center">
+        <div class="w-[14.5%] text-center">
           Alat medis
         </div>
-        <div class="w-[17.4%] text-center">
+        <div class="w-[14.5%] text-center">
+          Administrasi
+        </div>
+        <div class="w-[14.5%] text-center">
           Total Bayar
         </div>
-        <div class="w-[17.4%] text-center">
+        <div class="w-[14.5%] text-center">
           Metode Pembayaran
         </div>
         <div class="w-[8%] text-center">
@@ -81,33 +84,90 @@
 
       <!-- Body -->
       <div class="w-full flex flex-col gap-3">
-        <div
-          class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
-          <div class="w-[5%] text-center">
-            1.
+        @foreach ($pembayaran as $p)
+          <div
+            class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
+            <div class="w-[5%] text-center">
+              {{ $loop->iteration }}.
+            </div>
+            <div class="w-[14.5%] text-center">
+              {{ $p->pasien->nama_pasien }}
+            </div>
+            <div class="w-[14.5%] text-center">
+              {{ $p->rekam_medis_id }}
+            </div>
+            <div class="w-[14.5%] text-center max-h-10 overflow-auto">
+              {{ $p->alat_medis }}
+            </div>
+            <div class="w-[14.5%] text-center">
+              Rp {{ $p->administrasi }}
+            </div>
+            <div class="w-[14.5%] text-center">
+              Rp {{ $p->total_bayar }}
+            </div>
+            <div class="w-[14.5%] text-center">
+              {{ $p->metode_pembayaran }}
+            </div>
+            <div class="flex justify-evenly w-[8%] items-center">
+                <form action="{{ route('pembayaran.edit', ['id' => $p->id]) }}">
+                    <button type="submit">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                    </button>
+                </form>
+              <i class="fa-solid fa-trash fa-lg cursor-pointer" id="{{ $p->id }}"></i>
+            </div>
+
+            <!-- Modal Delete -->
+            <div
+              class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
+              id="container-modal-delete-{{ $p->id }}">
+              <form action="{{ route('pembayaran.destroy', ['id' => $p->id]) }}" method="POST" class="w-full">
+                @csrf
+                <div
+                  class="relative mx-auto w-1/3 bg-white rounded-md p-8 shadow-md flex flex-col justify-center items-center gap-10">
+                  <h1 class="font-bold text-xl">Apakah anda yakin ingin menghapus data ini?</h1>
+                  <div class="w-full flex justify-center gap-8">
+                    <button type="submit"
+                      class="bg-primary-cream rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200">Hapus</button>
+                    <button type="button"
+                      class="rounded-md px-8 py-3 font-semibold shadow-md hover:shadow-xl transition-all duration-200 cancel-button">Batal</button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="w-[17.4%] text-center">
-            Hahaha hoe
-          </div>
-          <div class="w-[17.4%] text-center">
-            12
-          </div>
-          <div class="w-[17.4%] text-center">
-            Suntik
-          </div>
-          <div class="w-[17.4%] text-center">
-            Rp 100.000
-          </div>
-          <div class="w-[17.4%] text-center">
-            Transfer
-          </div>
-          <div class="flex justify-evenly w-[8%]">
-            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
-
   </div>
+
+  <script>
+    // Flash message
+    const flashMessageSuccess = document.getElementById('flash-message-success');
+    const flashMessageError = document.getElementById('flash-message-error');
+    const flashMessageSuccessClose = document.getElementById('flash-message-success-close');
+    const flashMessageErrorClose = document.getElementById('flash-message-error-close');
+
+    flashMessageSuccessClose?.addEventListener('click', () => {
+      flashMessageSuccess.style.display = 'none';
+    });
+
+    flashMessageErrorClose?.addEventListener('click', () => {
+      flashMessageError.style.display = 'none';
+    });
+
+    // Delete button
+    window.addEventListener('click', (e) => {
+
+      if (e.target.classList.contains('fa-trash')) {
+        let id = e.target.id;
+        const containerModalDeleteUser = document.getElementById(`container-modal-delete-${id}`);
+        containerModalDeleteUser.classList.remove('hidden');
+      }
+      if (e.target.classList.contains('cancel-button')) {
+        const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
+        containerModalDeleteUserClose.classList.add('hidden');
+      }
+    });
+  </script>
 </x-app-layout>

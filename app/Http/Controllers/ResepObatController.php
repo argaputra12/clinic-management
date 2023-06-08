@@ -18,7 +18,7 @@ class ResepObatController extends Controller
      */
     public function index()
     {
-        $resep = Resep::all();
+        $resep = Resep::orderBy('created_at', 'DESC')->paginate(10);
         // dd($resep);
 
         return view('admin.data-resep-obat', compact('resep'));
@@ -75,7 +75,7 @@ class ResepObatController extends Controller
             ->first();
 
         // return response
-        return view('components.modal-obat', compact('resep_obat', 'pasien', 'rekam_medis'));
+        return view('components.modal-obat', compact('resep_obat', 'pasien', 'rekam_medis', 'total_harga'));
     }
 
     /**

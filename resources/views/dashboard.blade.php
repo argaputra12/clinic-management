@@ -35,7 +35,16 @@
           <div
             class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">
             <i class="text-center fa-4x fa-solid fa-capsules"></i>
-            <h2 class="font-semibold text-lg">Resep Obat</h2>
+            <h2 class="font-semibold text-lg">Resep</h2>
+          </div>
+        </a>
+      </div>
+      <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3 ">
+        <a href="{{ route('obat.index') }}">
+          <div
+            class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">
+            <i class="text-center fa-4x fa-solid fa-tablets"></i>
+            <h2 class="font-semibold text-lg">Obat</h2>
           </div>
         </a>
       </div>

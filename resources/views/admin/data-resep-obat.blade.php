@@ -82,16 +82,17 @@
               {{ $loop->iteration }}
             </div>
             <div class="w-1/4 text-center">
-              {{ $r->pasien->nama_pasien ?? '-' }}
+              {{ $r->medis->pasien->nama_pasien }}
             </div>
             <div class="w-1/4 text-center">
               {{ $r->rekam_medis_id }}
             </div>
             <div class="w-1/4 text-center">
-              {{ $r->total_harga }}
+              Rp {{ $r->total_harga }}
             </div>
             <div class="flex justify-center items-center gap-6 w-1/5">
-              <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer">
+              <i id="detail-obat" class="fa-solid fa-circle-info fa-lg cursor-pointer"
+                data-url="{{ route('resep.show', ['id' => $r->id]) }}">
                 <input type="hidden" value="{{ $r->id }}">
               </i>
               <a href="{{ route('resep.edit', ['id' => $r->id]) }}">
@@ -123,6 +124,10 @@
       </div>
     </div>
 
+    <!-- Pagination -->
+    <div class="my-4">
+        {{ $resep->links() }}
+    </div>
   </div>
 
   <!-- Obat Modal -->
@@ -164,11 +169,12 @@
 
     if (e.target.id == 'detail-obat') {
       const obatModalContainer = document.getElementById('obat-modal-container')
-      // get id
-      let id = e.target.children[0].value
+
+      // get url
+      let url = e.target.dataset.url
 
       // fetch data
-      fetch('api/resep/show/' + id, {
+      fetch(url, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

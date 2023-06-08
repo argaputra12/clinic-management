@@ -18,7 +18,7 @@ class ObatFactory extends Factory
     {
         return [
             'nama_obat' => $this->faker->name,
-            'satuan' => $this->faker->numberBetween(100, 500) . ' mg',
+            'satuan' => $this->faker->randomElement(['mg', 'ml', 'gram', 'pcs']),
             'harga' => $this->faker->numberBetween(1000, 5000)
         ];
     }

@@ -147,6 +147,11 @@
         @endforeach
       </div>
     </div>
+
+    <!-- Pagination -->
+    <div class="my-4">
+        {{ $medis->links() }}
+    </div>
   </div>
 
   <script>

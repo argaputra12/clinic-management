@@ -15,7 +15,7 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $pembayaran = Pembayaran::all();
+        $pembayaran = Pembayaran::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.data-pembayaran', compact('pembayaran'));
     }
 

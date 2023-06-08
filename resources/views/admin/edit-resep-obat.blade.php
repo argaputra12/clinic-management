@@ -15,6 +15,9 @@
             <label for="rekam_medis_id" class="font-semibold">Id Rekam Medis</label>
             <select name="rekam_medis_id" id="rekam_medis_id" class="block w-full rounded-md">
               @foreach ($medis as $m)
+              @if ($m->id == $resep->rekam_medis_id)
+                  <option value="{{ $m->id }}" selected>{{ $m->id }}</option>
+              @endif
                 <option value="{{ $m->id }}">{{ $m->id }}</option>
               @endforeach
             </select>

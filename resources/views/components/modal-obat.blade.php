@@ -4,7 +4,7 @@
   </div>
 
   <div class="flex justify-between mb-6">
-    <h3>Nama Pasien : {{ $pasien->nama_pasien }}</h3>
+    <h3>Nama Pasien : {{ $pasien ? $pasien->nama_pasien : "-" }}</h3>
     <h3>No Rekam Medis : {{ $rekam_medis->id }}</h3>
   </div>
 
@@ -35,9 +35,7 @@
     <div class="flex justify-between">
       <div class="text-left font-bold">Jumlah</div>
       <div class="text-right">Rp
-        @foreach ($resep_obat as $r)
-            {{ $r->jumlah * $r->harga }}
-        @endforeach
+        {{ $total_harga }}
       </div>
     </div>
   </div>

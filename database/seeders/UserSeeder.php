@@ -20,6 +20,15 @@ class UserSeeder extends Seeder
             'role' => 'admin',
             'password' => bcrypt('password')
         ]);
+
+        // create user with role dokter
+        User::factory()->create([
+            'username' => 'dokter',
+            'email' => 'dokter@dokter.com',
+            'role' => 'dokter',
+            'password' => bcrypt('password')
+        ]);
+
         User::factory(10)->create();
     }
 }

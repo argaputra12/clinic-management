@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Resep;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
@@ -67,6 +69,15 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
     });
 
+    Route::prefix('obat')->group(function () {
+        Route::get('/', [ObatController::class, 'index'])->name('obat.index');
+        Route::post('/', [ObatController::class, 'store'])->name('obat.store');
+        Route::get('/create', [ObatController::class, 'create'])->name('obat.create');
+        Route::post('/{id}', [ObatController::class, 'update'])->name('obat.update');
+        Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
+        Route::post('/{id}/delete', [ObatController::class, 'destroy'])->name('obat.destroy');
+    });
+
     Route::prefix('pembayaran')->group(function (){
         Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
         Route::post('/', [PembayaranController::class, 'store'])->name('pembayaran.store');
@@ -84,7 +95,19 @@ Route::middleware('dokter')->group(function (){
             return view('dokter.dashboard');
         })->name('dokter.dashboard');
 
-        Route::get('/medis', [MedisController::class, 'dokterIndex'])->name('dokter.medis.index');
+        Route::prefix('/medis')->group(function () {
+           Route::get('/', [MedisController::class, 'dokterIndex'])->name('dokter.medis.index');
+        });
+
+        Route::prefix('/resep')->group(function () {
+            Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
+            Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
+            Route::get('/create', [ResepObatController::class, 'create'])->name('resep.create');
+            Route::post('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+            Route::get('/{id}/edit', [ResepObatController::class, 'edit'])->name('resep.edit');
+            Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
+        });
+
     });
 });
 

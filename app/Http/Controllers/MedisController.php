@@ -7,9 +7,10 @@ use App\Models\Resep;
 use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\ResepObat;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Termwind\Components\Dd;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class MedisController extends Controller
 {
@@ -142,5 +143,35 @@ class MedisController extends Controller
 
         return redirect()->route('medis.index')
             ->with('success', 'Rekam Medis berhasil dihapus.');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $medis = Medis::with('pasien', 'dokter')
+            ->whereHas('pasien', function($query) use ($search) {
+                $query->where('nama_pasien', 'like', "%" . $search . "%");
+            })
+            ->orWhereHas('dokter', function($query) use ($search) {
+                $query->where('nama_dokter', 'like', "%" . $search . "%");
+            })
+            ->paginate(10);
+
+        return view('admin.data-rekam-medis', compact('medis'));
+    }
+
+    public function dokterSearch(Request $request)
+    {
+        $search = $request->search;
+        $medis = Medis::with('pasien', 'dokter')
+            ->whereHas('pasien', function($query) use ($search) {
+                $query->where('nama_pasien', 'like', "%" . $search . "%");
+            })
+            ->orWhereHas('dokter', function($query) use ($search) {
+                $query->where('nama_dokter', 'like', "%" . $search . "%");
+            })
+            ->paginate(10);
+
+        return view('dokter.data-rekam-medis', compact('medis'));
     }
 }

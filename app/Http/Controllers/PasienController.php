@@ -91,4 +91,12 @@ class PasienController extends Controller
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil diupdate.');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $pasien = Pasien::where('nama_pasien', 'like', "%" . $search . "%")->paginate(10);
+
+        return view('admin.data-pasien', compact('pasien'));
+    }
 }

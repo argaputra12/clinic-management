@@ -26,9 +26,24 @@
     <a href="{{ route('dashboard') }}" class="font-semibold text-lg">Dashboard</a>
   </div>
 
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-10">
+    <div class="flex gap-3 items-center">
+      <i class="fa-solid fa-user"></i>
+      <h2 class="capitalize">
+        {{ Auth::user()->username }}
+      </h2>
+    </div>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+      <button class="flex gap-3 items-center">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <h2 class="capitalize">
+          Logout
+        </h2>
+      </button>
+    </form>
 
-    <x-button type="button" class="hidden md:inline-flex" icon-only variant="secondary" sr-text="Toggle dark mode"
+    {{-- <x-button type="button" class="hidden md:inline-flex" icon-only variant="secondary" sr-text="Toggle dark mode"
       x-on:click="toggleTheme">
       <x-heroicon-o-moon x-show="!isDarkMode" aria-hidden="true" class="w-6 h-6" />
 
@@ -66,7 +81,7 @@
           </x-dropdown-link>
         </form>
       </x-slot>
-    </x-dropdown>
+    </x-dropdown> --}}
   </div>
 </nav>
 

@@ -33,13 +33,15 @@
 
     <!-- Search -->
     <div class="mb-6 flex gap-4">
-      <div class="flex justify-start">
-        <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <input type="text" name="search"
-          class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
-      </div>
+      <form action="{{ route('pasien.search') }}">
+        <div class="flex justify-start">
+          <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="text" name="search"
+            class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
+        </div>
+      </form>
       <a href="{{ route('pasien.create') }}"
         class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
         <i class="fa-solid fa-plus"></i>
@@ -109,11 +111,11 @@
               {{ $p->no_telp }}
             </div>
             <div class="flex justify-center gap-4 w-[12.5%] items-center">
-                <form action="{{ route('pasien.edit', ['id' => $p->id]) }}">
-                    <button type="submit">
-                        <i class="fa-solid fa-pen-to-square fa-lg cursor-pointer"></i>
-                    </button>
-                </form>
+              <form action="{{ route('pasien.edit', ['id' => $p->id]) }}">
+                <button type="submit">
+                  <i class="fa-solid fa-pen-to-square fa-lg cursor-pointer"></i>
+                </button>
+              </form>
               <i class="fa-solid fa-trash fa-lg cursor-pointer" id="{{ $p->id }}"></i>
             </div>
 
@@ -142,7 +144,7 @@
 
     <!-- Pagination -->
     <div class="my-4">
-        {{ $pasien->links() }}
+      {{ $pasien->links() }}
     </div>
   </div>
 

@@ -101,4 +101,20 @@ class PembayaranController extends Controller
         return redirect()->route('pembayaran.index')
             ->with('success', 'Pembayaran berhasil dihapus');
     }
+
+    public function search(Request $request)
+    {
+        $pembayaran = Pembayaran::where('pasien_id', 'like', '%' . $request->search . '%')
+            ->orWhere('rekam_medis_id', 'like', '%' . $request->search . '%')
+            ->orWhere('alat_medis', 'like', '%' . $request->search . '%')
+            ->orWhere('administrasi', 'like', '%' . $request->search . '%')
+            ->orWhere('total_bayar', 'like', '%' . $request->search . '%')
+            ->orWhere('metode_pembayaran', 'like', '%' . $request->search . '%')
+            ->orWhereHas('pasien', function ($query) use ($request) {
+                $query->where('nama_pasien', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(10);
+
+        return view('admin.data-pembayaran', compact('pembayaran'));
+    }
 }

@@ -84,4 +84,14 @@ class ObatController extends Controller
 
         return redirect()->route('obat.index')->with('success', 'Obat berhasil dihapus');
     }
+
+    public function search(Request $request)
+    {
+        $obat = Obat::where('nama_obat', 'like', '%' . $request->search . '%')
+        ->orWhere('satuan', 'like', '%' . $request->search . '%')
+        ->orWhere('harga', 'like', '%' . $request->search . '%')
+        ->paginate(10);
+
+        return view('admin.data-obat', compact('obat'));
+    }
 }

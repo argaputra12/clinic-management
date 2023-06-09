@@ -6,6 +6,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\PembayaranController;
@@ -25,8 +26,8 @@ use App\Http\Controllers\Auth\CustomLoginController;
 Route::get('/', function () {
     return view('welcome');
 })
-->middleware(['dokter'])
-->name('welcome');
+    ->middleware(['dokter'])
+    ->name('welcome');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', function () {
@@ -40,6 +41,7 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/{id}', [PasienController::class, 'update'])->name('pasien.update');
         Route::get('/{id}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
         Route::post('/{id}/delete', [PasienController::class, 'destroy'])->name('pasien.destroy');
+        Route::get('/search', [PasienController::class, 'search'])->name('pasien.search');
     });
 
     Route::prefix('medis')->group(function () {
@@ -49,24 +51,17 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/{id}', [MedisController::class, 'update'])->name('medis.update');
         Route::get('/{id}/edit', [MedisController::class, 'edit'])->name('medis.edit');
         Route::delete('/{id}', [MedisController::class, 'destroy'])->name('medis.destroy');
+        Route::get('/search', [MedisController::class, 'search'])->name('medis.search');
     });
 
-    Route::prefix('user')->group(function (){
+    Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');
         Route::post('/', [UserController::class, 'store'])->name('user.store');
         Route::get('/create', [UserController::class, 'create'])->name('user.create');
         Route::post('/{id}', [UserController::class, 'update'])->name('user.update');
         Route::get('/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::post('/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
-    });
-
-    Route::prefix('resep')->group(function (){
-        Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
-        Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
-        Route::get('/create', [ResepObatController::class, 'create'])->name('resep.create');
-        Route::post('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
-        Route::get('/{id}/edit', [ResepObatController::class, 'edit'])->name('resep.edit');
-        Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
+        Route::get('/search', [UserController::class, 'search'])->name('user.search');
     });
 
     Route::prefix('obat')->group(function () {
@@ -76,46 +71,57 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/{id}', [ObatController::class, 'update'])->name('obat.update');
         Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
         Route::post('/{id}/delete', [ObatController::class, 'destroy'])->name('obat.destroy');
+        Route::get('/search', [ObatController::class, 'search'])->name('obat.search');
     });
 
-    Route::prefix('pembayaran')->group(function (){
+    Route::prefix('pembayaran')->group(function () {
         Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
         Route::post('/', [PembayaranController::class, 'store'])->name('pembayaran.store');
         Route::get('/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
         Route::post('/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
         Route::get('/{id}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
         Route::post('/{id}/delete', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+        Route::get('/search', [PembayaranController::class, 'search'])->name('pembayaran.search');
     });
 
+    Route::prefix('laporan')->group(function () {
+
+        Route::prefix('pasien')->group(function () {
+            Route::get('/', [LaporanController::class, 'pasienIndex'])->name('laporan.pasien.index');
+            Route::get('/dokumen', [LaporanController::class, 'dokumenPasien'])->name('laporan.pasien.dokumen');
+        });
+
+        Route::prefix('kunjungan')->group(function () {
+            Route::get('/', [LaporanController::class, 'kunjunganIndex'])->name('laporan.kunjungan.index');
+            Route::get('/dokumen', [LaporanController::class, 'dokumenKunjungan'])->name('laporan.kunjungan.dokumen');
+        });
+    });
 });
 
-Route::middleware('dokter')->group(function (){
-    Route::prefix('/dokter')->group(function (){
+Route::middleware('dokter')->group(function () {
+    Route::prefix('/dokter')->group(function () {
         Route::get('/dashboard', function () {
             return view('dokter.dashboard');
         })->name('dokter.dashboard');
 
         Route::prefix('/medis')->group(function () {
-           Route::get('/', [MedisController::class, 'dokterIndex'])->name('dokter.medis.index');
+            Route::get('/', [MedisController::class, 'dokterIndex'])->name('dokter.medis.index');
+            Route::get('/search', [MedisController::class, 'dokterSearch'])->name('dokter.medis.search');
         });
-
-        Route::prefix('/resep')->group(function () {
-            Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
-            Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
-            Route::get('/create', [ResepObatController::class, 'create'])->name('resep.create');
-            Route::post('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
-            Route::get('/{id}/edit', [ResepObatController::class, 'edit'])->name('resep.edit');
-            Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
-        });
-
     });
 });
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/resep')->group(function () {
+        Route::get('/', [ResepObatController::class, 'index'])->name('resep.index');
+        Route::post('/', [ResepObatController::class, 'store'])->name('resep.store');
+        Route::get('/create', [ResepObatController::class, 'create'])->name('resep.create');
+        Route::post('/{id}', [ResepObatController::class, 'update'])->name('resep.update');
+        Route::get('/{id}/edit', [ResepObatController::class, 'edit'])->name('resep.edit');
+        Route::post('/{id}/delete', [ResepObatController::class, 'destroy'])->name('resep.destroy');
+        Route::get('/search', [ResepObatController::class, 'search'])->name('resep.search');
+    });
 });
 
 // useless routes

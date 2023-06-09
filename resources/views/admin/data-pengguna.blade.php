@@ -33,13 +33,15 @@
 
     <!-- Search -->
     <div class="mb-6 flex gap-4">
-      <div class="flex justify-start">
-        <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <input type="text" name="search"
-          class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
-      </div>
+      <form action="{{ route('user.search') }}">
+        <div class="flex justify-start">
+          <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="text" name="search"
+            class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
+        </div>
+      </form>
       <a href="{{ route('user.create') }}"
         class="rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
         <i class="fa-solid fa-plus"></i>
@@ -141,11 +143,11 @@
               {{ $user->role }}
             </div>
             <div class="flex justify-evenly items-center w-[8%]">
-                <form action="{{ route('user.edit', ['id' => $user->id]) }}">
-                    <button type="submit">
-                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                    </button>
-                </form>
+              <form action="{{ route('user.edit', ['id' => $user->id]) }}">
+                <button type="submit">
+                  <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </button>
+              </form>
               <i class="fa-solid fa-trash fa-lg cursor-pointer" id="{{ $user->id }}"></i>
             </div>
             <!-- Delete Modal -->

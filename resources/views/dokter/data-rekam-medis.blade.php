@@ -33,13 +33,15 @@
 
     <!-- Search -->
     <div class="mb-6 flex gap-4">
-      <div class="flex justify-start">
-        <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <input type="text" name="search"
-          class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
-      </div>
+      <form action="{{ route('dokter.medis.search') }}">
+        <div class="flex justify-start">
+          <button class="bg-primary-cream rounded-l-md pl-4 pr-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="text" name="search"
+            class="bg-primary-cream focus:ring-0 border-transparent focus:border-transparent rounded-r-md">
+        </div>
+      </form>
     </div>
 
     <!-- Table -->

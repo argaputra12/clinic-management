@@ -73,12 +73,12 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        if($user->role == 'admin'){
+        if ($user->role == 'admin') {
             $admin = Admin::where('user_id', $user->id)->first();
             // dd($admin);
             return view('components.modals.detail-info-admin', compact('admin'));
         }
-        if($user->role == 'dokter'){
+        if ($user->role == 'dokter') {
             $dokter = Dokter::where('user_id', $user->id)->first();
             return view('components.modals.detail-info-dokter', compact('dokter'));
         }
@@ -92,7 +92,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         return view('admin.edit-pengguna', compact('user'));
-
     }
 
     /**
@@ -113,7 +112,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        if($user->role == 'admin'){
+        if ($user->role == 'admin') {
             $admin = Admin::where('user_id', $user->id)->first();
             $admin->update([
                 'nama_admin' => $request->nama,
@@ -153,5 +152,22 @@ class UserController extends Controller
 
         return redirect()->route('user.index')
             ->with('success', 'Pengguna berhasil dihapus.');
-   }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $users = User::where('username', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->orWhere('nik', 'like', '%' . $search . '%')
+            ->orWhereHas('dokter', function ($query) use ($search) {
+                $query->where('nama_dokter', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('admin', function ($query) use ($search) {
+                $query->where('nama_admin', 'like', '%' . $search . '%');
+            })
+            ->paginate(10);
+            
+        return view('admin.data-pengguna', compact('users'));
+    }
 }

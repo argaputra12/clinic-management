@@ -63,20 +63,16 @@
     <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-xl text-white font-semibold px-2 mt-6">
       CETAK LAPORAN
     </div>
-    <x-sidebar.link title='Data Pasien'>
+    <x-sidebar.link title='Data Pasien' href="{{ route('laporan.pasien.index') }}">
       <x-slot name='icon'>
         <i class="w-6 text-center fa-lg fa-solid fa-file-export"></i>
       </x-slot>
     </x-sidebar.link>
-    <x-sidebar.link title='Data Kunjungan'>
+    <x-sidebar.link title='Data Kunjungan' href="{{ route('laporan.kunjungan.index') }}">
       <x-slot name='icon'>
         <i class="w-6 text-center fa-lg fa-solid fa-file-export"></i>
       </x-slot>
     </x-sidebar.link>
   @endif
-
-  {{-- <x-sidebar.link title="Data Pasien" href="{{ route('pasien.index') }}" isActive="request()->routeIs('pasien.index')"/>
-  <x-sidebar.link title="Data Rekam Medis" href="{{ route('medis.index') }}" isActive="request()->routeIs('medis.index')"/>
-  <x-sidebar.link title="Data Pengguna" href="{{ route('user.index') }}" isActive="request()->routeIs('user.index')"/> --}}
 
 </x-perfect-scrollbar>

@@ -142,4 +142,20 @@ class ResepObatController extends Controller
         return redirect()->route('resep.index')
             ->with('success', 'Resep berhasil dihapus.');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $resep = Resep::where('id', 'like', "%" . $search . "%")
+            ->orWhere('rekam_medis_id', 'like', "%" . $search . "%")
+            ->orWhereHas('medis', function ($query) use ($search) {
+                $query->whereHas('pasien', function ($query) use ($search) {
+                    $query->where('nama_pasien', 'like', "%" . $search . "%");
+                });
+            })
+            ->paginate(10);
+
+        return view('admin.data-resep-obat', compact('resep'));
+    }
 }

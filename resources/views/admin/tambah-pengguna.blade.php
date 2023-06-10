@@ -1,6 +1,7 @@
 <x-guest-layout>
   <div class="flex flex-col items-center flex-1 px-4 sm:justify-center">
     <div class="w-full my-14 overflow-hidden bg-white rounded-xl shadow-md sm:max-w-xl dark:bg-dark-eval-1">
+
       <form action="{{ route('user.store') }}" method="POST">
         @csrf
 
@@ -10,6 +11,18 @@
         </div>
 
         <div class="w-full px-24 mt-10 mb-6 flex flex-col items-center gap-6">
+
+          <!-- Alert -->
+          @if ($errors->any())
+            <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+              <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+          
           <!-- NIK -->
           <div class="w-full">
             <input type="text" name="nik" id="nik" class="block w-full rounded-md text-center"

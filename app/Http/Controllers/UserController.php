@@ -34,7 +34,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validated = $request->validate([
             'nik' => 'required',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
@@ -42,9 +42,13 @@ class UserController extends Controller
             'no_telp' => 'required',
             'tanggal_lahir' => 'required',
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        if(!$validated){
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
 
         $user = User::create([
             'nik' => $request->nik,
@@ -99,16 +103,22 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nik' => 'required',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'no_telp' => 'required',
             'tanggal_lahir' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'username' => 'required',
         ]);
+
+        if(!$validated){
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
+
+
 
         $user = User::findOrFail($id);
 
@@ -167,7 +177,7 @@ class UserController extends Controller
                 $query->where('nama_admin', 'like', '%' . $search . '%');
             })
             ->paginate(10);
-            
+
         return view('admin.data-pengguna', compact('users'));
     }
 }

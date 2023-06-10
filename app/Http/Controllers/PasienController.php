@@ -11,7 +11,7 @@ class PasienController extends Controller
 {
     public function index()
     {
-        $pasien = DB::table('pasiens')->paginate(10);
+        $pasien = Pasien::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.data-pasien', compact('pasien'));
     }
 
@@ -23,7 +23,7 @@ class PasienController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validated = $request->validate([
             'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
@@ -33,17 +33,16 @@ class PasienController extends Controller
             'alamat' => 'required',
         ]);
 
-        // insert pasien
-        DB::table('pasiens')
-            ->insert([
-                'nama_pasien' => $request->nama_pasien,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'umur' => $request->umur,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'no_telp' => $request->no_telp,
-                'alamat' => $request->alamat,
-            ]);
+        if (!$validated) {
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
 
+        // insert pasien
+        $pasien = Pasien::create($request->all());
+
+        if (!$pasien) {
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
 
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil ditambahkan.');
@@ -76,7 +75,7 @@ class PasienController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
@@ -84,6 +83,10 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required',
             'no_telp' => 'required',
         ]);
+
+        if (!$validated) {
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
 
         $pasien = Pasien::find($id);
         $pasien->update($request->all());

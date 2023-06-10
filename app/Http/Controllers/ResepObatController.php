@@ -39,7 +39,33 @@ class ResepObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'rekam_medis_id' => 'required',
+            'total_harga' => 'required',
+            'obat' => 'required',
+            'jumlah' => 'required',
+        ]);
+
+        if (!$validate) {
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
+
+        $resep = Resep::create([
+            'rekam_medis_id' => $request->rekam_medis_id,
+            'total_harga' => $request->total_harga,
+        ]);
+
+        foreach ($request->obat as $key => $obat) {
+            ResepObat::create([
+                'jumlah' => $request->jumlah[$key],
+                'obat_id' => $obat,
+                'resep_id' => $resep->id,
+            ]);
+        }
+
+        // return response
+        return redirect()->route('resep.index')
+            ->with('success', 'Resep berhasil ditambahkan.');
     }
 
     /**
@@ -60,6 +86,8 @@ class ResepObatController extends Controller
             $total_harga += $item->harga * $item->jumlah;
         }
 
+        $resep  = Resep::find($id);
+
         $pasien = DB::table('resep_obats')
             ->join('reseps', 'resep_obats.resep_id', '=', 'reseps.id')
             ->join('rekam_medis', 'reseps.rekam_medis_id', '=', 'rekam_medis.id')
@@ -75,7 +103,7 @@ class ResepObatController extends Controller
             ->first();
 
         // return response
-        return view('components.modal-obat', compact('resep_obat', 'pasien', 'rekam_medis', 'total_harga'));
+        return view('components.modal-obat', compact('resep_obat', 'pasien', 'rekam_medis', 'total_harga', 'resep'));
     }
 
     /**
@@ -122,6 +150,7 @@ class ResepObatController extends Controller
         Resep::where('id', $id)
             ->update([
                 'rekam_medis_id' => $request->rekam_medis_id,
+                'total_harga' => $request->total_harga,
             ]);
 
         // return response

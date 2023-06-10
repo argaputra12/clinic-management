@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>Aliyah Medika</title>
 
   <!-- Fonts -->
   <link
@@ -27,7 +27,7 @@
   <script src="https://kit.fontawesome.com/0b736e1e36.js" crossorigin="anonymous"></script>
 
   <!-- Ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 </head>
 

@@ -44,38 +44,26 @@ class MedisController extends Controller
      */
     public function store(Request $request)
     {
-        $pasien = Pasien::where('id', $request->pasien_id)->first();
-        $request->merge([
-            'nama_pasien' => $pasien->nama_pasien,
-        ]);
 
         $validate = $request->validate([
             'pasien_id' => 'required',
-            'no_rm' => 'required',
+            'dokter_id'=> 'required',
             'tanggal_kunjungan' => 'required',
-            'nama_pasien' => 'required',
             'tanggal_lahir' => 'required',
-            'alamat' => 'required',
             'tensi' => 'required',
             'keluhan' => 'required',
-            'diagonsa' => 'required',
+            'diagnosa' => 'required',
             'tindakan' => 'required',
-            'nama_dokter' => 'required',
         ]);
 
-        try {
-            $medis = Medis::create($validate);
-            $medis->save();
-            dd('berhasil');
-        } catch (\Throwable $th) {
-            dd($th);
+        if (!$validate) {
+            return redirect()->back()->with('error', 'Data tidak valid');
         }
 
-        dd($validate);
+        Medis::create($request->all());
 
-
-        // return redirect()->route('medis.index')
-        //     ->with('success', 'Rekam Medis berhasil ditambahkan.');
+        return redirect()->route('medis.index')
+            ->with('success', 'Rekam Medis berhasil ditambahkan.');
     }
 
     /**
@@ -105,7 +93,7 @@ class MedisController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $request->validate([
+        $validated = $request->validate([
             'pasien_id' => 'required',
             'dokter_id'=> 'required',
             'tanggal_kunjungan' => 'required',
@@ -114,6 +102,10 @@ class MedisController extends Controller
             'diagnosa' => 'required',
             'tindakan' => 'required',
         ]);
+
+        if (!$validated) {
+            return redirect()->back()->with('error', 'Data tidak valid');
+        }
 
         $medis = Medis::find($id);
         $medis->update($request->all());
@@ -129,15 +121,6 @@ class MedisController extends Controller
     public function destroy(string $id)
     {
         $medis = Medis::find($id);
-        // $reseps = Resep::where('medis_id', $id)->get();
-
-        // foreach ($reseps as $resep) {
-        //     $resep_obats = ResepObat::where('resep_id', $resep->id)->get();
-        //     foreach ($resep_obats as $resep_obat) {
-        //         $resep_obat->delete();
-        //     }
-        //     $resep->delete();
-        // }
 
         $medis->delete();
 

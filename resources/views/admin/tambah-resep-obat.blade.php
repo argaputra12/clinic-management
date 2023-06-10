@@ -9,6 +9,16 @@
         </div>
 
         <div class="w-full px-8 my-6 flex flex-col items-center gap-3">
+          <!-- Alert -->
+          @if ($errors->any())
+            <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+              <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
 
           <!-- Rekam Medis ID -->
           <div class="w-full flex flex-col gap-1">
@@ -40,6 +50,12 @@
                 </button>
               </div>
             </div>
+          </div>
+
+          <!-- Total Harga -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="total_harga" class="font-semibold">Total Harga</label>
+            <input type="number" name="total_harga" id="total_harga" class="block w-full rounded-md">
           </div>
 
           <div class="w-full flex justify-start gap-6 mt-4">

@@ -10,6 +10,16 @@
         </div>
 
         <div class="w-full px-24 mt-10 mb-6 flex flex-col items-center gap-4">
+            <!-- Alert -->
+            @if ($errors->any())
+                <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
           <!-- NIK -->
           <div class="w-full flex flex-col gap-1">

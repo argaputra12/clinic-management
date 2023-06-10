@@ -9,6 +9,18 @@
         </div>
 
         <div class="w-full px-8 my-6 flex flex-col items-center gap-3">
+
+          <!-- Alert -->
+          @if ($errors->any())
+            <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+              <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+          
           <!-- Nama Pasien -->
           <div class="w-full flex flex-col gap-1">
             <label for="nama_pasien" class="font-semibold">Nama Lengkap</label>
@@ -37,8 +49,8 @@
           <div class="w-full flex flex-col gap-1">
             <label for="jenis_kelamin" class="font-semibold">Jenis Kelamin</label>
             <select name="jenis_kelamin" id="jenis_kelamin" class="block w-full rounded-md">
-                <option value="L">Laki-laki</option>
-                <option value="P">Perempuan</option>
+              <option value="L">Laki-laki</option>
+              <option value="P">Perempuan</option>
             </select>
           </div>
 
@@ -49,10 +61,11 @@
           </div>
 
           <div class="w-full flex justify-start gap-6 mt-4">
-            <button type="submit" class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-            <button type="reset" class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
+            <button type="submit"
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
+            <button type="reset"
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
           </div>
-
 
         </div>
     </div>

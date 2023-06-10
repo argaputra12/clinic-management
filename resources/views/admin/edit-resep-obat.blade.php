@@ -10,14 +10,25 @@
 
         <div class="w-full px-8 my-6 flex flex-col items-center gap-3">
 
+          <!-- Alert -->
+          @if ($errors->any())
+            <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+              <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
           <!-- Rekam Medis ID -->
           <div class="w-full flex flex-col gap-1">
             <label for="rekam_medis_id" class="font-semibold">Id Rekam Medis</label>
             <select name="rekam_medis_id" id="rekam_medis_id" class="block w-full rounded-md">
               @foreach ($medis as $m)
-              @if ($m->id == $resep->rekam_medis_id)
+                @if ($m->id == $resep->rekam_medis_id)
                   <option value="{{ $m->id }}" selected>{{ $m->id }}</option>
-              @endif
+                @endif
                 <option value="{{ $m->id }}">{{ $m->id }}</option>
               @endforeach
             </select>
@@ -59,6 +70,7 @@
                   </select>
                   <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
                 </div>
+
                 <button type="button"
                   class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
                   <i class="fa-solid fa-plus"></i>
@@ -66,11 +78,17 @@
               </div>
             </div>
           </div>
+           <!-- Total Harga -->
+           <div class="w-full flex flex-col gap-1">
+            <label for="total_harga" class="font-semibold">Total Harga</label>
+            <input type="number" name="total_harga" id="total_harga" class="block w-full rounded-md" value="{{ $resep->total_harga }}">
+          </div>
 
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-            <a href="{{ route('resep.index') }}" class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">
+            <a href="{{ route('resep.index') }}"
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">
               Batal
             </a>
           </div>

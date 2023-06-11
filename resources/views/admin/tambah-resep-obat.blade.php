@@ -61,8 +61,9 @@
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-            <button type="reset"
-              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
+              <a href="{{ route('resep.index') }} " class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">
+                Batal
+            </a>
           </div>
         </div>
     </div>

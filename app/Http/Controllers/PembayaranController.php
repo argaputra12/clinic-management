@@ -24,9 +24,8 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        $pasien = Pasien::all();
         $medis = Medis::all();
-        return view('admin.tambah-pembayaran', compact('pasien', 'medis'));
+        return view('admin.tambah-pembayaran', compact('medis'));
     }
 
     /**
@@ -35,12 +34,17 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pasien_id' => 'required',
             'rekam_medis_id' => 'required',
             'alat_medis' => 'required',
             'administrasi' => 'required',
             'total_bayar' => 'required',
             'metode_pembayaran' => 'required',
+        ]);
+
+        $pasien_id = Medis::where('id', $request->rekam_medis_id)->first()->pasien_id;
+
+        $request->merge([
+            'pasien_id' => $pasien_id,
         ]);
 
         Pembayaran::create($request->all());
@@ -63,10 +67,9 @@ class PembayaranController extends Controller
     public function edit(string $id)
     {
         $pembayaran = Pembayaran::findOrFail($id);
-        $pasien = Pasien::all();
         $medis = Medis::all();
 
-        return view('admin.edit-pembayaran', compact('pembayaran', 'pasien', 'medis'));
+        return view('admin.edit-pembayaran', compact('pembayaran', 'medis'));
     }
 
     /**
@@ -75,12 +78,18 @@ class PembayaranController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'pasien_id' => 'required',
             'rekam_medis_id' => 'required',
             'alat_medis' => 'required',
             'administrasi' => 'required',
             'total_bayar' => 'required',
             'metode_pembayaran' => 'required',
+        ]);
+
+
+        $pasien_id = Medis::where('id', $request->rekam_medis_id)->first()->pasien_id;
+
+        $request->merge([
+            'pasien_id' => $pasien_id,
         ]);
 
         $pembayaran = Pembayaran::findOrFail($id);

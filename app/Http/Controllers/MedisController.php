@@ -72,8 +72,7 @@ class MedisController extends Controller
     public function show(string $id)
     {
         $medis = Medis::find($id);
-        // return component
-        return view('components.modals.detail-info-medis', compact('medis'));
+        return view('dokter.detail-rekam-medis', compact('medis'));
     }
 
     /**

@@ -21,31 +21,19 @@
             </div>
           @endif
 
-          <!-- Nama Pasien -->
-          <div class="w-full flex flex-col gap-1">
-            <label for="nama_pasien" class="font-semibold">Nama Pasien</label>
-            <select name="pasien_id" id="pasien_id" class="block w-full rounded-md">
-              @foreach ($pasien as $p)
-                @if ($p->id == $pembayaran->pasien_id)
-                  <option value="{{ $p->id }}" selected>{{ $p->nama_pasien }}</option>
-                @endif
-                <option value="{{ $p->id }}">{{ $p->nama_pasien }}</option>
-              @endforeach
-            </select>
-          </div>
-
           <!-- Nomor Rekam Medis -->
           <div class="w-full flex flex-col gap-1">
             <label for="rekam_medis_id" class="font-semibold">Rekam Medis Id</label>
-            <select name="rekam_medis_id" id="rekam_medis_id" class="block w-full rounded-md">
+            <input type="text" name="rekam_medis_id" list="rekam_medis_id" class="rounded-md block w-full" value="{{ $pembayaran->rekam_medis_id }}">
+            <datalist name="rekam_medis_id" id="rekam_medis_id">
               <option value="" disabled>-- Pilih nomor rekam medis --</option>
               @foreach ($medis as $m)
                 @if ($m->id == $pembayaran->rekam_medis_id)
-                  <option value="{{ $m->id }}" selected>{{ $m->id }}</option>
+                  <option value="{{ $m->id }}" selected>{{ $m->pasien->nama_pasien }}</option>
                 @endif
-                <option value="{{ $m->id }}">{{ $m->id }}</option>
+                <option value="{{ $m->id }}">{{ $m->pasien->nama_pasien }}</option>
               @endforeach
-            </select>
+            </datalist>
           </div>
 
           <!-- Alat Medis -->

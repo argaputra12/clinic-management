@@ -23,23 +23,25 @@
           <!-- Nama Pasien -->
           <div class="w-full flex flex-col gap-1">
             <label for="nama_pasien" class="font-semibold">Nama Pasien</label>
-            <select name="pasien_id" id="pasien_id" class="block w-full rounded-md">
-              <option value="" disabled>-- Pilih Pasien --</option>
-              @foreach ($pasien as $p)
+            <input type="text" name="pasien_id" list="pasien_id" class="rounded-lg">
+            <datalist name="pasien_id" id="pasien_id">
+                <option value="" disabled>-- Pilih Pasien --</option>
+                @foreach ($pasien as $p)
                 <option value="{{ $p->id }}">{{ $p->nama_pasien }}</option>
-              @endforeach
-            </select>
-          </div>
+                @endforeach
+            </datalist>
+        </div>
 
-          <!-- Dokter -->
-          <div class="w-full flex flex-col gap-1">
+        <!-- Dokter -->
+        <div class="w-full flex flex-col gap-1">
             <label for="nama_dokter" class="font-semibold">Nama dokter</label>
-            <select name="dokter_id" id="dokter_id" class="block w-full rounded-md">
+            <input type="text" name="dokter_id" list="dokter_id" class="rounded-lg">
+            <datalist name="dokter_id" id="dokter_id" class=" rounded-md">
               <option value="" disabled>-- Pilih dokter --</option>
               @foreach ($dokter as $d)
                 <option value="{{ $d->id }}">{{ $d->nama_dokter }}</option>
               @endforeach
-            </select>
+            </datalist>
           </div>
 
           <!-- Tanggal Kunjungan-->

@@ -21,26 +21,16 @@
             </div>
           @endif
 
-          <!-- Nama Pasien -->
-          <div class="w-full flex flex-col gap-1">
-            <label for="nama_pasien" class="font-semibold">Nama Pasien</label>
-            <select name="pasien_id" id="pasien_id" class="block w-full rounded-md">
-              <option value="" disabled>-- Pilih Pasien --</option>
-              @foreach ($pasien as $p)
-                <option value="{{ $p->id }}">{{ $p->nama_pasien }}</option>
-              @endforeach
-            </select>
-          </div>
-
           <!-- Nomor Rekam Medis -->
           <div class="w-full flex flex-col gap-1">
             <label for="rekam_medis_id" class="font-semibold">Rekam Medis Id</label>
-            <select name="rekam_medis_id" id="rekam_medis_id" class="block w-full rounded-md">
+            <input type="text" name="rekam_medis_id" list="rekam_medis_id" class="rounded-md block w-full">
+            <datalist name="rekam_medis_id" id="rekam_medis_id" >
               <option value="" disabled>-- Pilih nomor rekam medis --</option>
               @foreach ($medis as $m)
-                <option value="{{ $m->id }}">{{ $m->id }}</option>
+                <option value="{{ $m->id }}">{{ $m->pasien->nama_pasien }}</option>
               @endforeach
-            </select>
+            </datalist>
           </div>
 
           <!-- Alat Medis -->

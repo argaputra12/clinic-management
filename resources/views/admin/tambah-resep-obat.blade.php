@@ -23,11 +23,12 @@
           <!-- Rekam Medis ID -->
           <div class="w-full flex flex-col gap-1">
             <label for="rekam_medis_id" class="font-semibold">Id Rekam Medis</label>
-            <select name="rekam_medis_id" id="rekam_medis_id" class="block w-full rounded-md">
+            <input type="text" name="rekam_medis_id" list="rekam_medis_id" class="rounded-lg">
+            <datalist name="rekam_medis_id" id="rekam_medis_id" class="rounded-md">
               @foreach ($medis as $m)
-                <option value="{{ $m->id }}">{{ $m->id }}</option>
+                <option value="{{ $m->id }}">{{ $m->pasien->nama_pasien }}</option>
               @endforeach
-            </select>
+            </datalist>
           </div>
 
           <!-- Obat -->

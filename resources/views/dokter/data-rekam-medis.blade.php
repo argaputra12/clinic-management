@@ -57,26 +57,20 @@
         <div class="w-[5%] text-center">
           No.
         </div>
-        <div class="w-[13%] text-center">
+        <div class="w-[19%] text-center">
           Nama Pasien
         </div>
-        <div class="w-[13%] text-center">
+        <div class="w-[19%] text-center">
           Nama Dokter
         </div>
-        <div class="w-[12%] text-center">
+        <div class="w-[19%] text-center">
           Datang
         </div>
-        <div class="w-[11%] text-center">
+        <div class="w-[19%] text-center">
           Tensi
         </div>
-        <div class="w-[16%] text-center">
-          Keluhan
-        </div>
-        <div class="w-[14%] text-center">
-          Diagnosa
-        </div>
-        <div class="w-[16%] text-center">
-          Tindakan
+        <div class="w-[19%] text-center">
+          Aksi
         </div>
 
       </div>
@@ -89,33 +83,52 @@
             <div class="w-[5%] text-center">
               {{ $loop->iteration }}.
             </div>
-            <div class="w-[13%] text-center">
+            <div class="w-[19%] text-center">
               {{ $m->pasien->nama_pasien }}
             </div>
-            <div class="w-[13%] text-center">
+            <div class="w-[19%] text-center">
               {{ $m->dokter->nama_dokter }}
             </div>
-            <div class="w-[12%] text-center">
+            <div class="w-[19%] text-center">
               {{ $m->tanggal_kunjungan }}
             </div>
-            <div class="w-[11%] text-center">
+            <div class="w-[19%] text-center">
               {{ $m->tensi }}
             </div>
-            <div class="w-[16%] text-center truncate">
-              {{ $m->keluhan }}
-            </div>
-            <div class="w-[14%] text-center truncate">
-              {{ $m->diagnosa }}
-            </div>
-            <div class="w-[16%] text-center truncate">
-              {{ $m->tindakan }}
+            <div class="w-[19%] text-center">
+              <i id="detail-rekam-medis" class="fa-solid fa-circle-info fa-lg cursor-pointer"
+                data-url="{{ route('medis.show', ['id' => $m->id]) }}">
+                <input type="hidden" value="{{ $m->id }}">
+              </i>
             </div>
           </div>
         @endforeach
       </div>
     </div>
+    <!-- Rekam Medis Modal -->
+    <div id="rekam-medis-modal-container"
+      class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+
+    </div>
     <div class="my-4">
       {{ $medis->links() }}
     </div>
   </div>
+  <script>
+    window.addEventListener('click', function(e) {
+        if(e.target.id == 'detail-rekam-medis'){
+            url = e.target.dataset.url;
+
+            fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('rekam-medis-modal-container').innerHTML = data;
+                document.getElementById('rekam-medis-modal-container').classList.remove('hidden');
+            })
+
+        }else if(e.target.id == 'rekam-medis-modal-container'){
+            document.getElementById('rekam-medis-modal-container').classList.add('hidden');
+        }
+    })
+  </script>
 </x-app-layout>

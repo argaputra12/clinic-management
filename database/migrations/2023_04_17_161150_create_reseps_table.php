@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('rekam_medis_id');
             $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
 
-            $table->float('total_harga');
+            $table->unsignedBigInteger('total_harga');
 
             $table->timestamps();
         });

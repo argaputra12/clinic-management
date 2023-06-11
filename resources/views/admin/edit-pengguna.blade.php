@@ -10,16 +10,16 @@
         </div>
 
         <div class="w-full px-24 mt-10 mb-6 flex flex-col items-center gap-4">
-            <!-- Alert -->
-            @if ($errors->any())
-                <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
-                    <ul class="list-disc list-inside">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+          <!-- Alert -->
+          @if ($errors->any())
+            <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
+              <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
 
           <!-- NIK -->
           <div class="w-full flex flex-col gap-1">
@@ -39,23 +39,23 @@
           <div class="w-full flex flex-col gap-1">
             <label for="jenis_kelamin" class="font-semibold">Jenis Kelamin</label>
             <select name="jenis_kelamin" id="jenis_kelamin" class="block w-full rounded-md">
-                @if ($user->dokter)
-                    @if ($user->dokter->jenis_kelamin == 'L')
-                        <option value="L" selected>Laki-laki</option>
-                        <option value="P">Perempuan</option>
-                    @else
-                        <option value="L">Laki-laki</option>
-                        <option value="P" selected>Perempuan</option>
-                    @endif
+              @if ($user->dokter)
+                @if ($user->dokter->jenis_kelamin == 'L')
+                  <option value="L" selected>Laki-laki</option>
+                  <option value="P">Perempuan</option>
                 @else
-                    @if ($user->admin->jenis_kelamin == 'L')
-                        <option value="L" selected>Laki-laki</option>
-                        <option value="P">Perempuan</option>
-                    @else
-                        <option value="L">Laki-laki</option>
-                        <option value="P" selected>Perempuan</option>
-                    @endif
+                  <option value="L">Laki-laki</option>
+                  <option value="P" selected>Perempuan</option>
                 @endif
+              @else
+                @if ($user->admin->jenis_kelamin == 'L')
+                  <option value="L" selected>Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                @else
+                  <option value="L">Laki-laki</option>
+                  <option value="P" selected>Perempuan</option>
+                @endif
+              @endif
             </select>
           </div>
 
@@ -97,9 +97,8 @@
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-            <a href="{{ route('user.index') }}">
-              <button type="reset"
-                class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
+            <a href="{{ route('user.index') }}"
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal
             </a>
           </div>
         </div>

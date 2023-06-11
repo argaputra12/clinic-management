@@ -1,6 +1,4 @@
 <x-guest-layout>
-  <x-auth-card>
-    <!-- Flash message -->
     @if (session('success'))
       <div id="flash-message-success"
         class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -28,6 +26,8 @@
         </span>
       </div>
     @endif
+  <x-auth-card>
+    <!-- Flash message -->
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

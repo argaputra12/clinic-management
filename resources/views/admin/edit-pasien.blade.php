@@ -20,7 +20,7 @@
               </ul>
             </div>
           @endif
-          
+
           <!-- Nama Pasien -->
           <div class="w-full flex flex-col gap-1">
             <label for="nama_pasien" class="font-semibold">Nama Lengkap</label>
@@ -73,9 +73,8 @@
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-            <a href="{{ route('pasien.index') }}">
-              <button type="reset"
-                class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal</button>
+            <a href="{{ route('pasien.index') }}"
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Batal
             </a>
           </div>
 

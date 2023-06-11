@@ -7,6 +7,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Aliyah Medika</title>
+  <!-- Favicon -->
+    <link rel="icon" href="{{ asset('storage/icon/ALIYAH_medika.png') }}" type="image/png" sizes="32x32">
 
   <!-- Fonts -->
   <link

@@ -37,9 +37,9 @@ class AuthenticatedSessionController extends Controller
 
         switch(Auth::user()->role){
             case "admin":
-                return redirect()->intended(RouteServiceProvider::HOME);
+                return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Login berhasil');
             case "dokter":
-                return redirect()->route('welcome');
+                return redirect()->route('welcome')->with('success', 'Login berhasil');
         }
 
     }

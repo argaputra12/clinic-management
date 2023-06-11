@@ -38,9 +38,9 @@ class CustomLoginController extends Controller
 
         switch(Auth::user()->role){
             case "admin":
-                return redirect()->intended(RouteServiceProvider::HOME);
+                return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Login berhasil');
             case "dokter":
-                return redirect()->route('dokter.dashboard');
+                return redirect()->route('dokter.dashboard')->with('success', 'Login berhasil');
         }
 
     }

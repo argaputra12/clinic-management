@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        $request->validate([
+        $validated = $request->validate([
             'nik' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'tanggal_lahir' => ['required', 'date'],
@@ -42,6 +42,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'max:255'],
         ]);
+
+        if(!$validated){
+            return back()->withErrors($validated);
+        }
 
         $user = User::create([
             'nik' => $request->nik,
@@ -84,6 +88,6 @@ class RegisteredUserController extends Controller
 
         // Auth::login($user);
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil');
     }
 }

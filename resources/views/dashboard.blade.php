@@ -29,7 +29,7 @@
     <!-- Login alert -->
 
     <div class="flex justify-center items-center w-1/2 flex-wrap">
-      <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3">
+      {{-- <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3">
         <a href="{{ route('user.index') }}">
           <div
             class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">
@@ -37,7 +37,7 @@
             <h2 class="font-semibold text-lg">Pengguna</h2>
           </div>
         </a>
-      </div>
+      </div> --}}
       <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3">
         <a href="{{ route('dokter.medis.index') }}">
           <div
@@ -74,7 +74,7 @@
           </div>
         </a>
       </div>
-      <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3 ">
+      {{-- <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3 ">
         <a href="{{ route('pembayaran.index') }}">
           <div
             class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">
@@ -82,7 +82,7 @@
             <h2 class="font-semibold text-lg">Pembayaran</h2>
           </div>
         </a>
-      </div>
+      </div> --}}
       <div class="p-4 overflow-hidden flex justify-center items-center dark:bg-dark-eval-1 basis-1/3 ">
         <div
           class="bg-primary-cream rounded-md shadow-md flex flex-col gap-4 justify-center items-center w-52 h-52 hover:bg-opacity-50 hover:shadow-lg hover:border-[1px] transition-all duration-300">

@@ -50,12 +50,9 @@ class PasienController extends Controller
 
     public function show(Request $request)
     {
-        $pasien = DB::table('pasiens')
-            ->where('id', $request->id)
-            ->first();
+        $pasien = Pasien::find($request->id);
 
-        // return component
-        return view('admin.detail-pasien', compact('pasien'));
+        return view('components.modal-pasien', compact('pasien'));
     }
 
     public function destroy($id)

@@ -12,7 +12,7 @@
     <table>
         <tbody>
             <tr class="align-top my-3">
-                <td class="w-1/5">Nama Dokter</td>
+                <td>Nama Dokter</td>
                 <td class="px-3">:</td>
                 <td>{{ $medis->dokter->nama_dokter }}</td>
             </tr>

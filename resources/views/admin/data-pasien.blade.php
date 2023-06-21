@@ -98,7 +98,7 @@
             <div class="w-[12.5%] text-center">
               {{ $p->tanggal_lahir }}
             </div>
-            <div class="w-[17%] text-center">
+            <div class="w-[17%] text-center truncate">
               {{ $p->alamat }}
             </div>
             <div class="w-[12.5%] text-center">
@@ -111,6 +111,10 @@
               {{ $p->no_telp }}
             </div>
             <div class="flex justify-center gap-4 w-[12.5%] items-center">
+              <i id="detail-pasien" class="fa-solid fa-circle-info fa-lg cursor-pointer"
+                data-url="{{ route('pasien.show', ['id' => $p->id]) }}">
+                <input type="hidden" value="{{ $p->id }}">
+              </i>
               <form action="{{ route('pasien.edit', ['id' => $p->id]) }}">
                 <button type="submit">
                   <i class="fa-solid fa-pen-to-square fa-lg cursor-pointer"></i>
@@ -148,6 +152,8 @@
     </div>
   </div>
 
+  <div id="pasien-modal-container" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+
   <script>
     // Flash message
     const flashMessageSuccess = document.getElementById('flash-message-success');
@@ -174,6 +180,35 @@
       if (e.target.classList.contains('cancel-button')) {
         const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
         containerModalDeleteUserClose.classList.add('hidden');
+      }
+
+      if (e.target.id == 'detail-pasien') {
+        const pasienModalContainer = document.getElementById('pasien-modal-container')
+
+        // get url
+        let url = e.target.dataset.url
+
+        // fetch data
+        fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+          })
+          .then(response => {
+            return response.text()
+          })
+          .then(data => {
+            pasienModalContainer.innerHTML = data
+            pasienModalContainer.classList.remove('hidden')
+          })
+          .catch(error => console.log(error))
+
+      }
+
+      if (e.target.id == 'pasien-modal-container') {
+        document.getElementById('pasien-modal-container').classList.add('hidden')
       }
     });
   </script>

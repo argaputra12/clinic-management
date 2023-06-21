@@ -119,6 +119,10 @@
               {{ $m->tindakan }}
             </div>
             <div class="flex justify-evenly w-[8%] items-center">
+              <i id="detail-medis" class="fa-solid fa-circle-info fa-lg cursor-pointer"
+                data-url="{{ route('medis.show', ['id' => $m->id]) }}">
+                <input type="hidden" value="{{ $m->id }}">
+              </i>
               <form action="{{ route('medis.edit', ['id' => $m->id]) }}">
                 <button type="submit">
                   <i class="fa-solid fa-pen-to-square fa-lg"></i>
@@ -158,33 +162,65 @@
     @endif
   </div>
 
-  <script>
-    // Flash message
-    const flashMessageSuccess = document.getElementById('flash-message-success');
-    const flashMessageError = document.getElementById('flash-message-error');
-    const flashMessageSuccessClose = document.getElementById('flash-message-success-close');
-    const flashMessageErrorClose = document.getElementById('flash-message-error-close');
+  <!-- medis Modal -->
+  <div id="medis-modal-container" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
 
-    flashMessageSuccessClose?.addEventListener('click', () => {
-      flashMessageSuccess.style.display = 'none';
-    });
+    <script>
+      // Flash message
+      const flashMessageSuccess = document.getElementById('flash-message-success');
+      const flashMessageError = document.getElementById('flash-message-error');
+      const flashMessageSuccessClose = document.getElementById('flash-message-success-close');
+      const flashMessageErrorClose = document.getElementById('flash-message-error-close');
 
-    flashMessageErrorClose?.addEventListener('click', () => {
-      flashMessageError.style.display = 'none';
-    });
+      flashMessageSuccessClose?.addEventListener('click', () => {
+        flashMessageSuccess.style.display = 'none';
+      });
 
-    // Delete button
-    window.addEventListener('click', (e) => {
+      flashMessageErrorClose?.addEventListener('click', () => {
+        flashMessageError.style.display = 'none';
+      });
 
-      if (e.target.classList.contains('fa-trash')) {
-        let id = e.target.id;
-        const containerModalDeleteUser = document.getElementById(`container-modal-delete-${id}`);
-        containerModalDeleteUser.classList.remove('hidden');
-      }
-      if (e.target.classList.contains('cancel-button')) {
-        const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
-        containerModalDeleteUserClose.classList.add('hidden');
-      }
-    });
-  </script>
+      // Delete button
+      window.addEventListener('click', (e) => {
+
+        if (e.target.classList.contains('fa-trash')) {
+          let id = e.target.id;
+          const containerModalDeleteUser = document.getElementById(`container-modal-delete-${id}`);
+          containerModalDeleteUser.classList.remove('hidden');
+        }
+        if (e.target.classList.contains('cancel-button')) {
+          const containerModalDeleteUserClose = e.target.parentElement.parentElement.parentElement.parentElement;
+          containerModalDeleteUserClose.classList.add('hidden');
+        }
+
+        if (e.target.id == 'detail-medis') {
+          const medisModalContainer = document.getElementById('medis-modal-container')
+
+          // get url
+          let url = e.target.dataset.url
+
+          // fetch data
+          fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+              },
+            })
+            .then(response => {
+              return response.text()
+            })
+            .then(data => {
+              medisModalContainer.innerHTML = data
+              medisModalContainer.classList.remove('hidden')
+            })
+            .catch(error => console.log(error))
+
+        }
+
+        if (e.target.id == 'medis-modal-container') {
+          document.getElementById('medis-modal-container').classList.add('hidden')
+        }
+      });
+    </script>
 </x-app-layout>

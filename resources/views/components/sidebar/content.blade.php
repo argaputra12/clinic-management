@@ -30,11 +30,11 @@
       </x-slot>
     </x-sidebar.link>
   @else
-    <x-sidebar.link title='Pengguna' href="{{ route('user.index') }}" :isActive="request()->routeIs('user.index')">
+    {{-- <x-sidebar.link title='Pengguna' href="{{ route('user.index') }}" :isActive="request()->routeIs('user.index')">
       <x-slot name='icon'>
         <i class="w-6 text-center fa-lg fa-solid fa-stethoscope"></i>
       </x-slot>
-    </x-sidebar.link>
+    </x-sidebar.link> --}}
     <x-sidebar.link title='Rekam Medis' href="{{ route('medis.index') }}" :isActive="request()->routeIs('medis.index')">
       <x-slot name='icon'>
         <i class="w-6 text-center fa-lg fa-solid fa-heart-pulse"></i>
@@ -55,11 +55,11 @@
         <i class="w-6 text-center fa-lg fa-solid fa-house-medical"></i>
       </x-slot>
     </x-sidebar.link>
-    <x-sidebar.link title='Pembayaran' href="{{ route('pembayaran.index') }}">
+    {{-- <x-sidebar.link title='Pembayaran' href="{{ route('pembayaran.index') }}">
       <x-slot name='icon'>
         <i class="w-6 text-center fa-lg fa-solid fa-file-invoice"></i>
       </x-slot>
-    </x-sidebar.link>
+    </x-sidebar.link> --}}
     <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-xl text-white font-semibold px-2 mt-6">
       CETAK LAPORAN
     </div>

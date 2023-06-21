@@ -46,7 +46,9 @@ class ObatController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $obat = Obat::findOrFail($id);
+
+        return view('components.detail-obat', compact('obat'));
     }
 
     /**

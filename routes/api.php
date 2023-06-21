@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedisController;
 use App\Http\Controllers\PasienController;
@@ -28,4 +29,16 @@ Route::prefix('/resep')->group(function (){
 
 Route::prefix('/medis')->group(function () {
     Route::get('/show/{id}', [MedisController::class, 'show'])->name('medis.show');
+});
+
+Route::prefix('/pasien')->group(function () {
+    Route::get('/show/{id}', [PasienController::class, 'show'])->name('pasien.show');
+});
+
+Route::prefix('/medis')->group(function () {
+   Route::get('/show/{id}', [MedisController::class, 'show'])->name('medis.show');
+});
+
+Route::prefix('/obat')->group(function () {
+    Route::get('/show/{id}', [ObatController::class, 'show'])->name('obat.show');
 });

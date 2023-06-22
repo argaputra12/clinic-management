@@ -81,7 +81,7 @@
           <div
             class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
             <div class="w-[5%] text-center">
-              {{ $loop->iteration }}.
+              {{ $m->id }}.
             </div>
             <div class="w-[19%] text-center">
               {{ $m->pasien->nama_pasien }}
@@ -116,19 +116,19 @@
   </div>
   <script>
     window.addEventListener('click', function(e) {
-        if(e.target.id == 'detail-rekam-medis'){
-            url = e.target.dataset.url;
+      if (e.target.id == 'detail-rekam-medis') {
+        url = e.target.dataset.url;
 
-            fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('rekam-medis-modal-container').innerHTML = data;
-                document.getElementById('rekam-medis-modal-container').classList.remove('hidden');
-            })
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('rekam-medis-modal-container').innerHTML = data;
+            document.getElementById('rekam-medis-modal-container').classList.remove('hidden');
+          })
 
-        }else if(e.target.id == 'rekam-medis-modal-container'){
-            document.getElementById('rekam-medis-modal-container').classList.add('hidden');
-        }
+      } else if (e.target.id == 'rekam-medis-modal-container') {
+        document.getElementById('rekam-medis-modal-container').classList.add('hidden');
+      }
     })
   </script>
 </x-app-layout>

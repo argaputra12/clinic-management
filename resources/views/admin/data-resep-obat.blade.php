@@ -81,7 +81,7 @@
           <div
             class="w-full flex justify-between items-center gap-4 px-8 h-14 py-2 border-gray-400 border-b-[1px] text-gray-500">
             <div class="w-[5%] text-center">
-              {{ $loop->iteration }}
+              {{ $r->id }}
             </div>
             <div class="w-1/4 text-center">
               {{ $r->medis->pasien->nama_pasien }}

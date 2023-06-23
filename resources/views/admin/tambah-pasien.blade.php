@@ -11,10 +11,10 @@
         <div class="w-full px-8 my-6 flex flex-col items-center gap-3">
 
           <!-- Alert -->
-          @if ($errors->any())
+          @if (session('errors'))
             <div class="w-full bg-red-500 rounded-md text-white px-4 py-2">
               <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
+                @foreach (session('errors')->all() as $error)
                   <li>{{ $error }}</li>
                 @endforeach
               </ul>

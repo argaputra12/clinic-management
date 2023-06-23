@@ -40,7 +40,7 @@
                   <select name="obat[]" class="block w-full rounded-md">
                     <option disabled selected>Pilih nama obat</option>
                     @foreach ($obat as $o)
-                      <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
+                      <option value="{{ $o->id }}">{{ $o->nama_obat }} ({{ $o->satuan }})</option>
                     @endforeach
                   </select>
                   <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
@@ -51,12 +51,6 @@
                 </button>
               </div>
             </div>
-          </div>
-
-          <!-- Total Harga -->
-          <div class="w-full flex flex-col gap-1">
-            <label for="total_harga" class="font-semibold">Total Harga</label>
-            <input type="number" name="total_harga" id="total_harga" class="block w-full rounded-md">
           </div>
 
           <div class="w-full flex justify-start gap-6 mt-4">
@@ -82,7 +76,7 @@
                         <select name="obat[]" class="block w-full rounded-md">
                             <option disabled selected>Pilih nama obat</option>
                             @foreach ($obat as $o)
-                            <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
+                            <option value="{{ $o->id }}">{{ $o->nama_obat }} ({{ $o->satuan }})</option>
                             @endforeach
                         </select>
                         <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">

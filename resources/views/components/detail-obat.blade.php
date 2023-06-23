@@ -8,7 +8,7 @@
         <tr class="mb-1">
           <td>Nama obat</td>
           <td class="pl-5 pr-3">:</td>
-          <td>{{ $obat->nama_obat }}</td>
+          <td>{{ $obat->nama_obat }} ({{ $obat->satuan }})</td>
         </tr>
         <tr class="mb-1">
           <td>Satuan</td>

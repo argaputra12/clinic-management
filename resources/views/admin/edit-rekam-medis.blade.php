@@ -54,17 +54,24 @@
             <input type="date" name="tanggal_kunjungan" id="tanggal_kunjungan" class="block w-full rounded-md" value="{{ $medis->tanggal_kunjungan }}">
           </div>
 
+          <!-- Keluhan -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="keluhan" class="font-semibold">Keluhan</label>
+            <input type="text" name="keluhan" id="keluhan" class="block w-full rounded-md" value="{{ $medis->keluhan }}">
+          </div>
+
+          <!-- Berat Badan -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="berat_badan" class="font-semibold">Berat badan</label>
+            <input type="number" name="berat_badan" id="berat_badan" class="block w-full rounded-md" value="{{ $medis->berat_badan }}">
+          </div>
+
           <!-- Tensi -->
           <div class="w-full flex flex-col gap-1">
             <label for="tensi" class="font-semibold">Tensi</label>
             <input type="text" name="tensi" id="tensi" class="block w-full rounded-md" placeholder="110/90" value="{{ $medis->tensi }}">
           </div>
 
-          <!-- Keluhan -->
-          <div class="w-full flex flex-col gap-1">
-            <label for="keluhan" class="font-semibold">Keluhan</label>
-            <input type="text" name="keluhan" id="keluhan" class="block w-full rounded-md" value="{{ $medis->keluhan }}">
-          </div>
 
           <!-- Diagnosa -->
           <div class="w-full flex flex-col gap-1">

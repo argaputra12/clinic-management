@@ -20,6 +20,7 @@ class Medis extends Model
         'keluhan',
         'diagnosa',
         'tindakan',
+        'berat_badan',
     ];
 
     public function pasien()

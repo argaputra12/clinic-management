@@ -22,6 +22,16 @@
                 <td>{{ $medis->tanggal_kunjungan }}</td>
             </tr>
             <tr class="align-top my-3">
+                <td>Keluhan</td>
+                <td class="px-3">:</td>
+                <td>{{ $medis->keluhan }}</td>
+            </tr>
+            <tr class="align-top my-3">
+                <td>Berat badan</td>
+                <td class="px-3">:</td>
+                <td>{{ $medis->berat_badan }}</td>
+            </tr>
+            <tr class="align-top my-3">
                 <td>Tensi</td>
                 <td class="px-3">:</td>
                 <td>{{ $medis->tensi }}</td>
@@ -30,11 +40,6 @@
                 <td>Diagnosa</td>
                 <td class="px-3">:</td>
                 <td>{{ $medis->diagnosa }}</td>
-            </tr>
-            <tr class="align-top my-3">
-                <td>Keluhan</td>
-                <td class="px-3">:</td>
-                <td>{{ $medis->keluhan }}</td>
             </tr>
             <tr class="align-top my-3">
                 <td>Tindakan</td>

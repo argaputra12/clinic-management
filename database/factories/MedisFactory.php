@@ -22,6 +22,7 @@ class MedisFactory extends Factory
             'pasien_id' => Pasien::factory()->create()->id,
             'dokter_id' => Dokter::factory()->create()->id,
             'tanggal_kunjungan' => $this->faker->date(),
+            'berat_badan' => $this->faker->randomFloat(2, 40, 100),
             'tensi' => $this->faker->randomElement(['110/70', '120/80', '130/90']),
             'keluhan' => $this->faker->text(),
             'diagnosa' => $this->faker->text(),

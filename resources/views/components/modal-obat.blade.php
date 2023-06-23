@@ -12,9 +12,9 @@
     <!-- Table Header -->
     <div class="flex justify-between font-bold">
       <div class="flex w-1/2 justify-center">
-        <div class="w-1/3">Nama Obat</div>
-        <div class="w-1/3">Jumlah</div>
-        <div class="w-1/3">Harga Satuan</div>
+        <div class="w-1/2">Nama Obat</div>
+        <div class="w-1/4">Jumlah</div>
+        <div class="w-1/4">Harga Satuan</div>
       </div>
       <div>Total Harga</div>
     </div>
@@ -23,9 +23,9 @@
     @foreach ($resep_obat as $r)
       <div class="flex justify-between">
         <div class="flex w-1/2 justify-center">
-          <div class="w-1/3">{{ $r->nama_obat }}</div>
-          <div class="w-1/3">{{ $r->jumlah }}</div>
-          <div class="w-1/3">Rp {{ $r->harga }}</div>
+          <div class="w-1/2">{{ $r->nama_obat }} ({{ $r->satuan }})</div>
+          <div class="w-1/4">{{ $r->jumlah }}</div>
+          <div class="w-1/4">Rp {{ $r->harga }}</div>
         </div>
         <div class="text-right">Rp {{ $r->jumlah * $r->harga }}</div>
       </div>

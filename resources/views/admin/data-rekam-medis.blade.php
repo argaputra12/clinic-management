@@ -73,15 +73,18 @@
           Datang
         </div>
         <div class="w-[11%] text-center">
-          Tensi
+            Keluhan
         </div>
-        <div class="w-[16%] text-center">
-          Keluhan
+        <div class="w-[10%] text-center">
+          Berat Badan
+        </div>
+        <div class="w-[11%] text-center">
+          Tensi
         </div>
         <div class="w-[11%] text-center">
           Diagnosa
         </div>
-        <div class="w-[16%] text-center">
+        <div class="w-[11%] text-center">
           Tindakan
         </div>
         <div class="w-[8%] text-center">
@@ -100,22 +103,25 @@
             <div class="w-[11%] text-center">
               {{ $m->pasien->nama_pasien }}
             </div>
-            <div class="w-[11%] text-center">
+            <div class="w-[11%] text-center truncate">
               {{ $m->dokter->nama_dokter }}
             </div>
             <div class="w-[11%] text-center">
               {{ $m->tanggal_kunjungan }}
             </div>
+            <div class="w-[11%] text-center truncate">
+              {{ $m->keluhan }}
+            </div>
+            <div class="w-[11%] text-center">
+              {{ $m->berat_badan }}
+            </div>
             <div class="w-[11%] text-center">
               {{ $m->tensi }}
-            </div>
-            <div class="w-[16%] text-center truncate">
-              {{ $m->keluhan }}
             </div>
             <div class="w-[11%] text-center truncate">
               {{ $m->diagnosa }}
             </div>
-            <div class="w-[16%] text-center truncate">
+            <div class="w-[11%] text-center truncate">
               {{ $m->tindakan }}
             </div>
             <div class="flex justify-evenly w-[8%] items-center">

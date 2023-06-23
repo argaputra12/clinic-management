@@ -47,7 +47,7 @@ class UserController extends Controller
         ]);
 
         if(!$validated){
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validated);
         }
 
         $user = User::create([
@@ -115,7 +115,7 @@ class UserController extends Controller
         ]);
 
         if(!$validated){
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validated);
         }
 
 

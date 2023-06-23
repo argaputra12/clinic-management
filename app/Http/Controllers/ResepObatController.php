@@ -41,18 +41,24 @@ class ResepObatController extends Controller
     {
         $validate = $request->validate([
             'rekam_medis_id' => 'required',
-            'total_harga' => 'required',
             'obat' => 'required',
             'jumlah' => 'required',
         ]);
 
         if (!$validate) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validate);
+        }
+
+        // hitung total harga
+        $total_harga = 0;
+        foreach ($request->obat as $key => $obat) {
+            $harga = DB::table('obats')->where('id', $obat)->first();
+            $total_harga += $harga->harga * $request->jumlah[$key];
         }
 
         $resep = Resep::create([
             'rekam_medis_id' => $request->rekam_medis_id,
-            'total_harga' => $request->total_harga,
+            'total_harga' => $total_harga,
         ]);
 
         foreach ($request->obat as $key => $obat) {

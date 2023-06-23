@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('rekam_medis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pasien_id')->unique();
+            $table->unsignedBigInteger('pasien_id');
             $table->foreign('pasien_id')->references('id')->on('pasiens')->cascadeOnDelete();
 
             $table->unsignedBigInteger('dokter_id');
             $table->foreign('dokter_id')->references('id')->on('dokters')->cascadeOnDelete();
+            $table->unsignedBigInteger('berat_badan');
 
             $table->date('tanggal_kunjungan');
             $table->char('tensi', 11);

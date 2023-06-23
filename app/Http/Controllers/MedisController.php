@@ -51,13 +51,14 @@ class MedisController extends Controller
             'tanggal_kunjungan' => 'required',
             'tanggal_lahir' => 'required',
             'tensi' => 'required',
+            'berat_badan' => 'required',
             'keluhan' => 'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
         ]);
 
         if (!$validate) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validate);
         }
 
         Medis::create($request->all());
@@ -98,12 +99,13 @@ class MedisController extends Controller
             'tanggal_kunjungan' => 'required',
             'tensi' => 'required',
             'keluhan' => 'required',
+            'berat_badan' => 'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
         ]);
 
         if (!$validated) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validated);
         }
 
         $medis = Medis::find($id);

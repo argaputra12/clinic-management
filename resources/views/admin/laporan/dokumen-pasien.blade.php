@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Dokumen Laporan Pasien</title>
+  <!-- Favicon -->
+  <link rel="icon" href="http://127.0.0.1:8000/storage/icon/ALIYAH_medika.png" type="image/png" sizes="32x32">
 </head>
 
 <body>

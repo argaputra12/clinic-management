@@ -36,6 +36,13 @@ class ObatController extends Controller
             'harga' => 'required'
         ]);
 
+        // check if obat already exists
+        $obat = Obat::where('nama_obat', $request->nama_obat)->andWhere('satuan', $request->satuan)->first();
+
+        if ($obat) {
+            return redirect()->back()->withErrors('Obat dengan nama dan satuan tersebut sudah ada');
+        }
+
         Obat::create($request->all());
 
         return redirect()->route('obat.index')->with('success', 'Obat berhasil ditambahkan');

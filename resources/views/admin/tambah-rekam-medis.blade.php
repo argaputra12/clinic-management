@@ -25,15 +25,15 @@
             <label for="nama_pasien" class="font-semibold">Nama Pasien</label>
             <input type="text" name="pasien_id" list="pasien_id" class="rounded-lg">
             <datalist name="pasien_id" id="pasien_id">
-                <option value="" disabled>-- Pilih Pasien --</option>
-                @foreach ($pasien as $p)
+              <option value="" disabled>-- Pilih Pasien --</option>
+              @foreach ($pasien as $p)
                 <option value="{{ $p->id }}">{{ $p->nama_pasien }}</option>
-                @endforeach
+              @endforeach
             </datalist>
-        </div>
+          </div>
 
-        <!-- Dokter -->
-        <div class="w-full flex flex-col gap-1">
+          <!-- Dokter -->
+          <div class="w-full flex flex-col gap-1">
             <label for="nama_dokter" class="font-semibold">Nama dokter</label>
             <input type="text" name="dokter_id" list="dokter_id" class="rounded-lg">
             <datalist name="dokter_id" id="dokter_id" class=" rounded-md">
@@ -62,16 +62,22 @@
             <input type="text" name="alamat" id="alamat" class="block w-full rounded-md">
           </div>
 
-          <!-- Alamat -->
-          <div class="w-full flex flex-col gap-1">
-            <label for="tensi" class="font-semibold">Tensi</label>
-            <input type="text" name="tensi" id="tensi" class="block w-full rounded-md" placeholder="110/90">
-          </div>
-
           <!-- Keluhan -->
           <div class="w-full flex flex-col gap-1">
             <label for="keluhan" class="font-semibold">keluhan</label>
             <input type="text" name="keluhan" id="keluhan" class="block w-full rounded-md">
+          </div>
+
+          <!-- Berat badan -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="berat_badan" class="font-semibold">Berat badan</label>
+            <input type="number" name="berat_badan" id="berat_badan" class="block w-full rounded-md">
+          </div>
+
+          <!-- Tensi -->
+          <div class="w-full flex flex-col gap-1">
+            <label for="tensi" class="font-semibold">Tensi</label>
+            <input type="text" name="tensi" id="tensi" class="block w-full rounded-md" placeholder="110/90">
           </div>
 
           <!-- Diagnosa -->

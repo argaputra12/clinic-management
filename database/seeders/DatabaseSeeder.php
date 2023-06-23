@@ -44,7 +44,5 @@ class DatabaseSeeder extends Seeder
         // run seeder from ResepObatSeeder
         $this->call(ResepObatSeeder::class);
 
-        // run seeder from PembayaranSeeder
-        $this->call(PembayaranSeeder::class);
     }
 }

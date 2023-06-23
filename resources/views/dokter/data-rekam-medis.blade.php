@@ -66,7 +66,10 @@
         <div class="w-[19%] text-center">
           Datang
         </div>
-        <div class="w-[19%] text-center">
+        <div class="w-[9%] text-center">
+          Berat Badan
+        </div>
+        <div class="w-[10%] text-center">
           Tensi
         </div>
         <div class="w-[19%] text-center">
@@ -92,7 +95,10 @@
             <div class="w-[19%] text-center">
               {{ $m->tanggal_kunjungan }}
             </div>
-            <div class="w-[19%] text-center">
+            <div class="w-[9%] text-center">
+              {{ $m->berat_badan }}
+            </div>
+            <div class="w-[10%] text-center">
               {{ $m->tensi }}
             </div>
             <div class="w-[19%] text-center">

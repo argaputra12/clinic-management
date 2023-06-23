@@ -34,14 +34,25 @@ class PasienController extends Controller
         ]);
 
         if (!$validated) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+            // insert session error
+
+
+            return redirect()->back()->withErrors($validated);
         }
 
-        // insert pasien
-        $pasien = Pasien::create($request->all());
+        // check nama pasien
+        $pasien = Pasien::where('nama_pasien', $request->nama_pasien)->first();
 
-        if (!$pasien) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+        if ($pasien) {
+            return redirect()->back()->withErrors('Nama pasien sudah ada');
+        }
+
+
+        // insert pasien
+        $insert = Pasien::create($request->all());
+
+        if (!$insert) {
+            return redirect()->back()->withErrors('Gagal menambahkan pasien');
         }
 
         return redirect()->route('pasien.index')
@@ -82,7 +93,7 @@ class PasienController extends Controller
         ]);
 
         if (!$validated) {
-            return redirect()->back()->with('error', 'Data tidak valid');
+            return redirect()->back()->withErrors($validated);
         }
 
         $pasien = Pasien::find($id);

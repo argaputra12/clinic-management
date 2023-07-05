@@ -37,7 +37,7 @@ class ObatController extends Controller
         ]);
 
         // check if obat already exists
-        $obat = Obat::where('nama_obat', $request->nama_obat)->andWhere('satuan', $request->satuan)->first();
+        $obat = Obat::where('nama_obat', $request->nama_obat)->where('satuan', $request->satuan)->first();
 
         if ($obat) {
             return redirect()->back()->withErrors('Obat dengan nama dan satuan tersebut sudah ada');

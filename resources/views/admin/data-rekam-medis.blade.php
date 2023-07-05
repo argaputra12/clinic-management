@@ -134,15 +134,16 @@
                   <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 </button>
               </form>
-              <i class="fa-solid fa-trash fa-lg" id={{ $m->id }}></i>
+              <i class="fa-solid fa-trash fa-lg cursor-pointer" id={{ $m->id }}></i>
             </div>
 
             <!-- Delete Modal -->
             <div
               class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
               id="container-modal-delete-{{ $m->id }}">
-              <form action="{{ route('pasien.destroy', ['id' => $m->id]) }}" method="POST" class="w-full">
+              <form action="{{ route('medis.destroy', ['id' => $m->id]) }}" method="POST" class="w-full">
                 @csrf
+                @method('DELETE')
                 <div
                   class="relative mx-auto w-1/3 bg-white rounded-md p-8 shadow-md flex flex-col justify-center items-center gap-10">
                   <h1 class="font-bold text-xl">Apakah anda yakin ingin menghapus data ini?</h1>

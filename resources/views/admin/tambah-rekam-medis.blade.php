@@ -50,7 +50,7 @@
             <input type="date" name="tanggal_kunjungan" id="tanggal_kunjungan" class="block w-full rounded-md">
           </div>
 
-          <!-- Tanggal Lahir-->
+          {{-- <!-- Tanggal Lahir-->
           <div class="w-full flex flex-col gap-1">
             <label for="tanggal_lahir" class="font-semibold">Tanggal Lahir</label>
             <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="block w-full rounded-md">
@@ -60,7 +60,7 @@
           <div class="w-full flex flex-col gap-1">
             <label for="alamat" class="font-semibold">Alamat</label>
             <input type="text" name="alamat" id="alamat" class="block w-full rounded-md">
-          </div>
+          </div> --}}
 
           <!-- Keluhan -->
           <div class="w-full flex flex-col gap-1">

@@ -35,7 +35,7 @@ class UserController extends Controller
     {
 
         $validated = $request->validate([
-            'nik' => 'required|unique:users,nik|min:16|max:16',
+            'nik' => 'required|unique:users,nik|min:16|max:16|numeric',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
@@ -104,7 +104,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nik' => 'required|unique:users,nik|min:16|max:16',
+            'nik' => 'required|unique:users,nik|min:16|max:16|nik',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',

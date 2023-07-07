@@ -20,6 +20,9 @@
     [x-cloak] {
       display: none;
     }
+    body {
+        background-image: url("{{ asset('storage/icon/background.jpeg') }}");
+    }
   </style>
 
   <!-- Scripts -->
@@ -34,7 +37,7 @@
 </head>
 
 <body>
-  <div class="flex flex-col min-h-screen text-gray-900 bg-primary-green dark:bg-dark-eval-0 dark:text-gray-200">
+  <div class="flex flex-col min-h-screen text-gray-900 dark:bg-dark-eval-0 dark:text-gray-200">
     {{ $slot }}
 
     <x-footer />

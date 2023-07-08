@@ -5,7 +5,7 @@
         @csrf
 
         <div class="bg-primary-green bg-opacity-20 flex justify-center items-center py-8">
-          <h2 class="font-bold text-xl">FORM DATA PEMBAYARAN</h2>
+          <h2 class="font-bold text-xl">FORM DATA OBAT</h2>
         </div>
 
         <div class="w-full px-8 my-6 flex flex-col items-center gap-3">

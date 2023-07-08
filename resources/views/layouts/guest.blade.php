@@ -16,14 +16,29 @@
     rel="stylesheet" />
 
   <!-- Styles -->
-  <style>
-    [x-cloak] {
-      display: none;
-    }
-    body {
+  @if (Route::currentRouteName() == 'login' ||
+          Route::currentRouteName() == 'register' ||
+          Route::currentRouteName() == 'password.request' ||
+          Route::currentRouteName() == 'password.reset')
+    <style>
+      [x-cloak] {
+        display: none;
+      }
+
+      body {
         background-image: url("{{ asset('storage/icon/background.jpeg') }}");
-    }
-  </style>
+      }
+    </style>
+  @else
+    <style>
+      [x-cloak] {
+        display: none;
+      }
+      body{
+        background-color: #105652;
+      }
+    </style>
+  @endif
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])

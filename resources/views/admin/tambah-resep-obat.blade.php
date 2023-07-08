@@ -33,16 +33,16 @@
 
           <!-- Obat -->
           <div class="w-full flex flex-col gap-1">
-            <label for="Obat" class="font-semibold">Obat</label>
+            <label for="obat" class="font-semibold">Obat</label>
             <div id="obat" class="w-full flex flex-col gap-3">
               <div class="w-full flex gap-3">
                 <div class="flex gap-3 w-11/12">
-                  <select name="obat[]" class="block w-full rounded-md">
-                    <option disabled selected>Pilih nama obat</option>
+                  <input type="text" name="obat[]" list="obat_id" class="block w-full rounded-md">
+                  <datalist id="obat_id" class="rounded-md">
                     @foreach ($obat as $o)
                       <option value="{{ $o->id }}">{{ $o->nama_obat }} ({{ $o->satuan }})</option>
                     @endforeach
-                  </select>
+                  </datalist>
                   <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
                 </div>
                 <button type="button"
@@ -56,8 +56,9 @@
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
-              <a href="{{ route('resep.index') }} " class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">
-                Batal
+            <a href="{{ route('resep.index') }} "
+              class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">
+              Batal
             </a>
           </div>
         </div>
@@ -71,21 +72,26 @@
   $(document).ready(function() {
     $(document).on('click', '.tambah-obat', function() {
       $('#obat').append(`
-                <div class="w-full flex gap-3">
-                    <div class="flex gap-3 w-11/12">
-                        <select name="obat[]" class="block w-full rounded-md">
-                            <option disabled selected>Pilih nama obat</option>
-                            @foreach ($obat as $o)
-                            <option value="{{ $o->id }}">{{ $o->nama_obat }} ({{ $o->satuan }})</option>
-                            @endforeach
-                        </select>
-                        <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
-                    </div>
-                    <button type="button"
-                    class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
-                    <i class="fa-solid fa-plus"></i>
-                    </button>
+                <div class="w-full flex flex-col gap-1">
+            <label for="obat" class="font-semibold">Obat</label>
+            <div id="obat" class="w-full flex flex-col gap-3">
+              <div class="w-full flex gap-3">
+                <div class="flex gap-3 w-11/12">
+                  <input type="text" name="obat[]" list="obat_id" class="block w-full rounded-md">
+                  <datalist id="obat_id" class="rounded-md">
+                    @foreach ($obat as $o)
+                      <option value="{{ $o->id }}">{{ $o->nama_obat }} ({{ $o->satuan }})</option>
+                    @endforeach
+                  </datalist>
+                  <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
+                </div>
+                <button type="button"
+                  class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
               </div>
+            </div>
+          </div>
         `);
     })
   });

@@ -49,7 +49,6 @@ class MedisController extends Controller
             'pasien_id' => 'required',
             'dokter_id'=> 'required',
             'tanggal_kunjungan' => 'required',
-            'tanggal_lahir' => 'required',
             'tensi' => 'required',
             'berat_badan' => 'required',
             'keluhan' => 'required',

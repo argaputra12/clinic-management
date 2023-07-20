@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
 
         $validated = $request->validate([
-            'nik' => ['required', 'string', 'max:255', 'unique:'.User::class, 'min:16', 'max:16', 'numeric'],
+            'nik' => ['required', 'unique:'.User::class, 'max:9999999999999999', 'numeric'],
             'name' => ['required', 'string', 'max:255'],
             'tanggal_lahir' => ['required', 'date'],
             'no_hp' => ['required', 'string', 'max:255'],

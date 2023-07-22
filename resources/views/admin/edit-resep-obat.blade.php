@@ -1,7 +1,7 @@
 <x-guest-layout>
-  <div class="flex flex-col items-center flex-1 px-4 sm:justify-center">
-    <div class="w-full my-6 overflow-hidden bg-white rounded-xl shadow-md sm:max-w-2xl dark:bg-dark-eval-1">
-      <form action="{{ route('resep.update', ['id' => $resep->id]) }}" method="POST">
+  <form action="{{ route('resep.update', ['id' => $resep->id]) }}" method="POST">
+    <div class="flex flex-col items-center flex-1 px-4 sm:justify-center">
+      <div class="w-full my-6 overflow-hidden bg-white rounded-xl shadow-md sm:max-w-2xl dark:bg-dark-eval-1">
         @csrf
 
         <div class="bg-primary-green bg-opacity-20 flex justify-center items-center py-8">
@@ -42,14 +42,13 @@
                 @foreach ($resep_obat as $ro)
                   <div class="w-full flex gap-3">
                     <div class="flex gap-3 w-11/12">
-                      <select name="obat[]" class="block w-full rounded-md">
+                      <input type="text" name="obat[]" list="obat_id" value="{{ $ro->obat_id }}"
+                        class="rounded-lg">
+                      <datalist name="obat_id" id="obat_id">
                         @foreach ($obat as $o)
-                          @if ($o->id == $ro->obat_id)
-                            <option value="{{ $o->id }}" selected>{{ $o->nama_obat }}</option>
-                          @endif
                           <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
                         @endforeach
-                      </select>
+                      </datalist>
                       <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah"
                         class="block rounded-md" value="{{ $ro->jumlah }}">
                     </div>
@@ -60,30 +59,9 @@
                   </div>
                 @endforeach
               @endif
-              <div class="w-full flex gap-3">
-                <div class="flex gap-3 w-11/12">
-                  <select name="obat[]" class="block w-full rounded-md">
-                    <option disabled selected>Pilih nama obat</option>
-                    @foreach ($obat as $o)
-                      <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
-                    @endforeach
-                  </select>
-                  <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
-                </div>
 
-                <button type="button"
-                  class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-              </div>
             </div>
           </div>
-           <!-- Total Harga -->
-           <div class="w-full flex flex-col gap-1">
-            <label for="total_harga" class="font-semibold">Total Harga</label>
-            <input type="number" name="total_harga" id="total_harga" class="block w-full rounded-md" value="{{ $resep->total_harga }}">
-          </div>
-
           <div class="w-full flex justify-start gap-6 mt-4">
             <button type="submit"
               class="bg-primary-cream rounded-md px-4 py-2 shadow-md hover:shadow-xl transition-all duration-200 font-semibold">Simpan</button>
@@ -93,31 +71,33 @@
             </a>
           </div>
         </div>
+
+      </div>
     </div>
-    </form>
-  </div>
-  </div>
+  </form>
+
 </x-guest-layout>
 
 <script>
   $(document).ready(function() {
     $(document).on('click', '.tambah-obat', function() {
       $('#obat').append(`
-                  <div class="w-full flex gap-3">
-                      <div class="flex gap-3 w-11/12">
-                          <select name="obat[]" class="block w-full rounded-md">
-                              <option disabled selected>Pilih nama obat</option>
-                              @foreach ($obat as $o)
-                              <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
-                              @endforeach
-                          </select>
-                          <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md">
-                      </div>
-                      <button type="button"
-                      class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
-                      <i class="fa-solid fa-plus"></i>
-                      </button>
+      <div class="w-full flex gap-3">
+                <div class="flex gap-3 w-11/12">
+                  <input type="text" name="obat[]" list="obat_id" class="rounded-lg" placeholder="Pilih Id Obat">
+                  <datalist name="obat_id" id="obat_id">
+                    @foreach ($obat as $o)
+                      <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
+                    @endforeach
+                  </datalist>
+                  <input type="number" id="jumlah-obat" name="jumlah[]" placeholder="Jumlah" class="block rounded-md"
+                    value="">
                 </div>
+                <button type="button"
+                  class="tambah-obat w-1/12 rounded-md px-4 shadow-md border-[1px] flex justify-center items-center">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
           `);
     })
   });

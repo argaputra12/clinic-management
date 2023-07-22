@@ -38,11 +38,11 @@ class DatabaseSeeder extends Seeder
         // run seeder from ObatSeeder
         $this->call(ObatSeeder::class);
 
-        // run seeder from ResepSeeder
-        $this->call(ResepSeeder::class);
+        // // run seeder from ResepSeeder
+        // $this->call(ResepSeeder::class);
 
-        // run seeder from ResepObatSeeder
-        $this->call(ResepObatSeeder::class);
+        // // run seeder from ResepObatSeeder
+        // $this->call(ResepObatSeeder::class);
 
     }
 }

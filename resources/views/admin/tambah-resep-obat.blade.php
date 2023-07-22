@@ -72,9 +72,7 @@
   $(document).ready(function() {
     $(document).on('click', '.tambah-obat', function() {
       $('#obat').append(`
-                <div class="w-full flex flex-col gap-1">
-            <label for="obat" class="font-semibold">Obat</label>
-            <div id="obat" class="w-full flex flex-col gap-3">
+      <div id="obat" class="w-full flex flex-col gap-3">
               <div class="w-full flex gap-3">
                 <div class="flex gap-3 w-11/12">
                   <input type="text" name="obat[]" list="obat_id" class="block w-full rounded-md">
@@ -91,7 +89,6 @@
                 </button>
               </div>
             </div>
-          </div>
         `);
     })
   });

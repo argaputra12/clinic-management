@@ -130,6 +130,8 @@ class ResepObatController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $total_harga = 0;
+
         foreach ($request->obat as $key => $obat) {
             $cek_obat = DB::table('resep_obats')
                 ->where('resep_id', $id)
@@ -139,10 +141,15 @@ class ResepObatController extends Controller
             if ($cek_obat) {
                 DB::table('resep_obats')
                     ->where('resep_id', $id)
+                    ->where('obat_id', $obat)
                     ->update([
                         'jumlah' => $request->jumlah[$key],
                         'obat_id' => $obat,
                     ]);
+
+                $obat = DB::table('obats')->where('id', $obat)->first();
+                $total_harga += $obat->harga * $request->jumlah[$key];
+
             } else {
                 DB::table('resep_obats')
                     ->where('resep_id', $id)
@@ -151,12 +158,15 @@ class ResepObatController extends Controller
                         'obat_id' => $obat,
                         'resep_id' => $id,
                     ]);
+
+                $obat = DB::table('obats')->where('id', $obat)->first();
+                $total_harga += $obat->harga * $request->jumlah[$key];
             }
         }
         Resep::where('id', $id)
             ->update([
                 'rekam_medis_id' => $request->rekam_medis_id,
-                'total_harga' => $request->total_harga,
+                'total_harga' => $total_harga,
             ]);
 
         // return response

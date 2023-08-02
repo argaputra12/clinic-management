@@ -132,37 +132,23 @@ class ResepObatController extends Controller
     {
         $total_harga = 0;
 
+        // delete all obat in resep
+        DB::table('resep_obats')
+            ->where('resep_id', $id)
+            ->delete();
+
+        // insert obat to resep
         foreach ($request->obat as $key => $obat) {
-            $cek_obat = DB::table('resep_obats')
-                ->where('resep_id', $id)
-                ->where('obat_id', $obat)
-                ->exists();
+            ResepObat::create([
+                'jumlah' => $request->jumlah[$key],
+                'obat_id' => $obat,
+                'resep_id' => $id,
+            ]);
 
-            if ($cek_obat) {
-                DB::table('resep_obats')
-                    ->where('resep_id', $id)
-                    ->where('obat_id', $obat)
-                    ->update([
-                        'jumlah' => $request->jumlah[$key],
-                        'obat_id' => $obat,
-                    ]);
-
-                $obat = DB::table('obats')->where('id', $obat)->first();
-                $total_harga += $obat->harga * $request->jumlah[$key];
-
-            } else {
-                DB::table('resep_obats')
-                    ->where('resep_id', $id)
-                    ->insert([
-                        'jumlah' => $request->jumlah[$key],
-                        'obat_id' => $obat,
-                        'resep_id' => $id,
-                    ]);
-
-                $obat = DB::table('obats')->where('id', $obat)->first();
-                $total_harga += $obat->harga * $request->jumlah[$key];
-            }
+            $harga = DB::table('obats')->where('id', $obat)->first();
+            $total_harga += $harga->harga * $request->jumlah[$key];
         }
+
         Resep::where('id', $id)
             ->update([
                 'rekam_medis_id' => $request->rekam_medis_id,

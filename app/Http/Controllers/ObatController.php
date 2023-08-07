@@ -12,7 +12,7 @@ class ObatController extends Controller
      */
     public function index()
     {
-        $obat = Obat::orderBy('created_at', 'desc')->paginate(10);
+        $obat = Obat::orderBy('created_at', 'asc')->paginate(10);
 
         return view('admin.data-obat', compact('obat'));
     }

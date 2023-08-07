@@ -19,13 +19,13 @@ class MedisController extends Controller
      */
     public function index()
     {
-        $medis = Medis::orderBy('tanggal_kunjungan', 'desc')->paginate(10);
+        $medis = Medis::orderBy('id', 'asc')->paginate(10);
         return view('admin.data-rekam-medis', compact('medis'));
     }
 
     public function dokterIndex()
     {
-        $medis = Medis::orderBy('tanggal_kunjungan', 'desc')->paginate(10);
+        $medis = Medis::orderBy('id', 'asc')->paginate(10);
         return view('dokter.data-rekam-medis', compact('medis'));
     }
 

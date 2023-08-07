@@ -18,6 +18,11 @@
   <h4>Data Pasien</h4>
   <table style="margin-bottom:48px">
     <tbody>
+      <!-- <tr>
+        <td>No. Rekam Medis</td>
+        <td style="padding-left:15px">:</td>
+        <td>{{ $pasien['id'] }}</td>
+      </tr> -->
       <tr>
         <td>Nama Pasien</td>
         <td style="padding-left:15px">:</td>

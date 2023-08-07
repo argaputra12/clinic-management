@@ -52,7 +52,7 @@
     <div class="min-h-[750px] border-2 rounded-md p-4">
       <!-- Table Title -->
       <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
-        <h1 class="font-semibold text-xl">Table Data Resep Obat</h1>
+        <h1 class="font-semibold text-xl">Tabel Data Resep Obat</h1>
       </div>
 
       <!-- Header -->
@@ -65,7 +65,7 @@
           Nama Pasien
         </div>
         <div class="w-1/4 text-center">
-          No. Rekam Medis
+          No. Kunjungan
         </div>
         <div class="w-1/4 text-center">
           Total Harga

@@ -52,7 +52,7 @@
     <div class="min-h-[750px] border-2 rounded-md p-4">
       <!-- Table Title -->
       <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
-        <h1 class="font-semibold text-xl">Table Data Pasien</h1>
+        <h1 class="font-semibold text-xl">Tabel Data Pasien</h1>
       </div>
 
       <!-- Header -->

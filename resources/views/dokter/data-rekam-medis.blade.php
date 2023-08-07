@@ -66,7 +66,7 @@
         <div class="w-[19%] text-center">
           Datang
         </div>
-        <div class="w-[9%] text-center">
+        <div class="w-[12%] text-center">
           Berat Badan
         </div>
         <div class="w-[10%] text-center">

@@ -62,6 +62,7 @@ class LaporanController extends Controller
         if($request->time == '1')
         {
             $rekam_medis = Medis::where('created_at', '>=', date('Y-m-d', strtotime('-1 day')))->get();
+            $jumlah_kunjungan = Medis::where('created_at', '>=', date('Y-m-d', strtotime('-1 day')))->count();
             $pdf = Pdf::loadView('admin.laporan.dokumen-kunjungan', compact('rekam_medis', 'jumlah_kunjungan'));
             $pdf->setPaper('a4', 'landscape');
             return $pdf->stream();

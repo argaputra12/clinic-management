@@ -11,7 +11,7 @@ class PasienController extends Controller
 {
     public function index()
     {
-        $pasien = Pasien::orderBy('created_at', 'desc')->paginate(10);
+        $pasien = Pasien::orderBy('created_at', 'asc')->paginate(10);
         return view('admin.data-pasien', compact('pasien'));
     }
 

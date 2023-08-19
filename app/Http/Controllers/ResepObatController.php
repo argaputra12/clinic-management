@@ -18,7 +18,7 @@ class ResepObatController extends Controller
      */
     public function index()
     {
-        $resep = Resep::orderBy('created_at', 'DESC')->paginate(10);
+        $resep = Resep::orderBy('created_at', 'asc')->paginate(10);
         // dd($resep);
 
         return view('admin.data-resep-obat', compact('resep'));
@@ -47,6 +47,13 @@ class ResepObatController extends Controller
 
         if (!$validate) {
             return redirect()->back()->withErrors($validate);
+        }
+
+        #Cek resep dengan rekam medisnya sudah ada apa belum
+        $resep = Resep::where('rekam_medis_id', $request->rekam_medis_id)->first();
+
+        if($resep) {
+            return redirect()->back()->withErrors('Resep dengan rekam medis tersebut sudah ada');
         }
 
         // hitung total harga

@@ -61,13 +61,13 @@
         </div>
 
         <!-- Remember Me -->
-        <div class="flex items-center justify-end">
+        {{-- <div class="flex items-center justify-end">
           @if (Route::has('password.request'))
             <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
               {{ __('Lupa password?') }}
             </a>
           @endif
-        </div>
+        </div> --}}
 
         <div class="flex justify-center">
           <x-button class="justify-center w-1/2 gap-2">

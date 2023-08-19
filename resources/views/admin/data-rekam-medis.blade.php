@@ -54,7 +54,7 @@
     <div class="min-h-[750px] border-2 rounded-md p-4">
       <!-- Table Title -->
       <div class="border-b-[1px] border-black mx-4 p-2 mb-4">
-        <h1 class="font-semibold text-xl">Table Rekam Medis</h1>
+        <h1 class="font-semibold text-xl">Tabel Rekam Medis</h1>
       </div>
 
       <!-- Header -->
@@ -75,7 +75,7 @@
         <div class="w-[11%] text-center">
             Keluhan
         </div>
-        <div class="w-[10%] text-center">
+        <div class="w-[11%] text-center">
           Berat Badan
         </div>
         <div class="w-[11%] text-center">

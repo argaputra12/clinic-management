@@ -72,7 +72,14 @@ class MedisController extends Controller
     public function show(string $id)
     {
         $medis = Medis::find($id);
-        return view('dokter.detail-rekam-medis', compact('medis'));
+        $resep = Resep::where('rekam_medis_id', $id)->first();
+        $resep_obat = DB::table('resep_obats')
+            ->join('obats', 'resep_obats.obat_id', '=', 'obats.id')
+            ->join('reseps', 'resep_obats.resep_id', '=', 'reseps.id')
+            ->select('resep_obats.*', 'obats.nama_obat', 'obats.satuan', 'obats.harga')
+            ->where('resep_obats.resep_id', $resep->id)
+            ->get();
+        return view('dokter.detail-rekam-medis', compact('medis', 'resep_obat'));
     }
 
     /**

@@ -8,7 +8,7 @@
     <h3>No Rekam Medis : {{ $medis->id }}</h3>
   </div>
 
-  <div class="flex text-sm w-full">
+  <div class="flex flex-col text-sm w-full">
     <table>
         <tbody>
             <tr class="align-top my-3">
@@ -48,4 +48,27 @@
             </tr>
         </tbody>
     </table>
+    <div class="flex flex-col gap-4 justify-between text-sm mt-8">
+        <!-- Table Header -->
+        <div class="flex justify-between font-bold">
+          <div class="flex w-1/2 justify-center">
+            <div class="w-1/2">Nama Obat</div>
+            <div class="w-1/4">Jumlah</div>
+            <div class="w-1/4">Harga Satuan</div>
+          </div>
+          <div>Total Harga</div>
+        </div>
+
+        <!-- Table Body -->
+        @foreach ($resep_obat as $r)
+          <div class="flex justify-between">
+            <div class="flex w-1/2 justify-center">
+              <div class="w-1/2">{{ $r->nama_obat }} ({{ $r->satuan }})</div>
+              <div class="w-1/4">{{ $r->jumlah }}</div>
+              <div class="w-1/4">Rp {{ $r->harga }}</div>
+            </div>
+            <div class="text-right">Rp {{ $r->jumlah * $r->harga }}</div>
+          </div>
+        @endforeach
+      </div>
   </div>
